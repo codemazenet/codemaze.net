@@ -7,7 +7,7 @@ namespace CodeMaze.Cryptography
 {
     public static class Base64Encryptor
     {
-        private static string password = "Sed9vqcp6AVaTHtF1lL8m7ahGFu96PF3";
+        private static string password = "Sed9v&cp6A$7";
         /// <summary>
         /// Convert string to base64
         /// </summary>

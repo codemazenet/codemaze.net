@@ -27,9 +27,15 @@ namespace CodeMaze.WebApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+           
+            string connectionEncryted = configuration.GetConnectionString("DatabaseLocalConfig");
+            if (!string.IsNullOrWhiteSpace(connectionEncryted))
+                connectionString = Base64Encryptor.Decrypt(connectionEncryted);
+
             AppSettingsSection = Configuration.GetSection(nameof(CodeMaze.Data.Systems.AppSettings));
         }
 
+        private readonly string connectionString;
         private readonly IConfigurationSection AppSettingsSection;
         public IConfiguration Configuration { get; }
 
@@ -71,7 +77,7 @@ namespace CodeMaze.WebApp
             services.Configure<CodeMaze.Data.Systems.AppSettings>(AppSettingsSection);
 
             services.AddDbContext<KyzinDbContext>(options =>
-               options.UseSqlServer(CodeMazeConfiguration.DatabaseInfo.ConnectionString));
+               options.UseSqlServer(connectionString));
 
             services.AutoMapperConfigure();
 

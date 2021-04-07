@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using CodeMaze.Configuration;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using CodeMaze.Data.Systems;
+using Microsoft.Extensions.Configuration;
 
 namespace CodeMaze.Middleware
 {
@@ -15,13 +18,16 @@ namespace CodeMaze.Middleware
 
         public Task Invoke(HttpContext httpContext)
         {
-            if (httpContext.Response.Headers.ContainsKey("X-Powered-By"))
+            var configuration = httpContext.RequestServices.GetService(typeof(IConfiguration)) as IConfiguration;
+            var appReady = configuration.GetValue<bool>("AppReady");
+
+            if(appReady == false)
             {
-                httpContext.Response.Headers.Remove("X-Powered-By");
+                return httpContext.Response.WriteAsync("Welcome to Code Maze, App isn't ready!");
             }
 
-            httpContext.Response.Headers["X-Powered-By"] = CodeMazeConfiguration.AppSettings.PoweredBy;
-            httpContext.Response.Headers["X-Author-By"] = CodeMazeConfiguration.AppSettings.AuthorBy;
+            httpContext.Response.Headers["MAZE-Powered-By"] = CodeMazeConfiguration.AppSettings.PoweredBy;
+            httpContext.Response.Headers["MAZE-Author-By"] = CodeMazeConfiguration.AppSettings.AuthorBy;
             return _next.Invoke(httpContext);
         }
     }

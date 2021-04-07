@@ -83,7 +83,7 @@ namespace CodeMaze.Configuration
         {
             async Task<int> SetConfiguration(string key, string value)
             {
-                using (var conn = new SqlConnection(CodeMazeConfiguration.DatabaseInfo.ConnectionString))
+                using (var conn = new SqlConnection(CodeMazeConfiguration.ConnectionString))
                 {
                     string sql = $"UPDATE {nameof(BlogConfiguration)} " +
                                  $"SET {nameof(BlogConfiguration.CfgValue)} = @value, {nameof(BlogConfiguration.LastModifiedTimeUtc)} = @lastModifiedTimeUtc " +
@@ -127,7 +127,7 @@ namespace CodeMaze.Configuration
         {
             try
             {
-                using (var conn = new SqlConnection(CodeMazeConfiguration.DatabaseInfo.ConnectionString))
+                using (var conn = new SqlConnection(CodeMazeConfiguration.ConnectionString))
                 {
                     string sql = $"SELECT CfgKey, CfgValue FROM {nameof(BlogConfiguration)}";
                     var data = conn.Query<(string CfgKey, string CfgValue)>(sql);
