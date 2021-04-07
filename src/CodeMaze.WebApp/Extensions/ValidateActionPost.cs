@@ -5,6 +5,7 @@ using CodeMaze.Configuration;
 using CodeMaze.Data.ViewModels;
 using CodeMaze.Library;
 using System;
+using CodeMaze.Cryptography;
 
 namespace CodeMaze.WebApp.Extensions
 {
@@ -17,7 +18,7 @@ namespace CodeMaze.WebApp.Extensions
             {
                 if (context.HttpContext.Request.Method == "POST")
                 {
-                    var aesEncryptionService = context.HttpContext.RequestServices.GetService(typeof(IAesEncryptionService)) as IAesEncryptionService;
+                    var aesEncryptionService = context.HttpContext.RequestServices.GetService(typeof(ISymmetricEncryptor)) as ISymmetricEncryptor;
 
                     var antiToken = (string)context.HttpContext.Request.Headers["Kyzin-Token"];
 
@@ -25,7 +26,7 @@ namespace CodeMaze.WebApp.Extensions
 
                     var token = JsonConvert.DeserializeObject<TokenValidateViewModel>(tokenDecrypt);
 
-                    if (!token.Token.Equals(KyzinConfiguration.TokenValidatePost))
+                    if (!token.Token.Equals(CodeMazeConfiguration.TokenValidatePost))
                     {
                         context.Result = new BadRequestResult();
                     }

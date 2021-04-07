@@ -20,8 +20,8 @@ namespace CodeMaze.Middleware
                 httpContext.Response.Headers.Remove("X-Powered-By");
             }
 
-            httpContext.Response.Headers["X-Powered-By"] = KyzinConfiguration.AppSettings.PoweredBy;
-            httpContext.Response.Headers["X-Author-By"] = KyzinConfiguration.AppSettings.AuthorBy;
+            httpContext.Response.Headers["X-Powered-By"] = CodeMazeConfiguration.AppSettings.PoweredBy;
+            httpContext.Response.Headers["X-Author-By"] = CodeMazeConfiguration.AppSettings.AuthorBy;
             return _next.Invoke(httpContext);
         }
     }

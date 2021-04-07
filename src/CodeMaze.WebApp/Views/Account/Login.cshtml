@@ -4,10 +4,10 @@
 
     if (string.IsNullOrEmpty(title))
     {
-        title = KyzinConfiguration.DefaultSlogan;
+        title = CodeMazeConfiguration.DefaultSlogan;
     }
 
-    var applicationName = $"{KyzinConfiguration.ApplicationName} - {title}";
+    var applicationName = $"{CodeMazeConfiguration.ApplicationName} - {title}";
 }
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="vi" class="ie8 no-js"> <![endif]-->
@@ -21,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="@applicationName" name="description" />
-    <meta content="@KyzinConfiguration.ApplicationName" name="author" />
+    <meta content="@CodeMazeConfiguration.ApplicationName" name="author" />
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
     <link href="@Utility.GetBaseUrl("/admin/css/plugin.login.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Utility.GetBaseUrl("/admin/css/page.login.min.css")" rel="stylesheet" type="text/css" />
@@ -149,7 +149,7 @@
         </form>
         <!-- END REGISTRATION FORM -->
     </div>
-    <div class="copyright"> @DateTime.UtcNow.Year © @KyzinConfiguration.ApplicationName Admin. </div>
+    <div class="copyright"> @DateTime.UtcNow.Year © @CodeMazeConfiguration.ApplicationName Admin. </div>
     <!--[if lt IE 9]>
     <script src="@Utility.GetBaseUrl("/admin/plugins/respond.min.js")"></script>
     <script src="@Utility.GetBaseUrl("/admin/plugins/excanvas.min.js")"></script>

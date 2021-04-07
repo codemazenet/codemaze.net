@@ -2,7 +2,7 @@
 
     //exten ajax
     $.getTokenKey = function () {
-        var tk = $("input[name='CSRF-KZT-FORM']").val();
+        var tk = $("input[name='CSRF-MAZE-FORM']").val();
         return {
             "Kyzin-Token": tk
         }

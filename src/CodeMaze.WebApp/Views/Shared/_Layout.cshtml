@@ -4,11 +4,11 @@
     var metaDescription = ViewData["MetaDescription"] as string;
     var metaKeywords = ViewData["MetaKeywords"] as string;
     var metaTitle = ViewData["MetaTitle"];
-    var applicationName = KyzinConfiguration.ApplicationName;
+    var applicationName = CodeMazeConfiguration.ApplicationName;
     var title = string.IsNullOrWhiteSpace(ViewData["Title"] as string) ?
-                $"{applicationName} - {KyzinConfiguration.DefaultSlogan}" :
+                $"{applicationName} - {CodeMazeConfiguration.DefaultSlogan}" :
                 $"{ViewData["Title"]} - {applicationName}";
-    metaDescription += $"{ViewData["Title"]},{KyzinConfiguration.DefaultSlogan}";
+    metaDescription += $"{ViewData["Title"]},{CodeMazeConfiguration.DefaultSlogan}";
     metaKeywords += "ASP.NET Core, ASP.NET, ASP.NET Core MVC, Tips development, web development, mobile development, software development, download software";
     metaTitle += $"{title}, Chia sẻ kinh nghiệm lập trình, những trải nghiệm thú vị của tôi";
 }
@@ -24,19 +24,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="@(string.IsNullOrWhiteSpace(KyzinConfiguration.DefaultSlogan)?title:KyzinConfiguration.DefaultSlogan)">
+    <meta name="description" content="@(string.IsNullOrWhiteSpace(CodeMazeConfiguration.DefaultSlogan)?title:CodeMazeConfiguration.DefaultSlogan)">
     <meta name="description" content="@metaDescription" />
     <meta name="keywords" content="@metaKeywords" />
     <meta name="title" content="@metaTitle" />
     <meta name="robots" content="index,follow,all">
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="@KyzinConfiguration.BaseUrl" />
+    <meta name="apple-mobile-web-app-title" content="@CodeMazeConfiguration.BaseUrl" />
 
-    <meta name="copyright" content="@KyzinConfiguration.BaseUrl" />
-    <meta name="author" content="@KyzinConfiguration.BaseUrl">
+    <meta name="copyright" content="@CodeMazeConfiguration.BaseUrl" />
+    <meta name="author" content="@CodeMazeConfiguration.BaseUrl">
 
-    @*<base href="@KyzinConfiguration.BaseUrl" />*@
+    @*<base href="@CodeMazeConfiguration.BaseUrl" />*@
     <!-- Mobile Specific Metas -->
     <!-- Plugin required -->
     <link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/bootstrap.min.css")">
@@ -70,7 +70,7 @@
             </div><!-- End row -->
         </section><!-- End container -->
 
-        <input name="CSRF-KZT-FORM" type="hidden" value="@Model.KyzinToken" />
+        <input name="CSRF-MAZE-FORM" type="hidden" value="@Model.KyzinToken" />
 
         @*<partial name="Modules/_footer_content" />*@
         <partial name="Modules/_footer_bottom" />

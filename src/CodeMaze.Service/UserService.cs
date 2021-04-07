@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CodeMaze.Service
 {
-    public class UserService : KyzinService
+    public class UserService : BaseService
     {
         private readonly IRepository<UserEntity> _userRepository;
 

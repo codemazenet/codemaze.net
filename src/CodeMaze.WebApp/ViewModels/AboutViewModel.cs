@@ -1,11 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using CodeMaze.Configuration;
+﻿using CodeMaze.Configuration;
+using CodeMaze.Cryptography;
+
+using Microsoft.AspNetCore.Http;
 
 namespace CodeMaze.WebApp.ViewModels
 {
     public class AboutViewModel : BaseVM
     {
-        public AboutViewModel(IBlogConfig blogConfig, IHttpContextAccessor httpContextAccessor) : base(blogConfig, httpContextAccessor)
+        public AboutViewModel(
+            IBlogConfig blogConfig,
+            IHttpContextAccessor httpContextAccessor,
+            ISymmetricEncryptor aceEncryptor) :
+            base(blogConfig, httpContextAccessor, aceEncryptor)
         {
         }
     }

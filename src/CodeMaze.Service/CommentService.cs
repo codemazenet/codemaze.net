@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CodeMaze.Service
 {
-    public class CommentService : KyzinService
+    public class CommentService : BaseService
     {
         private readonly IBlogConfig _blogConfig;
 

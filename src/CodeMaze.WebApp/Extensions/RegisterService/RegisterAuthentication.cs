@@ -19,7 +19,7 @@ namespace CodeMaze.WebApp
             });
 
             //services.AddDbContext<KyzinDbContext>(options =>
-            //    options.UseSqlServer(KyzinConfiguration.DbConnention, sqlOptions =>
+            //    options.UseSqlServer(CodeMazeConfiguration.DbConnention, sqlOptions =>
             //    {
             //        sqlOptions.EnableRetryOnFailure(
             //            maxRetryCount: 3,
@@ -37,7 +37,7 @@ namespace CodeMaze.WebApp
             {
                 options.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(KyzinConfiguration.AppSettings.SessionTimeOut);
+                options.IdleTimeout = TimeSpan.FromSeconds(CodeMazeConfiguration.AppSettings.SessionTimeOut);
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
@@ -51,7 +51,7 @@ namespace CodeMaze.WebApp
             }).AddCookie(options =>
             {
                 options.LoginPath = "/login.html";
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(KyzinConfiguration.AppSettings.CookiesTimeOut);
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(CodeMazeConfiguration.AppSettings.CookiesTimeOut);
                 options.SlidingExpiration = true;
             });
         }

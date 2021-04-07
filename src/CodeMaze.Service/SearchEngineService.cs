@@ -1,6 +1,6 @@
 ﻿namespace CodeMaze.Service
 {
-    public class SearchEngineService : KyzinService
+    public class SearchEngineService : BaseService
     {
     }
 }

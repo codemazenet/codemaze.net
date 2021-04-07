@@ -28,7 +28,7 @@ namespace CodeMaze.WebApp.Controllers
         [Route("/tags.html")]
         public IActionResult Index()
         {
-            return View("TagList", new TagsViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor));
+            return View("TagList", new TagsViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption));
         }
 
         [Route("/tag/{normalizedName}.html")]
@@ -39,7 +39,7 @@ namespace CodeMaze.WebApp.Controllers
 
             if (page < 1) page = 1;
 
-            var result = await repositoryFactory.Post.GetByTagNameAsync(normalizedName, KyzinConfiguration.PageSize, page);
+            var result = await repositoryFactory.Post.GetByTagNameAsync(normalizedName, CodeMazeConfiguration.PageSize, page);
 
             if (!result.IsSuccess)
             {
@@ -47,7 +47,7 @@ namespace CodeMaze.WebApp.Controllers
             }
             var tag = repositoryFactory.Tag.GetTag(normalizedName);
 
-            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor);
+            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption);
             pageView.Title = new TagTitleViewModel { Name = tag.TagName };
             ViewData["Title"] = tag.TagName;
 
@@ -55,11 +55,11 @@ namespace CodeMaze.WebApp.Controllers
 
             if (postList?.Count > 0)
             {
-                var token = postList.Count == KyzinConfiguration.PageSize ? commonFactory.AesEncryption.Encrypt((page + 1).ToString()) : string.Empty;
+                var token = postList.Count == CodeMazeConfiguration.PageSize ? commonFactory.AesEncryption.Encrypt((page + 1).ToString()) : string.Empty;
 
                 int postCount = memoryCache.GetOrCreate($"{StaticCacheKeys.TagCount}-{normalizedName}", entry => repositoryFactory.Post.CountVisiblePostsByTagName(normalizedName));
 
-                var postsAsIPagedList = new StaticPagedList<PostListItem>(postList, page, KyzinConfiguration.PageSize, postCount);
+                var postsAsIPagedList = new StaticPagedList<PostListItem>(postList, page, CodeMazeConfiguration.PageSize, postCount);
 
                 pageView.Items = postsAsIPagedList;
                 pageView.Token = token;

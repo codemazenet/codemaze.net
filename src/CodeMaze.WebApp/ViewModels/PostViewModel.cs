@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using CodeMaze.Configuration;
+﻿using CodeMaze.Configuration;
+using CodeMaze.Cryptography;
 using CodeMaze.Data.ViewModels;
+
+using Microsoft.AspNetCore.Http;
+
 using System.Collections.Generic;
 
 namespace CodeMaze.WebApp.ViewModels
@@ -12,7 +15,11 @@ namespace CodeMaze.WebApp.ViewModels
         public UserClaim Author { get; set; }
         public string Token { get; set; }
 
-        public PostViewViewModel(IBlogConfig blogConfig, IHttpContextAccessor httpContextAccessor) : base(blogConfig, httpContextAccessor)
+        public PostViewViewModel(
+            IBlogConfig blogConfig,
+            IHttpContextAccessor httpContextAccessor,
+            ISymmetricEncryptor aceEncryptor)
+            : base(blogConfig, httpContextAccessor, aceEncryptor)
         {
             RelatedPosts = new List<RelatedPostViewModel>();
         }

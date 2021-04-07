@@ -21,7 +21,7 @@ namespace CodeMaze.WebApp
             //services.AddTransient<IPingbackSender, PingbackSender>();
             //services.AddTransient<IPingbackReceiver, PingbackReceiver>();
             services.AddTransient<IFileSystemOpmlWriter, FileSystemOpmlWriter>();
-            services.AddTransient<IAesEncryptionService>(enc => new AesEncryptionService(new KeyInfo(KyzinConfiguration.Encryption)));
+            //services.AddTransient<IAesEncryptionService>(enc => new AesEncryptionService(new KeyInfo(CodeMazeConfiguration.Encryption)));
 
             return services;
         }

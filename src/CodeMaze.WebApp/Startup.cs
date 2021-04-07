@@ -17,6 +17,7 @@ using CodeMaze.WebApp.Extensions;
 using System.IO.Compression;
 using System.Linq;
 using WebMarkupMin.AspNetCore3;
+using CodeMaze.Cryptography;
 
 namespace CodeMaze.WebApp
 {
@@ -34,15 +35,19 @@ namespace CodeMaze.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //var key = Base64Encryptor.Base64StringEncode("u1sl&SF7$s");
+            //var key2 = Base64Encryptor.Base64StringDecode(key);
+
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("KyzinDatabase")));
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+           services.AddControllersWithViews();
             services.AddResponseCaching();
             services.AddRazorPages();
+            services.AddSingleton<ISymmetricEncryptor>(sec => new SymmetricEncryptor(Configuration.GetSection("SecurityKey").GetValue<string>("CipherKey")));
             services.AddResponseCompression(options =>
             {
                 options.Providers.Add<BrotliCompressionProvider>();
@@ -65,7 +70,7 @@ namespace CodeMaze.WebApp
             services.Configure<CodeMaze.Data.Systems.AppSettings>(AppSettingsSection);
 
             services.AddDbContext<KyzinDbContext>(options =>
-               options.UseSqlServer(KyzinConfiguration.DatabaseInfo.ConnectionString));
+               options.UseSqlServer(CodeMazeConfiguration.DatabaseInfo.ConnectionString));
 
             services.AutoMapperConfigure();
 

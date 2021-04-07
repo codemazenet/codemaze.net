@@ -20,7 +20,7 @@ namespace CodeMaze.WebApp.Extensions
                 var postId = Guid.NewGuid();
                 var postContent = HttpUtility.HtmlEncode(data.HtmlContent);
                 var shortContent = !string.IsNullOrWhiteSpace(data.ShortContent) ? data.ShortContent :
-                                    Utility.GetPostAbstract(data.HtmlContent, KyzinConfiguration.AppSettings.PostSummaryWords);
+                                    Utility.GetPostAbstract(data.HtmlContent, CodeMazeConfiguration.AppSettings.PostSummaryWords);
                 var newTime = DateTime.UtcNow;
                 var postCode = !string.IsNullOrWhiteSpace(data.Code) ? data.Code : data.Title.ConvertToCode();
                 var postUrl = !string.IsNullOrWhiteSpace(data.Url) ? data.Url : data.Title.ConvertToUrl();

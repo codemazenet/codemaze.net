@@ -18,11 +18,11 @@ namespace CodeMaze.WebApp.Controllers
         public async Task<IActionResult> ManageAsync(int page = 1, [FromServices] IMemoryCache memoryCache = null)
         {
             ViewData["Component"] = "post/manage";
-            var postList = await repositoryFactory.Post.GetAllPostAsync(page, KyzinConfiguration.PageSize);
+            var postList = await repositoryFactory.Post.GetAllPostAsync(page, CodeMazeConfiguration.PageSize);
 
             int postCount = memoryCache.GetOrCreate(StaticCacheKeys.ManagePostCount, entry => repositoryFactory.Post.CountManagePosts());
 
-            var postsAsIPagedList = new StaticPagedList<PostManageViewModel>(postList.Item, page, KyzinConfiguration.PageSize, postCount);
+            var postsAsIPagedList = new StaticPagedList<PostManageViewModel>(postList.Item, page, CodeMazeConfiguration.PageSize, postCount);
 
             return View("Manage", postsAsIPagedList);
         }

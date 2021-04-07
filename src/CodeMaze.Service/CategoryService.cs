@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CodeMaze.Service
 {
-    public class CategoryService : KyzinService
+    public class CategoryService : BaseService
     {
         private readonly IRepository<CategoryEntity> _categoryRepository;
         private readonly IRepository<PostCategoryEntity> _postCategoryRepository;

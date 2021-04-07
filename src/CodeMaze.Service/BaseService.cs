@@ -9,15 +9,15 @@ using CodeMaze.Data.Systems;
 
 namespace CodeMaze.Service
 {
-    public class KyzinService
+    public abstract class BaseService
     {
         protected IMapper _mapper;
 
-        protected ILogger<KyzinService> Logger;
+        protected ILogger<BaseService> Logger;
 
         protected AppSettings AppSettings;
 
-        public KyzinService(ILogger<KyzinService> logger = null,
+        public BaseService(ILogger<BaseService> logger = null,
             IMapper mapper = null,
             IOptions<AppSettings> settings = null)
         {
@@ -26,7 +26,9 @@ namespace CodeMaze.Service
             if (null != mapper) _mapper = mapper;
         }
 
-        public virtual T TryExecute<T>(Func<T> func, [CallerMemberName] string callerMemberName = "", object keyParameter = null)
+        protected virtual T TryExecute<T>(Func<T> func, 
+            [CallerMemberName] string callerMemberName = "", 
+            object keyParameter = null)
         {
             try
             {
@@ -39,7 +41,9 @@ namespace CodeMaze.Service
             }
         }
 
-        public virtual Response<T> TryExecute<T>(Func<Response<T>> func, [CallerMemberName] string callerMemberName = "", object keyParameter = null)
+        protected virtual Response<T> TryExecute<T>(Func<Response<T>> func, 
+            [CallerMemberName] string callerMemberName = "", 
+            object keyParameter = null)
         {
             try
             {
@@ -52,7 +56,9 @@ namespace CodeMaze.Service
             }
         }
 
-        public virtual async Task<T> TryExecuteAsync<T>(Func<Task<T>> func, [CallerMemberName] string callerMemberName = "", object keyParameter = null)
+        protected virtual async Task<T> TryExecuteAsync<T>(Func<Task<T>> func, 
+            [CallerMemberName] string callerMemberName = "", 
+            object keyParameter = null)
         {
             try
             {
@@ -65,8 +71,9 @@ namespace CodeMaze.Service
             }
         }
 
-        public virtual async Task<Response<T>> TryExecuteAsync<T>(Func<Task<Response<T>>> func,
-            [CallerMemberName] string callerMemberName = "", object keyParameter = null)
+        protected virtual async Task<Response<T>> TryExecuteAsync<T>(Func<Task<Response<T>>> func,
+            [CallerMemberName] string callerMemberName = "", 
+            object keyParameter = null)
         {
             try
             {

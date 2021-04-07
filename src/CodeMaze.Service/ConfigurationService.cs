@@ -1,6 +1,6 @@
 ﻿namespace CodeMaze.Service
 {
-    public class ConfigurationService : KyzinService
+    public class ConfigurationService : BaseService
     {
     }
 }
