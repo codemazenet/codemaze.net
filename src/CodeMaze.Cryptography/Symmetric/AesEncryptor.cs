@@ -1,10 +1,11 @@
-﻿namespace CodeMaze.Cryptography
+﻿namespace CodeMaze.Cryptography.Symmetric
 {
     using System;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
-    public class SymmetricEncryptor: ISymmetricEncryptor
+
+    public class AesEncryptor : IAesEncryptor
     {
         private const int AesBlockByteSize = 128 / 8;
 
@@ -25,9 +26,9 @@
         private static readonly RandomNumberGenerator Random = RandomNumberGenerator.Create();
         private readonly string cipherKey;
 
-        public SymmetricEncryptor(string cipherKey)
+        public AesEncryptor(string cipherKey)
         {
-            this.cipherKey = Base64Encryptor.Base64StringDecode(cipherKey)?? "ltV&kvwD$2";
+            this.cipherKey = Base64Encryptor.Base64StringDecode(cipherKey) ?? "ltV&kvwD$2";
         }
 
         public string Encrypt(string toEncrypt)
@@ -160,11 +161,5 @@
 
             return merged;
         }
-    }
-
-    public interface ISymmetricEncryptor
-    {
-        string Encrypt(string plainText);
-        string Decrypt(string encryptedText);
     }
 }

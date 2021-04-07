@@ -1,4 +1,5 @@
 ﻿using CodeMaze.Cryptography;
+using CodeMaze.Cryptography.Symmetric;
 using CodeMaze.Data.RequestResponse;
 
 using Dapper;
@@ -20,7 +21,7 @@ namespace CodeMaze.Configuration
     {
         private readonly ILogger<BlogConfig> _logger;
 
-        private readonly ISymmetricEncryptor _encryptionService;
+        private readonly IAesEncryptor _encryptionService;
 
         public BlogOwnerSettings BlogOwnerSettings { get; set; }
 
@@ -39,7 +40,7 @@ namespace CodeMaze.Configuration
 
         public BlogConfig(
             ILogger<BlogConfig> logger,
-            ISymmetricEncryptor encryptionService,
+            IAesEncryptor encryptionService,
             IConfiguration configuration)
         {
             _encryptionService = encryptionService;

@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Newtonsoft.Json;
-using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
-using CodeMaze.Library;
-using System;
-using CodeMaze.Cryptography;
-
-namespace CodeMaze.WebApp.Extensions
+﻿namespace CodeMaze.WebApp.Extensions
 {
+    using CodeMaze.Configuration;
+    using CodeMaze.Cryptography.Symmetric;
+    using CodeMaze.Data.ViewModels;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
+
+    using Newtonsoft.Json;
+
+    using System;
+
     [AttributeUsage(AttributeTargets.Method)]
     public class ValidateActionPost : ActionFilterAttribute
     {
@@ -18,7 +20,7 @@ namespace CodeMaze.WebApp.Extensions
             {
                 if (context.HttpContext.Request.Method == "POST")
                 {
-                    var aesEncryptionService = context.HttpContext.RequestServices.GetService(typeof(ISymmetricEncryptor)) as ISymmetricEncryptor;
+                    var aesEncryptionService = context.HttpContext.RequestServices.GetService(typeof(IAesEncryptor)) as IAesEncryptor;
 
                     var antiToken = (string)context.HttpContext.Request.Headers["Kyzin-Token"];
 

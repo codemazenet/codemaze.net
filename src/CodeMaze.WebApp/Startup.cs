@@ -18,6 +18,7 @@ using System.IO.Compression;
 using System.Linq;
 using WebMarkupMin.AspNetCore3;
 using CodeMaze.Cryptography;
+using CodeMaze.Cryptography.Symmetric;
 
 namespace CodeMaze.WebApp
 {
@@ -44,10 +45,10 @@ namespace CodeMaze.WebApp
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
-           services.AddControllersWithViews();
+            services.AddControllersWithViews();
             services.AddResponseCaching();
             services.AddRazorPages();
-            services.AddSingleton<ISymmetricEncryptor>(sec => new SymmetricEncryptor(Configuration.GetSection("SecurityKey").GetValue<string>("CipherKey")));
+            services.AddSingleton<IAesEncryptor>(sec => new AesEncryptor(Configuration.GetSection("SecurityKey").GetValue<string>("CipherKey")));
             services.AddResponseCompression(options =>
             {
                 options.Providers.Add<BrotliCompressionProvider>();

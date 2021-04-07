@@ -1,5 +1,5 @@
 ﻿using CodeMaze.Configuration;
-using CodeMaze.Cryptography;
+using CodeMaze.Cryptography.Symmetric;
 
 using Microsoft.AspNetCore.Http;
 
@@ -10,7 +10,7 @@ namespace CodeMaze.WebApp.ViewModels
         public PageViewModel(
             IBlogConfig blogConfig,
             IHttpContextAccessor httpContextAccessor,
-            ISymmetricEncryptor aceEncryptor)
+            IAesEncryptor aceEncryptor)
             : base(blogConfig, httpContextAccessor, aceEncryptor)
         {
         }

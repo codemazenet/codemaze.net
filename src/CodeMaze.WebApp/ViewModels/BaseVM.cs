@@ -1,5 +1,5 @@
 ﻿using CodeMaze.Configuration;
-using CodeMaze.Cryptography;
+using CodeMaze.Cryptography.Symmetric;
 using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
 
@@ -15,9 +15,9 @@ namespace CodeMaze.WebApp.ViewModels
     {
         protected readonly IBlogConfig _blogConfig;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ISymmetricEncryptor _aceEncryptor;
+        private readonly IAesEncryptor _aceEncryptor;
 
-        public BaseVM(IBlogConfig blogConfig, IHttpContextAccessor httpContextAccessor, ISymmetricEncryptor aceEncryptor)
+        public BaseVM(IBlogConfig blogConfig, IHttpContextAccessor httpContextAccessor, IAesEncryptor aceEncryptor)
         {
             _blogConfig = blogConfig;
             _httpContextAccessor = httpContextAccessor;

@@ -1,5 +1,5 @@
 ﻿using CodeMaze.Configuration;
-using CodeMaze.Cryptography;
+using CodeMaze.Cryptography.Symmetric;
 using CodeMaze.Data.ViewModels;
 
 using Microsoft.AspNetCore.Http;
@@ -18,7 +18,7 @@ namespace CodeMaze.WebApp.ViewModels
         public PostViewViewModel(
             IBlogConfig blogConfig,
             IHttpContextAccessor httpContextAccessor,
-            ISymmetricEncryptor aceEncryptor)
+            IAesEncryptor aceEncryptor)
             : base(blogConfig, httpContextAccessor, aceEncryptor)
         {
             RelatedPosts = new List<RelatedPostViewModel>();
