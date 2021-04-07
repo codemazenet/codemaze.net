@@ -2,6 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Code Maze</Copyright>
+    <Product>Code Maze Cryptography</Product>
+    <Company>Code Maze</Company>
+    <Authors>codemaze.net</Authors>
+    <Description>Code Maze Cryptography Provided Symmetric Aes, Base64, MD5, SHA1</Description>
+    <PackageIcon>owl-logo.jpg</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="D:\Logo\owl-logo.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
