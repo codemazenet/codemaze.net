@@ -1,0 +1,43 @@
+﻿@model CodeMaze.WebApp.ViewModels.BaseVM
+
+@{
+    var HasLogin = false;
+    if (Model.UserClaim != null && !string.IsNullOrEmpty(Model.UserClaim.UserName))
+    {
+        HasLogin = true;
+    }
+}
+
+@if (HasLogin == false)
+{
+    @*<partial name="Modules/_signup_signin" />*@
+}
+
+<div id="header-top">
+    <section class="container clearfix">
+        <nav class="header-top-nav">
+            <ul>
+                <li><a href="/contact-us.html"><i class="icon-envelope"></i>Contact</a></li>
+                @if (HasLogin == true)
+                {
+                    <li><a href="/profile.html"><i class="icon-user"></i>My Profile</a></li>
+                    if (Model.UserClaim.Role.Equals("Administrator"))
+                    {
+                        <li><a href="/dashboard" target="_blank"><i class="icon-laptop"></i>Dashboard</a></li>
+                    }
+                    <li><a href="/logout.html" target="_self"><i class="icon-signout"></i>Logout</a></li>
+                }
+                else
+                {
+                    @*<li><a href="javascript:void(0);" id="login-panel"><i class="icon-user"></i>Login Area</a></li>*@
+                }
+            </ul>
+        </nav>
+        <div class="header-search">
+            <form action="/search.html" accept-charset="utf-8" method="get">
+                <input class="input-search" name="keyword" type="text" placeholder="Search here ..." accept="utf-8">
+                <button type="submit" class="search-submit"></button>
+            </form>
+        </div>
+    </section><!-- End container -->
+</div><!-- End header-top -->

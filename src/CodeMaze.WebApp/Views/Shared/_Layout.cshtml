@@ -1,0 +1,84 @@
+﻿@model CodeMaze.WebApp.ViewModels.BaseVM
+@{
+
+    var metaDescription = ViewData["MetaDescription"] as string;
+    var metaKeywords = ViewData["MetaKeywords"] as string;
+    var metaTitle = ViewData["MetaTitle"];
+    var applicationName = KyzinConfiguration.ApplicationName;
+    var title = string.IsNullOrWhiteSpace(ViewData["Title"] as string) ?
+                $"{applicationName} - {KyzinConfiguration.DefaultSlogan}" :
+                $"{ViewData["Title"]} - {applicationName}";
+    metaDescription += $"{ViewData["Title"]},{KyzinConfiguration.DefaultSlogan}";
+    metaKeywords += "ASP.NET Core, ASP.NET, ASP.NET Core MVC, Tips development, web development, mobile development, software development, download software";
+    metaTitle += $"{title}, Chia sẻ kinh nghiệm lập trình, những trải nghiệm thú vị của tôi";
+}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="vi"> <![endif]-->
+<!--[if IE 9 ]><html class="ie ie9" lang="vi"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="vi">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>@title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="@(string.IsNullOrWhiteSpace(KyzinConfiguration.DefaultSlogan)?title:KyzinConfiguration.DefaultSlogan)">
+    <meta name="description" content="@metaDescription" />
+    <meta name="keywords" content="@metaKeywords" />
+    <meta name="title" content="@metaTitle" />
+    <meta name="robots" content="index,follow,all">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="@KyzinConfiguration.BaseUrl" />
+
+    <meta name="copyright" content="@KyzinConfiguration.BaseUrl" />
+    <meta name="author" content="@KyzinConfiguration.BaseUrl">
+
+    @*<base href="@KyzinConfiguration.BaseUrl" />*@
+    <!-- Mobile Specific Metas -->
+    <!-- Plugin required -->
+    <link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/bootstrap.min.css")">
+    @*<link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/bootstrap.css")">*@
+    <!-- Main Style -->
+    <link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/style.min.css")">
+    @*<link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/style.css")">*@
+    <script src="@Utility.GetBaseUrl("/assets/default/js/plugins.min.js")"></script>
+    @*<script src="@Utility.GetBaseUrl("/assets/default/js/plugins.js")"></script>*@
+    @RenderSection("StyleLibs", false)
+    @RenderSection("JsLibs", false)
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/favicon.png">
+</head>
+<body>
+    <div id="main-wrapper">
+        <div class="loader">
+            <div class="loader_html"></div>
+        </div>
+
+        <partial name="Modules/_header_content" />
+
+        <section class="container main-content">
+            <div class="row">
+                <div class="col-md-9">
+
+                    @RenderBody()
+                </div><!-- End main -->
+
+                <partial name="Modules/_sidebar" />
+            </div><!-- End row -->
+        </section><!-- End container -->
+
+        <input name="CSRF-KZT-FORM" type="hidden" value="@Model.KyzinToken" />
+
+        @*<partial name="Modules/_footer_content" />*@
+        <partial name="Modules/_footer_bottom" />
+        <div class="go-up"><i class="icon-chevron-up"></i></div>
+    </div>
+    <!-- js -->
+
+    @RenderSection("ScriptExtend", false)
+    <!-- End js -->
+</body>
+</html>

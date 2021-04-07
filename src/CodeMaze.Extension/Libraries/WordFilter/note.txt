@@ -1,0 +1,6 @@
+﻿fuck|shit|ass
+
+var wordFilterDataFilePath = $"{AppDomain.CurrentDomain.GetData(Constants.DataDirectory)}\\BannedWords.txt";
+var maskWordFilter = new MaskWordFilter(wordFilterDataFilePath);
+username = maskWordFilter.FilterContent(username);
+commentContent = maskWordFilter.FilterContent(commentContent);

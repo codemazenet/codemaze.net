@@ -1,0 +1,80 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-CodeMaze.WebApp-4E4C416A-20A2-41FA-8686-66446C8B66D0</UserSecretsId>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\js\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\admin\plugins\jquery.searchable\js\jquery.searchable.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\.gitattributes" />
+    <None Include="wwwroot\libs\holder-v2.9.0\.gitignore" />
+    <None Include="wwwroot\libs\holder-v2.9.0\.jshintrc" />
+    <None Include="wwwroot\libs\holder-v2.9.0\.travis.yml" />
+    <None Include="wwwroot\libs\holder-v2.9.0\gulpfile.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\holder.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\holder.min.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\package.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\README.md" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\index.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\color.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\constants.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\dom.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\index.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\renderers\canvas.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\renderers\svg-dom.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\renderers\svg-text.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\scenegraph.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\svg.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\utils.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\vendor\ondomready.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\vendor\polyfills.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\lib\vendor\querystring.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\meteor\package.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\src\meteor\shim.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\.gitignore" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\holder.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\index.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\phantom.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\renderperf\.gitignore" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\renderperf\releases\holder-master\holder.js" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\renderperf\setup.sh" />
+    <None Include="wwwroot\libs\holder-v2.9.0\test\runner.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.12.1" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeMaze.Middleware\CodeMaze.Middleware.csproj" />
+    <ProjectReference Include="..\CodeMaze.Service\CodeMaze.Service.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,245 @@
+﻿@model CodeMaze.WebApp.ViewModels.PostViewViewModel
+@{
+    var postItem = Model.Item as PostItem;
+    var token = Model.KyzinToken;
+    var comments = postItem.Comments;
+    var commentUpdate = new CommentEditViewModel();
+    var commentCount = comments?.Count ?? 0;
+    var author = Model.Author;
+    var relatedPosts = Model.RelatedPosts;
+    var firstPost = relatedPosts?.FirstOrDefault(x => !x.Url.Equals(postItem.Url) && !x.Code.Equals(postItem.Code));
+    var lastPost = relatedPosts?.LastOrDefault(x => !x.Url.Equals(postItem.Url) && !x.Code.Equals(postItem.Code));
+    ViewData["Title"] = postItem.Title;
+    ViewData["MetaDescription"] = postItem.MetaDescription;
+    ViewData["MetaKeywords"] = postItem.MetaKeywords;
+    ViewData["MetaTitle"] = postItem.MetaTitle;
+}
+
+@section JsLibs{
+    <script src="@Utility.GetBaseUrl("/models/post.min.js")"></script>
+}
+@section StyleLibs{
+    <link rel="stylesheet" href="@Utility.GetBaseUrl("/libs/summernote-0.8.12/summernote-lite.min.css", false)">
+    <style type="text/css">
+        .error {
+            display: inline-block;
+            color: #fc5252;
+            font-size: 12px;
+        }
+
+        .field-error {
+            color: #fc5252 !important;
+            border: #fc5252 1px solid !important;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+}
+@section ScriptExtend{
+
+    <script src="~/libs/highlight/highlight.min.js"></script>
+    @*<link href="~/libs/highlight/style.css" rel="stylesheet" />*@
+    <link href="~/libs/highlight/skin/highlighter-custom.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $('#TextEditor').summernote({
+                height: 250,
+            });
+
+            $(".single-post img").lazyload({
+                effect: "fadeIn"
+            });
+
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+            });
+        });
+    </script>
+}
+
+<article class="post single-post clearfix">
+    <div class="post-inner">
+        <input type="hidden" value="@postItem.Id" name="postId" />
+
+        @if (!string.IsNullOrEmpty(postItem.Image))
+        {
+            <div class="post-img"><a href="@Utility.GetBaseUrl(postItem.Url)"><img data-src="@Utility.GetBaseUrl(postItem.Image)" alt="@postItem.Title"></a></div>
+        }
+
+        <h2 class="post-title"><span class="post-type"><i class="icon-file-alt"></i></span>@postItem.Title</h2>
+        <div class="post-meta">
+            <span class="meta-date"><i class="icon-edit"></i>@Utility.FormatDate(postItem.PubDateUtc)</span>
+            @if (postItem.Categories.Any())
+            {
+                <span class="meta-categories">
+                    <i class="icon-list"></i>
+                    @foreach (var category in postItem.Categories)
+                    {
+                        <a href="@Utility.GetBaseUrl(@category.Link)" title="Click to open this category">@category.DisplayName</a>
+                    }
+                </span>
+
+            }
+            @if (postItem.EnableComment)
+            {
+                <span class="meta-comment"><i class="icon-comments-alt"></i><a href="#comment">@commentCount Comments</a></span>
+            }
+            <span class="single-question-vote-result">+@postItem.Likes</span>
+            <ul class="single-question-vote">
+                <li><a href="javascript:void(0);" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
+                <li><a href="javascript:void(0);" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li>
+            </ul>
+        </div>
+        <div class="post-content">
+            @Html.Raw(postItem.Content)
+        </div><!-- End post-content -->
+        <div class="clearfix"></div>
+    </div><!-- End post-inner -->
+</article><!-- End article.post -->
+
+<div class="share-tags page-content">
+    <div class="post-tags">
+        @if (postItem.Tags.Any())
+        {
+            var tagList = postItem.Tags.OrderBy(tag => tag.TagName).ToList();
+            <i class="icon-tags"></i>
+            @foreach (var tag in tagList)
+            {
+                <a href="@Utility.GetBaseUrl(tag.TagUrl)" title="@tag.TagName">@tag.TagName</a>
+            }
+        }
+    </div>
+    <div class="share-inside-warp">
+        <ul>
+            <li>
+                <a href="#" original-title="Facebook">
+                    <span class="icon_i">
+                        <span class="icon_square" icon_size="20" span_bg="#3b5997" span_hover="#666">
+                            <i i_color="#FFF" class="social_icon-facebook"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="#" target="_blank">Facebook</a>
+            </li>
+            <li>
+                <a href="#" target="_blank">
+                    <span class="icon_i">
+                        <span class="icon_square" icon_size="20" span_bg="#00baf0" span_hover="#666">
+                            <i i_color="#FFF" class="social_icon-twitter"></i>
+                        </span>
+                    </span>
+                </a>
+                <a target="_blank" href="#">Twitter</a>
+            </li>
+            <li>
+                <a href="#" target="_blank">
+                    <span class="icon_i">
+                        <span class="icon_square" icon_size="20" span_bg="#ca2c24" span_hover="#666">
+                            <i i_color="#FFF" class="social_icon-gplus"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="#" target="_blank">Google plus</a>
+            </li>
+            <li>
+                <a href="#" target="_blank">
+                    <span class="icon_i">
+                        <span class="icon_square" icon_size="20" span_bg="#e64281" span_hover="#666">
+                            <i i_color="#FFF" class="social_icon-dribbble"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="#" target="_blank">Dribbble</a>
+            </li>
+            <li>
+                <a target="_blank" href="#">
+                    <span class="icon_i">
+                        <span class="icon_square" icon_size="20" span_bg="#c7151a" span_hover="#666">
+                            <i i_color="#FFF" class="icon-pinterest"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="#" target="_blank">Pinterest</a>
+            </li>
+        </ul>
+        <span class="share-inside-f-arrow"></span>
+        <span class="share-inside-l-arrow"></span>
+    </div><!-- End share-inside-warp -->
+    <div class="share-inside"><i class="icon-share-alt"></i>Share</div>
+    <div class="clearfix"></div>
+</div><!-- End share-tags -->
+
+@if (relatedPosts?.Any() == true)
+{
+    <div id="related-posts">
+        <h2>Related Posts</h2>
+        <ul class="related-posts">
+            @foreach (var relatedPost in relatedPosts)
+            {
+                <li class="related-item"><h3><a href="@Utility.GetBaseUrl(@relatedPost.Link)"><i class="icon-double-angle-right"></i>@relatedPost.Title</a></h3></li>
+            }
+        </ul>
+    </div><!-- End related-posts -->
+}
+
+@if (postItem.EnableComment)
+{
+
+    @await Component.InvokeAsync(typeof(CommentsViewComponent), postItem.Id)
+
+    <div id="comment" name="comment" class="comment-respond page-content clearfix">
+        <div class="boxedtitle page-title"><h2>Leave a reply</h2></div>
+        @using (Html.BeginForm("Add", "Comment", FormMethod.Post, new { @id = "commentform", @class = "comment-form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div id="respond-inputs" class="clearfix">
+                <div class="input">
+                    <label class="required" for="comment_name">Name<span>*</span></label>
+                    <input name="author" type="text" value="Duy Khanh" id="author" aria-required="true" required>
+                    <span class="hide error comment-name-error"></span>
+                </div>
+                <div class="input last">
+                    <label class="required" for="comment_email">E-Mail<span>*</span></label>
+                    <input name="email" type="email" value="luv.keny@gmail.com" id="email" aria-required="true" required>
+                    <span class="hide error comment-email-error"></span>
+                </div>
+            </div>
+            <div id="respond-textarea">
+                <div class="textarea">
+                    <label class="required" for="comment">Comment<span>*</span></label>
+                    <textarea id="TextEditor" name="comment" aria-required="true" rows="10">This is comment</textarea>
+                    <span class="hide error comment-error"></span>
+                </div>
+            </div>
+            <p class="form-submit">
+                <input type="hidden" value="@postItem.Id" name="PostId" class="comment-post-id" />
+                <input type="hidden" value="" name="commentid" class="comment-id" />
+                <input name="submit" type="button" id="submitComment" value="Post Comment" class="button small color">
+            </p>
+        }
+    </div>
+}
+
+@if (firstPost != null || lastPost != null)
+{
+    <div class="post-next-prev clearfix">
+        @if (firstPost != null)
+        {
+            <p class="prev-post">
+                <a href="@Utility.GetBaseUrl(@firstPost.Link)" title="@firstPost.Title"><i class="icon-double-angle-left"></i>&nbsp;Prev post</a>
+            </p>
+        }
+
+        @if (lastPost != null)
+        {
+            <p class="next-post">
+                <a href="@Utility.GetBaseUrl(@lastPost.Link)" title="@lastPost.Title">Next post&nbsp;<i class="icon-double-angle-right"></i></a>
+            </p>
+        }
+    </div><!-- End post-next-prev -->
+}

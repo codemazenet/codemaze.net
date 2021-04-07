@@ -1,0 +1,33 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model PageViewModel
+@{
+    var token = Model.Token;
+    var postListItem = Model.Items as X.PagedList.StaticPagedList<PostListItem>;
+    var response = ViewData["Response"] as Response;
+    var tag = Model.Title as TagTitleViewModel;
+}
+
+<div class="body-header">
+    <h3 class="header-text">@tag?.Name</h3>
+
+    <div class="header-note">@tag?.Note</div>
+</div>
+
+<input type="hidden" name="__pgtk" value="@token" />
+
+<div class="tabs-warp question-tab">
+
+    @if (postListItem?.Any() == true)
+    {
+        <partial name="Modules/_post_list" model="@postListItem" />
+    }
+    else
+    {
+        <div class="alert-message info">
+            <i class="icon-info"></i>
+            <span>Info!</span>
+            <p>No post</p>
+        </div>
+    }
+</div><!-- End page-content -->
