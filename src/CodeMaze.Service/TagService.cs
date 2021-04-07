@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CodeMaze.Service
 {
-    public class TagService : KyzinService
+    public class TagService : BaseService
     {
         private readonly IRepository<TagEntity> _tagRepository;
         private readonly IRepository<PostTagEntity> _postTagRepository;

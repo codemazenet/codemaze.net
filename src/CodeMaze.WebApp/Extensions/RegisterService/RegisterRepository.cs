@@ -16,7 +16,7 @@ namespace CodeMaze.WebApp
 
             services.AddScoped(typeof(IRepository<>), typeof(DbContextRepository<>));
 
-            var asm = Assembly.GetAssembly(typeof(KyzinService));
+            var asm = Assembly.GetAssembly(typeof(BaseService));
             if (null != asm)
             {
                 var types = asm.GetTypes().Where(t => t.IsClass && t.IsPublic && t.Namespace.EndsWith("Service") && t.Name.EndsWith("Service"));

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CodeMaze.Service
 {
-    public class PostService : KyzinService
+    public class PostService : BaseService
     {
         #region Repository Objects
 
