@@ -1,0 +1,214 @@
+[
+  {
+    "outputFileName": "wwwroot/assets/default/css/style.css",
+    "inputFiles": [
+      "wwwroot/assets/default/css/font-opensans/fontopensans.min.css",
+      "wwwroot/assets/default/css/font-ello/css/fontello.min.css",
+      "wwwroot/assets/default/css/font-awesome/css/font-awesome.min.css",
+      "wwwroot/assets/default/css/animate.min.css",
+      "wwwroot/assets/default/css/base.css",
+      "wwwroot/assets/default/css/lists.css",
+      "wwwroot/assets/default/css/prettyPhoto.css",
+      "wwwroot/assets/default/css/theme.css",
+      "wwwroot/assets/default/css/skins/blue.css",
+      "wwwroot/assets/default/css/responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/default/js/plugins.js",
+    "inputFiles": [
+      "wwwroot/assets/default/js/jquery.min.js",
+      "wwwroot/assets/default/js/jquery-ui-1.10.3.custom.min.js",
+      "wwwroot/assets/default/js/jquery.easing.1.3.min.js",
+      "wwwroot/assets/default/js/html5.js",
+      "wwwroot/assets/default/js/jquery.tipsy.js",
+      "wwwroot/assets/default/js/tabs.js",
+      "wwwroot/assets/default/js/jquery.flexslider.js",
+      "wwwroot/assets/default/js/jquery.prettyPhoto.js",
+      "wwwroot/assets/default/js/jquery.carouFredSel-6.2.1-packed.js",
+      "wwwroot/assets/default/js/jquery.scrollTo.js",
+      "wwwroot/assets/default/js/jquery.nav.js",
+      "wwwroot/assets/default/js/tags.js",
+      "wwwroot/assets/default/js/jquery.bxslider.min.js",
+      "wwwroot/assets/default/js/jquery.inview.min.js",
+      "wwwroot/assets/default/js/custom.js",
+      "wwwroot/libs/notify/bootstrap-notify.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/default/js/customize.js",
+    "inputFiles": [
+      "wwwroot/assets/default/js/custom.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/summernote-0.8.12/summernote.min.css",
+    "inputFiles": [
+      "wwwroot/libs/summernote-0.8.12/summernote.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/summernote-0.8.12/summernote-lite.min.css",
+    "inputFiles": [
+      "wwwroot/libs/summernote-0.8.12/summernote-lite.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/models/post.min.js",
+    "inputFiles": [
+      "wwwroot/libs/summernote-0.8.12/summernote-lite.min.js",
+      "wwwroot/libs/highlight/highlight.min.js",
+      "wwwroot/libs/lazyload.js",
+      "wwwroot/libs/holder-v2.9.0/holder.min.js",
+      "wwwroot/models/repository.js",
+      "wwwroot/models/post.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/default/css/bootstrap.min.css",
+    "inputFiles": [
+      "wwwroot/assets/default/css/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/plugin.login.css",
+    "inputFiles": [
+      "wwwroot/admin/plugins/font-awesome/css/font-awesome.css",
+      "wwwroot/admin/plugins/simple-line-icons/simple-line-icons.css",
+      "wwwroot/admin/plugins/bootstrap/css/bootstrap.css",
+      "wwwroot/admin/plugins/bootstrap-switch/css/bootstrap-switch.css",
+      "wwwroot/admin/plugins/select2/css/select2.css",
+      "wwwroot/admin/plugins/select2/css/select2-bootstrap.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/page.login.css",
+    "inputFiles": [
+      "wwwroot/admin/css/components.css",
+      "wwwroot/admin/css/plugins.css",
+      "wwwroot/admin/css/pages/login.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/scripts/plugin.login.js",
+    "inputFiles": [
+      "wwwroot/admin/plugins/jquery.min.js",
+      "wwwroot/admin/plugins/bootstrap/js/bootstrap.js",
+      "wwwroot/admin/plugins/js.cookie.min.js",
+      "wwwroot/admin/plugins/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/admin/plugins/jquery.blockui.min.js",
+      "wwwroot/admin/plugins/bootstrap-switch/js/bootstrap-switch.js",
+      "wwwroot/admin/plugins/jquery-validation/js/jquery.validate.js",
+      "wwwroot/admin/plugins/jquery-validation/js/additional-methods.js",
+      "wwwroot/admin/plugins/select2/js/select2.full.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/scripts/page.login.js",
+    "inputFiles": [
+      "wwwroot/admin/scripts/pages/login.js",
+      "wwwroot/admin/scripts/app.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/scripts/default.plugin.js",
+    "inputFiles": [
+      "wwwroot/admin/plugins/jquery.min.js",
+      "wwwroot/admin/plugins/bootstrap/js/bootstrap.js",
+      "wwwroot/admin/plugins/js.cookie.min.js",
+      "wwwroot/admin/plugins/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/admin/plugins/jquery.blockui.min.js",
+      "wwwroot/admin/plugins/bootstrap-switch/js/bootstrap-switch.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/scripts/default.app.js",
+    "inputFiles": [
+      "wwwroot/admin/scripts/app.js",
+      "wwwroot/admin/scripts/layout.js",
+      "wwwroot/admin/scripts/quick-sidebar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/default.plugin.css",
+    "inputFiles": [
+      "wwwroot/admin/plugins/font-awesome/css/font-awesome.css",
+      "wwwroot/admin/plugins/simple-line-icons/simple-line-icons.css",
+      "wwwroot/admin/plugins/bootstrap/css/bootstrap.css",
+      "wwwroot/admin/plugins/bootstrap-switch/css/bootstrap-switch.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/default.layout.css",
+    "inputFiles": [
+      "wwwroot/admin/css/components.min.css",
+      "wwwroot/admin/css/plugins.min.css",
+      "wwwroot/admin/css/layout.css",
+      "wwwroot/admin/css/themes/darkblue.css",
+      "wwwroot/admin/css/custom.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/page.manage.css",
+    "inputFiles": [
+      "wwwroot/admin/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css",
+      "wwwroot/admin/plugins/datatables/datatables.min.css",
+      "wwwroot/admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/post.manage.css",
+    "inputFiles": [
+      "wwwroot/admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css",
+      "wwwroot/admin/plugins/bootstrap-fileinput/bootstrap-fileinput.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/scripts/category.manage.js",
+    "inputFiles": [
+      "wwwroot/admin/scripts/datatable.js",
+      "wwwroot/admin/plugins/datatables/datatables.min.js",
+      "wwwroot/admin/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js",
+      "wwwroot/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "wwwroot/admin/scripts/page/category.manage.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/scripts/post.manage.js",
+    "inputFiles": [
+      "wwwroot/admin/scripts/datatable.js",
+      "wwwroot/admin/plugins/datatables/datatables.min.js",
+      "wwwroot/admin/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js",
+      "wwwroot/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "wwwroot/admin/plugins/bootstrap-fileinput/bootstrap-fileinput.js",
+      "wwwroot/admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js",
+      "wwwroot/admin/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js",
+      "wwwroot/admin/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js",
+      "wwwroot/admin/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js",
+      "wwwroot/admin/scripts/page/post.manage.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/highlight/style.css",
+    "inputFiles": [
+      "wwwroot/libs/highlight/skin/highlighter-custom.css",
+      "wwwroot/libs/highlight/skin/kyzin.theme.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/scripts/profile/view-profile.js",
+    "inputFiles": [
+      "wwwroot/admin/plugins/datatables/datatables.min.js",
+      "wwwroot/admin/plugins/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/admin/plugins/jquery.searchable/js/jquery.searchable.js",
+      "wwwroot/admin/scripts/main/main.js",
+      "wwwroot/admin/scripts/profile/page-profile.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/pages/profile/page-profile.min.css",
+    "inputFiles": [
+      "wwwroot/admin/css/pages/profile/page-profile.css"
+    ]
+  }
+]

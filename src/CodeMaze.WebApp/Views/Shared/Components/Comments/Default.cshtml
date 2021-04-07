@@ -1,0 +1,62 @@
+﻿@model IReadOnlyList<PostCommentListItem>
+
+@{ 
+    var comments = Model;
+    var commentCount = Model?.Count;
+}
+@if (Model?.Count > 0)
+{
+    <div id="commentlist" class="page-content">
+        <div class="boxedtitle page-title"><h2>Comments ( <span class="color">@commentCount</span> )</h2></div>
+        <ol class="commentlist clearfix">
+            @foreach (var comment in comments)
+            {
+                <li class="comment">
+                    <div class="comment-body clearfix">
+                        <div class="avatar"><img alt="" src="holder.js/65x65?random=yes&size=20&text=@comment.LogoText"></div>
+                        <div class="comment-text">
+                            <div class="author clearfix">
+                                <div class="comment-meta">
+                                    <span>@comment.Username</span>
+                                    <div class="date"><i class="icon-edit"></i> @Utility.FormatDate(comment.CreateOnUtc)</div>
+                                </div>
+                                <a class="comment-reply" href="#comment" data-comment-id="@comment.Id"><i class="icon-reply"></i>Reply</a>
+                            </div>
+                            <div class="text">
+                                <p>@Html.Raw(comment.CommentContent)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (comment?.CommentReplies?.Any() == true)
+                    {
+                        <ul class="children">
+
+                            @foreach (var commentReply in comment.CommentReplies)
+                            {
+                                <li class="comment">
+                                    <div class="comment-body clearfix">
+                                        <div class="avatar"><img alt="" src="holder.js/65x65?random=yes&size=20&text=@commentReply.LogoText"></div>
+                                        <div class="comment-text">
+                                            <div class="author clearfix">
+                                                <div class="comment-meta">
+                                                    <span>@commentReply.Username</span>
+                                                    <div class="date"><i class="icon-edit"></i> @Utility.FormatDate(commentReply.ReplyTimeUtc)</div>
+                                                </div>
+                                                <a class="comment-reply" data-comment-id="@commentReply.Id" data-parent-id="@comment.Id" href="#comment"><i class="icon-reply"></i>Reply</a>
+                                            </div>
+                                            <div class="text">
+                                                <p>@Html.Raw(commentReply.ReplyContent)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li><!-- End comment child -->
+                            }
+                        </ul><!-- End comment children -->
+                    }
+                </li>
+                <!-- End comment -->
+            }
+        </ol><!-- End commentlist -->
+    </div><!-- End page-content -->
+}

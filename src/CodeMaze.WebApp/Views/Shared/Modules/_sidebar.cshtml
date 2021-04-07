@@ -1,0 +1,44 @@
+﻿<aside class="col-md-3 sidebar">
+
+    <div class="widget">
+        <div class="widget-header">
+            <h3 class="widget_title">All Categories</h3>
+        </div>
+        <div class="widget-body">
+                <cache expires-after="@TimeSpan.FromMinutes(60)">
+                    @await Component.InvokeAsync(typeof(CategoryListViewComponent))
+                </cache>
+        </div>
+    </div>
+
+    <div class="widget ">
+        <div class="widget-header">
+            <h3 class="widget_title">Tags cloud</h3>
+        </div>
+        <div class="widget-body widget_tag_cloud">
+            <cache expires-after="@TimeSpan.FromMinutes(60)">
+                @await Component.InvokeAsync(typeof(HotTagsViewComponent))
+            </cache>
+        </div>
+    </div>
+
+    @*<div class="widget">
+        <div class="widget-header">
+            <h3 class="widget_title">Recent Posts</h3>
+        </div>
+        <div class="widget-body">
+            <ul class="related-posts">
+                @if (categoryRequest is null)
+                {
+                    <cache expires-after="@TimeSpan.FromMinutes(60)">
+                        @await Component.InvokeAsync(typeof(RecentPostsViewComponent))
+                    </cache>
+                }
+                else
+                {
+                    @await Component.InvokeAsync(typeof(RecentPostsViewComponent), categoryRequest)
+                }
+            </ul>
+        </div>
+    </div>*@
+</aside><!-- End sidebar -->

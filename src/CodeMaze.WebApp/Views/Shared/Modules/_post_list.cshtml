@@ -1,0 +1,63 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model X.PagedList.StaticPagedList<PostListItem>
+@{
+    var postListItem = Model;
+}
+
+@if (postListItem?.Count > 0)
+{
+    foreach (var postItem in postListItem)
+    {
+        <article class="post clearfix">
+            <div class="post-inner">
+                <h2 class="post-title"><span class="post-type"><i class="icon-file-alt"></i></span><a href="@postItem.Url">@postItem.Title</a></h2>
+                <div class="post-meta">
+                    <span class="meta-date"><i class="icon-edit"></i>@Utility.FormatDate(postItem.PubDateUtc)</span>
+                    <span class="meta-categories">
+                        <i class="icon-list"></i>
+                        @if (postItem.Categories?.Any() == true)
+                        {
+                            @foreach (var category in postItem.Categories)
+                            {
+                                <a href="@category.Url" title="@category.DisplayName">@category.DisplayName</a>
+                            }
+                        }
+                    </span>
+                    <span class="meta-comment"><i class="icon-comments-alt"></i><a href="#">@postItem.Comments comments</a></span>
+                </div>
+                <div class="post-content">
+                    <p>@postItem.ContentAbstract</p>
+                    @if (postItem.Tags?.Any() == true)
+                    {
+                        <div class="post-tags" style="float:left; margin-top: 12px;">
+                            <i class="icon-tags"></i>
+                            @foreach (var tag in postItem.Tags)
+                            {
+                                <a href="@tag.TagUrl" data-id="@tag.Id" data-tag="@tag.NormalizedTagName">@tag.TagName</a>
+                            }
+                        </div>
+                    }
+                    <a href="@postItem.Url" class="post-read-more button color">Read More</a>
+                </div><!-- End post-content -->
+            </div><!-- End post-inner -->
+        </article><!-- End article.post -->
+    }
+}
+
+@Html.PagedListPager(postListItem, page => $"?page={page}", new PagedListRenderOptions
+{
+    UlElementClasses = new[] { "pagination" },
+    MaximumPageNumbersToDisplay = 5,
+    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+    ActiveLiElementClass = "current",
+    ContainerDivClasses = new[] { "pagination" },
+    LinkToFirstPageFormat = "<i class=\"icon-double-angle-left\"></i>",
+    LinkToLastPageFormat = "<i class=\"icon-double-angle-right\"></i>",
+    LinkToPreviousPageFormat = "<i class=\"icon-angle-left\"></i>",
+    LinkToNextPageFormat = "<i class=\"icon-angle-right\"></i>",
+    DisplayLinkToNextPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+    DisplayLinkToPreviousPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+    DisplayLinkToFirstPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+    DisplayLinkToLastPage = X.PagedList.Web.Common.PagedListDisplayMode.Always
+})
