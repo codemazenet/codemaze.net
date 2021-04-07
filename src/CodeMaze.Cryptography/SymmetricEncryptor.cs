@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
-    public class SymmetricEncryptor
+    public class SymmetricEncryptor: ISymmetricEncryptor
     {
         private const int AesBlockByteSize = 128 / 8;
 
@@ -27,10 +27,10 @@
 
         public SymmetricEncryptor(string cipherKey)
         {
-            this.cipherKey = cipherKey?? "ltV&kvwD$2";
+            this.cipherKey = Base64Encryptor.Base64StringDecode(cipherKey)?? "ltV&kvwD$2";
         }
 
-        public string EncryptString(string toEncrypt)
+        public string Encrypt(string toEncrypt)
         {
             // encrypt
             var keySalt = GenerateRandomBytes(PasswordSaltByteSize);
@@ -64,7 +64,7 @@
             return Convert.ToBase64String(result);
         }
 
-        public string DecryptToString(string encryptedText)
+        public string Decrypt(string encryptedText)
         {
             var encryptedData = Convert.FromBase64String(encryptedText);
             if (encryptedData is null
@@ -164,7 +164,7 @@
 
     public interface ISymmetricEncryptor
     {
-        string EncryptString(string plainText);
-        string DecryptToString(string encryptedText);
+        string Encrypt(string plainText);
+        string Decrypt(string encryptedText);
     }
 }

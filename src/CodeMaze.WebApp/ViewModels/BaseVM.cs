@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using CodeMaze.Configuration;
+﻿using CodeMaze.Configuration;
+using CodeMaze.Cryptography;
 using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
-using CodeMaze.Library;
+
+using Microsoft.AspNetCore.Http;
+
+using Newtonsoft.Json;
+
 using System;
 
 namespace CodeMaze.WebApp.ViewModels
@@ -12,12 +15,13 @@ namespace CodeMaze.WebApp.ViewModels
     {
         protected readonly IBlogConfig _blogConfig;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ISymmetricEncryptor _aceEncryptor;
 
-        public BaseVM(IBlogConfig blogConfig, IHttpContextAccessor httpContextAccessor)
+        public BaseVM(IBlogConfig blogConfig, IHttpContextAccessor httpContextAccessor, ISymmetricEncryptor aceEncryptor)
         {
             _blogConfig = blogConfig;
             _httpContextAccessor = httpContextAccessor;
-
+            this._aceEncryptor = aceEncryptor;
             var data = new TokenValidateViewModel
             {
                 SessionId = Guid.NewGuid(),
@@ -25,7 +29,7 @@ namespace CodeMaze.WebApp.ViewModels
                 Token = CodeMazeConfiguration.TokenValidatePost
             };
 
-            KyzinToken = new AesEncryptionService(new KeyInfo(CodeMazeConfiguration.Encryption)).Encrypt(JsonConvert.SerializeObject(data));
+            KyzinToken = _aceEncryptor.Encrypt(JsonConvert.SerializeObject(data));
 
             if (_httpContextAccessor.HttpContext.Session.HasValue(SessionHelper.SessionLogin))
             {

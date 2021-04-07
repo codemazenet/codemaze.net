@@ -1,11 +1,13 @@
-﻿using Dapper;
+﻿using CodeMaze.Cryptography;
+using CodeMaze.Data.RequestResponse;
+
+using Dapper;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+
 using Newtonsoft.Json;
 
-//using CodeMaze.Extension.AesEncryption;
-using CodeMaze.Data.RequestResponse;
-using CodeMaze.Library;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -18,7 +20,7 @@ namespace CodeMaze.Configuration
     {
         private readonly ILogger<BlogConfig> _logger;
 
-        private readonly IAesEncryptionService _encryptionService;
+        private readonly ISymmetricEncryptor _encryptionService;
 
         public BlogOwnerSettings BlogOwnerSettings { get; set; }
 
@@ -37,7 +39,7 @@ namespace CodeMaze.Configuration
 
         public BlogConfig(
             ILogger<BlogConfig> logger,
-            IAesEncryptionService encryptionService,
+            ISymmetricEncryptor encryptionService,
             IConfiguration configuration)
         {
             _encryptionService = encryptionService;

@@ -24,7 +24,7 @@ namespace CodeMaze.WebApp.Controllers
         [ResponseCache(CacheProfileName ="Cache30")]
         public async Task<IActionResult> Detail(string url, string code, [FromServices] IMemoryCache memoryCache = null)
         {
-            var postView = new PostViewViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor);
+            var postView = new PostViewViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption);
 
             if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(code))
                 return View("NotFound", postView);

@@ -6,7 +6,7 @@
         title = "Studying And Sharing Programming Base Knowledge";
     }
 
-    title = $"{CodeMaze.Configuration.KyzinConfiguration.ApplicationName} - {title}";
+    title = $"{CodeMaze.Configuration.CodeMazeConfiguration.ApplicationName} - {title}";
     var component = (string)ViewData["Component"] ?? "dashboard";
 }
 <!DOCTYPE html>
@@ -21,8 +21,8 @@
     <meta charset="utf-8">
     <title>@title</title>
     <meta name="description" content="@title">
-    <meta name="author" content="@CodeMaze.Configuration.KyzinConfiguration.BaseUrl">
-    <base href="@CodeMaze.Configuration.KyzinConfiguration.BaseUrl" />
+    <meta name="author" content="@CodeMaze.Configuration.CodeMazeConfiguration.BaseUrl">
+    <base href="@CodeMaze.Configuration.CodeMazeConfiguration.BaseUrl" />
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -391,8 +391,8 @@
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
             <div class="page-footer-inner">
-                @DateTime.Now.Year &copy; @CodeMaze.Configuration.KyzinConfiguration.ApplicationName Theme By
-                <a target="_blank" href="@CodeMaze.Configuration.KyzinConfiguration.BaseUrl">Kyzin</a>
+                @DateTime.Now.Year &copy; @CodeMaze.Configuration.CodeMazeConfiguration.ApplicationName Theme By
+                <a target="_blank" href="@CodeMaze.Configuration.CodeMazeConfiguration.BaseUrl">Kyzin</a>
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>

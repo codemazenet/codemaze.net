@@ -28,7 +28,7 @@ namespace CodeMaze.WebApp.Controllers
         [Route("/tags.html")]
         public IActionResult Index()
         {
-            return View("TagList", new TagsViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor));
+            return View("TagList", new TagsViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption));
         }
 
         [Route("/tag/{normalizedName}.html")]
@@ -47,7 +47,7 @@ namespace CodeMaze.WebApp.Controllers
             }
             var tag = repositoryFactory.Tag.GetTag(normalizedName);
 
-            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor);
+            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption);
             pageView.Title = new TagTitleViewModel { Name = tag.TagName };
             ViewData["Title"] = tag.TagName;
 

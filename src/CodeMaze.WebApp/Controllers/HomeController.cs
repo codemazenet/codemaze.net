@@ -23,10 +23,7 @@ namespace CodeMaze.WebApp.Controllers
         [Route("/{page?}"), Route("index.html")]
         public async Task<IActionResult> Index(int page = 1, [FromServices] IMemoryCache memoryCache = null)
         {
-            var EncryptString = SymmetricEncryptor.EncryptString("Xin Chao", "Duy Khanh");
-            var DencryptString=SymmetricEncryptor.DecryptToString(EncryptString, "Duy Khanh");
-
-            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor);
+            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption);
 
             var postList = repositoryFactory.Post.GetPagedPostsAsync(CodeMazeConfiguration.PageSize, page);
 
@@ -48,7 +45,7 @@ namespace CodeMaze.WebApp.Controllers
         [Route("/about.html")]
         public IActionResult About()
         {
-            return View(new TagsViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor));
+            return View(new TagsViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

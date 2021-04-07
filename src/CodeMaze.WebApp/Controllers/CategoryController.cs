@@ -21,7 +21,7 @@ namespace CodeMaze.WebApp.Controllers
         [Route("/category/{url}-{code}.html")]
         public async Task<IActionResult> GetPostsByCategory(string url, string code, int page = 1, [FromServices] IMemoryCache memoryCache = null)
         {
-            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor);
+            var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption);
 
             if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(code))
                 return View("NotFound", pageView);

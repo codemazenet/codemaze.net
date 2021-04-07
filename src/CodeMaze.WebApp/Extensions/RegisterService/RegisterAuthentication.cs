@@ -19,7 +19,7 @@ namespace CodeMaze.WebApp
             });
 
             //services.AddDbContext<KyzinDbContext>(options =>
-            //    options.UseSqlServer(KyzinConfiguration.DbConnention, sqlOptions =>
+            //    options.UseSqlServer(CodeMazeConfiguration.DbConnention, sqlOptions =>
             //    {
             //        sqlOptions.EnableRetryOnFailure(
             //            maxRetryCount: 3,

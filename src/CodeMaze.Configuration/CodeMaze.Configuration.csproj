@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CodeMaze.Cryptography\CodeMaze.Cryptography.csproj" />
     <ProjectReference Include="..\CodeMaze.Data\CodeMaze.Data.csproj" />
     <ProjectReference Include="..\CodeMaze.Library\CodeMaze.Library.csproj" />
   </ItemGroup>

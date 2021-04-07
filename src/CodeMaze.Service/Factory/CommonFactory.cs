@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using CodeMaze.Configuration;
 using CodeMaze.Library;
+using CodeMaze.Cryptography;
 
 namespace CodeMaze.Service.Factory
 {
@@ -18,7 +19,7 @@ namespace CodeMaze.Service.Factory
         public readonly IOptions<AppSettings> Settings;
         public readonly IMapper Mapper;
         public readonly IBlogConfig BlogConfig;
-        public readonly IAesEncryptionService AesEncryption;
+        public readonly ISymmetricEncryptor  AesEncryption;
         public readonly IHttpContextAccessor HttpContextAccessor;
 
         public CommonFactory(
@@ -26,7 +27,7 @@ namespace CodeMaze.Service.Factory
             IOptions<AppSettings> settings,
             IMapper mapper,
             IBlogConfig blogConfig,
-            IAesEncryptionService aesEncryption,
+            ISymmetricEncryptor aesEncryption,
             IHttpContextAccessor httpContextAccessor)
         {
             if (logger != null) this.Logger = logger;
