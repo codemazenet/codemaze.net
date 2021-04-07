@@ -37,7 +37,7 @@ namespace CodeMaze.WebApp.Controllers
                 ViewData["Title"] = category.DisplayName;
             }
 
-            var result = await repositoryFactory.Post.GetPostsByCategoryAsync(request, KyzinConfiguration.PageSize, page);
+            var result = await repositoryFactory.Post.GetPostsByCategoryAsync(request, CodeMazeConfiguration.PageSize, page);
 
             if (!result.IsSuccess)
             {
@@ -48,11 +48,11 @@ namespace CodeMaze.WebApp.Controllers
 
             if (postList?.Count > 0)
             {
-                var token = postList.Count == KyzinConfiguration.PageSize ? commonFactory.AesEncryption.Encrypt((page + 1).ToString()) : string.Empty;
+                var token = postList.Count == CodeMazeConfiguration.PageSize ? commonFactory.AesEncryption.Encrypt((page + 1).ToString()) : string.Empty;
 
                 int postCount = memoryCache.GetOrCreate($"{StaticCacheKeys.PostCount}-{code}", entry => repositoryFactory.Post.CountVisiblePosts(url, code));
 
-                var postsAsIPagedList = new StaticPagedList<PostListItem>(postList, page, KyzinConfiguration.PageSize, postCount);
+                var postsAsIPagedList = new StaticPagedList<PostListItem>(postList, page, CodeMazeConfiguration.PageSize, postCount);
 
                 pageView.Items = postsAsIPagedList;
                 pageView.Token = token;

@@ -12,6 +12,6 @@ namespace CodeMaze.Configuration
         FeedSettings FeedSettings { get; set; }
         WatermarkSettings WatermarkSettings { get; set; }
 
-        Task<Response> SaveConfigurationAsync<T>(T kaizinSettings) where T : IKyzinSettings;
+        Task<Response> SaveConfigurationAsync<T>(T kaizinSettings) where T : IAppSettings;
     }
 }

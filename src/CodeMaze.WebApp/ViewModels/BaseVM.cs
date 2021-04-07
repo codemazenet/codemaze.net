@@ -22,10 +22,10 @@ namespace CodeMaze.WebApp.ViewModels
             {
                 SessionId = Guid.NewGuid(),
                 Time = DateTime.Now.ToFileTime(),
-                Token = KyzinConfiguration.TokenValidatePost
+                Token = CodeMazeConfiguration.TokenValidatePost
             };
 
-            KyzinToken = new AesEncryptionService(new KeyInfo(KyzinConfiguration.Encryption)).Encrypt(JsonConvert.SerializeObject(data));
+            KyzinToken = new AesEncryptionService(new KeyInfo(CodeMazeConfiguration.Encryption)).Encrypt(JsonConvert.SerializeObject(data));
 
             if (_httpContextAccessor.HttpContext.Session.HasValue(SessionHelper.SessionLogin))
             {

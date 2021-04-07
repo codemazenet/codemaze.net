@@ -84,7 +84,7 @@ namespace CodeMaze.Extension
             }
             else
             {
-                return Utility.GetPostAbstract(mainContent, KyzinConfiguration.AppSettings.PostSummaryWords, true);
+                return Utility.GetPostAbstract(mainContent, CodeMazeConfiguration.AppSettings.PostSummaryWords, true);
             }
         }
 

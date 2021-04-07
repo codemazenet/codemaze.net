@@ -120,7 +120,7 @@ namespace CodeMaze.WebApp.Controllers
                 new AuthenticationProperties
                 {
                     IsPersistent = true,
-                    ExpiresUtc = DateTime.Now.AddSeconds(KyzinConfiguration.AppSettings.SessionTimeOut)
+                    ExpiresUtc = DateTime.Now.AddSeconds(CodeMazeConfiguration.AppSettings.SessionTimeOut)
                 });
 
             HttpContext.Session.Set<UserClaim>(SessionHelper.SessionLogin, user);

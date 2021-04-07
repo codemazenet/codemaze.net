@@ -25,7 +25,7 @@ namespace CodeMaze.WebApp.Extensions
 
                     var token = JsonConvert.DeserializeObject<TokenValidateViewModel>(tokenDecrypt);
 
-                    if (!token.Token.Equals(KyzinConfiguration.TokenValidatePost))
+                    if (!token.Token.Equals(CodeMazeConfiguration.TokenValidatePost))
                     {
                         context.Result = new BadRequestResult();
                     }

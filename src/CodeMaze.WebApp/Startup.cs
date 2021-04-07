@@ -34,6 +34,8 @@ namespace CodeMaze.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("KyzinDatabase")));
@@ -65,7 +67,7 @@ namespace CodeMaze.WebApp
             services.Configure<CodeMaze.Data.Systems.AppSettings>(AppSettingsSection);
 
             services.AddDbContext<KyzinDbContext>(options =>
-               options.UseSqlServer(KyzinConfiguration.DatabaseInfo.ConnectionString));
+               options.UseSqlServer(CodeMazeConfiguration.DatabaseInfo.ConnectionString));
 
             services.AutoMapperConfigure();
 

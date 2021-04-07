@@ -38,7 +38,7 @@ namespace CodeMaze.WebApp.Controllers
 
             var userInfo = await memoryCache.GetOrCreateAsync($"UserId_{postInfo.Item.UserId}", entry => repositoryFactory.User.GetById(postInfo.Item.UserId));
 
-            var relatedPosts = await repositoryFactory.Post.GetRelatedPostsAsync(postInfo.Item.Categories.ToList(), KyzinConfiguration.RelatedPostSize);
+            var relatedPosts = await repositoryFactory.Post.GetRelatedPostsAsync(postInfo.Item.Categories.ToList(), CodeMazeConfiguration.RelatedPostSize);
 
             await ViewCount(postInfo.Item.Id).ConfigureAwait(true);
 

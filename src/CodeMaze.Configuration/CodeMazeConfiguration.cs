@@ -12,26 +12,26 @@ using System.Linq;
 
 namespace CodeMaze.Configuration
 {
-    public static class KyzinConfiguration
+    public static class CodeMazeConfiguration
     {
         public static string ApplicationName { get; set; }
         public static string DefaultSlogan { get; set; }
         public static string TokenValidatePost { get; set; }
         public static AppSettings AppSettings { get; set; }
-        public static EncryptionInfo Encryption { get; set; }
+        //public static EncryptionInfo Encryption { get; set; }
         public static string BaseUrl { get; set; }
         public static string DateTimeFormat { get; set; }
         public static int PageSize { get; set; }
         public static int RelatedPostSize { get; set; }
         public static DatabaseInfo DatabaseInfo { get; set; }
-        public static FirebaseAuthInfo FirebaseAuth { get; set; }
+        //public static FirebaseAuthInfo FirebaseAuth { get; set; }
 
         public static void RunKyzinConfigure(this IServiceCollection services, IConfiguration configuration)
         {
             ApplicationName = configuration.GetSection(Constants.ApplicationName).Value;
             DefaultSlogan = configuration.GetSection(Constants.DefaultSlogan).Value;
-            Encryption = configuration.GetSection(nameof(Encryption)).GetChildren().GetObjectFromSession<EncryptionInfo>();
-            FirebaseAuth = configuration.GetSection(nameof(FirebaseAuthInfo)).GetChildren().GetObjectFromSession<FirebaseAuthInfo>();
+            //Encryption = configuration.GetSection(nameof(Encryption)).GetChildren().GetObjectFromSession<EncryptionInfo>();
+            //FirebaseAuth = configuration.GetSection(nameof(FirebaseAuthInfo)).GetChildren().GetObjectFromSession<FirebaseAuthInfo>();
             AppSettings = configuration.GetSection(nameof(AppSettings)).GetChildren().GetObjectFromSession<AppSettings>();
             DatabaseInfo = configuration.GetSection(nameof(DatabaseInfo)).GetChildren().GetObjectFromSession<DatabaseInfo>();
             BaseUrl = configuration.GetSection(Constants.BaseUrl).Value;

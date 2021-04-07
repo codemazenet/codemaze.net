@@ -19,7 +19,7 @@ namespace CodeMaze.Extension
 
         public static string GetBaseUrl(string url = "", bool appendVersion = false)
         {
-            var baseUrl = KyzinConfiguration.BaseUrl;
+            var baseUrl = CodeMazeConfiguration.BaseUrl;
 
             if (string.IsNullOrEmpty(url))
             {
@@ -372,7 +372,7 @@ namespace CodeMaze.Extension
             }
 
             if (string.IsNullOrEmpty(format))
-                format = KyzinConfiguration.DateTimeFormat;
+                format = CodeMazeConfiguration.DateTimeFormat;
 
             return input.ToString(format);
         }

@@ -8,6 +8,7 @@ using CodeMaze.WebApp.ViewModels;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using X.PagedList;
+using CodeMaze.Cryptography;
 
 namespace CodeMaze.WebApp.Controllers
 {
@@ -22,17 +23,20 @@ namespace CodeMaze.WebApp.Controllers
         [Route("/{page?}"), Route("index.html")]
         public async Task<IActionResult> Index(int page = 1, [FromServices] IMemoryCache memoryCache = null)
         {
+            var EncryptString = SymmetricEncryptor.EncryptString("Xin Chao", "Duy Khanh");
+            var DencryptString=SymmetricEncryptor.DecryptToString(EncryptString, "Duy Khanh");
+
             var pageView = new PageViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor);
 
-            var postList = repositoryFactory.Post.GetPagedPostsAsync(KyzinConfiguration.PageSize, page);
+            var postList = repositoryFactory.Post.GetPagedPostsAsync(CodeMazeConfiguration.PageSize, page);
 
             if (postList?.Count > 0)
             {
-                var token = postList.Count == KyzinConfiguration.PageSize ? commonFactory.AesEncryption.Encrypt((page + 1).ToString()) : string.Empty;
+                var token = postList.Count == CodeMazeConfiguration.PageSize ? commonFactory.AesEncryption.Encrypt((page + 1).ToString()) : string.Empty;
 
                 int postCount = memoryCache.GetOrCreate(StaticCacheKeys.PostCount, entry => repositoryFactory.Post.CountVisiblePosts());
 
-                var postsAsIPagedList = new StaticPagedList<PostListItem>(postList, page, KyzinConfiguration.PageSize, postCount);
+                var postsAsIPagedList = new StaticPagedList<PostListItem>(postList, page, CodeMazeConfiguration.PageSize, postCount);
 
                 pageView.Items = postsAsIPagedList;
                 pageView.Token = token;

@@ -76,11 +76,11 @@ namespace CodeMaze.Configuration
             }
         }
 
-        public async Task<Response> SaveConfigurationAsync<T>(T moongladeSettings) where T : IKyzinSettings
+        public async Task<Response> SaveConfigurationAsync<T>(T appSettings) where T : IAppSettings
         {
             async Task<int> SetConfiguration(string key, string value)
             {
-                using (var conn = new SqlConnection(KyzinConfiguration.DatabaseInfo.ConnectionString))
+                using (var conn = new SqlConnection(CodeMazeConfiguration.DatabaseInfo.ConnectionString))
                 {
                     string sql = $"UPDATE {nameof(BlogConfiguration)} " +
                                  $"SET {nameof(BlogConfiguration.CfgValue)} = @value, {nameof(BlogConfiguration.LastModifiedTimeUtc)} = @lastModifiedTimeUtc " +
@@ -92,7 +92,7 @@ namespace CodeMaze.Configuration
 
             try
             {
-                var json = moongladeSettings.GetJson();
+                var json = appSettings.GetJson();
                 int rows = await SetConfiguration(typeof(T).Name, json);
                 return new Response(rows > 0);
             }
@@ -124,7 +124,7 @@ namespace CodeMaze.Configuration
         {
             try
             {
-                using (var conn = new SqlConnection(KyzinConfiguration.DatabaseInfo.ConnectionString))
+                using (var conn = new SqlConnection(CodeMazeConfiguration.DatabaseInfo.ConnectionString))
                 {
                     string sql = $"SELECT CfgKey, CfgValue FROM {nameof(BlogConfiguration)}";
                     var data = conn.Query<(string CfgKey, string CfgValue)>(sql);

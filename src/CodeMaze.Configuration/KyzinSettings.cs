@@ -2,7 +2,7 @@
 
 namespace CodeMaze.Configuration
 {
-    public class KyzinSettings : IKyzinSettings
+    public class KyzinSettings : IAppSettings
     {
         public string GetJson(Formatting formatting = Formatting.None)
         {

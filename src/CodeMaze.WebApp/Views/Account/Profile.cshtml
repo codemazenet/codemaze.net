@@ -5,10 +5,10 @@
 
     if (string.IsNullOrEmpty(title))
     {
-        title = KyzinConfiguration.DefaultSlogan;
+        title = CodeMazeConfiguration.DefaultSlogan;
     }
 
-    var applicationName = $"{KyzinConfiguration.ApplicationName} - {title}";
+    var applicationName = $"{CodeMazeConfiguration.ApplicationName} - {title}";
     var UserProfile = Model.UserProfile;
     var Posts = Model.Posts;
     var Comments = Model.Comments;
