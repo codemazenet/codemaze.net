@@ -8,7 +8,7 @@ using WebMarkupMin.Core;
 
 namespace CodeMaze.Extension
 {
-    public static class WebMarkupMinConfiguration
+    public static class WebMarkupMinConfigurationService
     {
         public static void AddWebMarkupMinConfigure(this IServiceCollection services)
         {

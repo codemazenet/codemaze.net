@@ -79,5 +79,20 @@ namespace CodeMaze.WebApp.Controllers
 
             return Ok(user != null);
         }
+
+        [Route("/auth/logout.html")]
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> LogoutAsync()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            if (HttpContext.Session.HasValue(SessionHelper.SessionLogin))
+            {
+                HttpContext.Session.Remove(SessionHelper.SessionLogin);
+            }
+
+            return Redirect("/index.html");
+        }
     }
 }

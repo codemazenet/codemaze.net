@@ -5,18 +5,22 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <title>Login</title>
+    <title>Login - Code Maze</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="@Utility.BaseUrl("favicon.png")" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/vendor/bootstrap/css/bootstrap.min.css")">
-    <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css")">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/css/util.css")">
-    <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/css/login.css")">
-    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/pages/login/style.bundle.min.css")">
+    @*
+        <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/vendor/bootstrap/css/bootstrap.min.css")">
+        <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/vendor/bootstrap/css/bootstrap.min.css")">
+        <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css")">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/css/util.css")">
+        <link rel="stylesheet" type="text/css" href="@Utility.BaseUrl("assets/css/login.css")">
+        <!--===============================================================================================-->
+    *@
 </head>
 <body>
 
@@ -25,7 +29,7 @@
             <div class="wrap-login100">
                 <div class="login100-form-title" style="background-image: url(@Utility.BaseUrl("assets/images/bg-01.jpg"));">
                     <span class="login100-form-title-1">
-                    Sign In
+                        Sign In
                     </span>
                 </div>
 
@@ -45,7 +49,7 @@
 
                     <div class="flex-sb-m w-full p-b-30">
                         <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" value="true" >
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" value="true">
                             <label class="label-checkbox100" for="ckb1">
                                 Remember me
                             </label>
@@ -69,8 +73,9 @@
     </div>
 
     <!--===============================================================================================-->
-    <script src="@Utility.BaseUrl("assets/vendor/jquery/jquery-3.6.0.min.js")"></script>
-    <script src="@Utility.BaseUrl("assets/js/login.js")"></script>
+    @*<script src="@Utility.BaseUrl("assets/vendor/jquery/jquery-3.6.0.min.js")"></script>
+        <script src="@Utility.BaseUrl("assets/js/login.js")"></script>*@
     <!--===============================================================================================-->
+    <script src="@Utility.BaseUrl("assets/pages/login/script.bundle.min.js")"></script>
 </body>
 </html>

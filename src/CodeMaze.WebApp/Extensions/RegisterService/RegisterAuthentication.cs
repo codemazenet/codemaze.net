@@ -4,34 +4,40 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using CodeMaze.Configuration;
 using System;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace CodeMaze.WebApp
 {
     public static class RegisterAuthentication
     {
-        public static void AddAuthenticationExtend(this IServiceCollection services)
+        public static void AddAuthenticationExtend(this IServiceCollection services, string authToken)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.Cookie.Name = "MazeCore.AuthToken";
+                options.LoginPath = "/auth/login.html";
+                options.LogoutPath = "/auth/logout.html";
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(CodeMazeConfiguration.AppSettings.CookiesTimeOut);
+                options.SlidingExpiration = true;
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                options.HttpOnly = HttpOnlyPolicy.None;
+                options.Secure = CookieSecurePolicy.Always;
             });
-
-            //services.AddDbContext<KyzinDbContext>(options =>
-            //    options.UseSqlServer(CodeMazeConfiguration.DbConnention, sqlOptions =>
-            //    {
-            //        sqlOptions.EnableRetryOnFailure(
-            //            maxRetryCount: 3,
-            //            maxRetryDelay: TimeSpan.FromSeconds(30),
-            //            errorNumbersToAdd: null);
-            //    }));
-
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddDefaultUI(UIFramework.Bootstrap4)
-            //    .AddEntityFrameworkStores<KizinDbConext>();
-
-            services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
@@ -41,19 +47,18 @@ namespace CodeMaze.WebApp
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Lax;
             });
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options =>
-            {
-                options.LoginPath = "/login.html";
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(CodeMazeConfiguration.AppSettings.CookiesTimeOut);
-                options.SlidingExpiration = true;
+            
+            services.AddDistributedMemoryCache();
+
+            services.AddCookiePolicy(options => {
+            
             });
+
+            services.AddMvc(options => options.Filters.Add(new AuthorizeFilter())); 
         }
     }
 }

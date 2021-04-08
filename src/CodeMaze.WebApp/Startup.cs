@@ -1,24 +1,20 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using CodeMaze.Configuration;
+using CodeMaze.Cryptography;
+using CodeMaze.Cryptography.Symmetric;
 using CodeMaze.Data;
 using CodeMaze.Extension;
 using CodeMaze.Middleware;
 using CodeMaze.WebApp.Extensions;
-using System.IO.Compression;
-using System.Linq;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 using WebMarkupMin.AspNetCore3;
-using CodeMaze.Cryptography;
-using CodeMaze.Cryptography.Symmetric;
 
 namespace CodeMaze.WebApp
 {
@@ -27,14 +23,16 @@ namespace CodeMaze.WebApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-           
-            string connectionEncryted = configuration.GetConnectionString("DatabaseLocalConfig");
-            if (!string.IsNullOrWhiteSpace(connectionEncryted))
-                connectionString = Base64Encryptor.Decrypt(connectionEncryted);
-
-            AppSettingsSection = Configuration.GetSection(nameof(CodeMaze.Data.Systems.AppSettings));
+            AppSettingsSection = configuration.GetSection(nameof(CodeMaze.Data.Systems.AppSettings));
+            connectionString = GetValueConfigDecript("ConnectionStrings", "DatabaseLocalConfig");
+            authToken = GetValueConfigDecript("SecurityKey", "AuthKey");
+            cipherKey = GetValueConfigDecript("SecurityKey", "CipherKey");
+            cultureDefault = GetValueConfig<string>("AppSettings", "CultureDefault");
         }
 
+        private readonly string authToken;
+        private readonly string cultureDefault;
+        private readonly string cipherKey;
         private readonly string connectionString;
         private readonly IConfigurationSection AppSettingsSection;
         public IConfiguration Configuration { get; }
@@ -42,78 +40,25 @@ namespace CodeMaze.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //var key = Base64Encryptor.Base64StringEncode("u1sl&SF7$s");
-            //var key2 = Base64Encryptor.Base64StringDecode(key);
-
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("KyzinDatabase")));
-
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddResponseCaching();
             services.AddRazorPages();
-            services.AddSingleton<IAesEncryptor>(sec => new AesEncryptor(Configuration.GetSection("SecurityKey").GetValue<string>("CipherKey")));
-            services.AddResponseCompression(options =>
-            {
-                options.Providers.Add<BrotliCompressionProvider>();
-                options.Providers.Add<GzipCompressionProvider>();
-                options.MimeTypes =
-                    ResponseCompressionDefaults.MimeTypes.Concat(
-                        new[] { "image/svg+xml" });
-            });
-            services.Configure<BrotliCompressionProviderOptions>(options =>
-            {
-                options.Level = CompressionLevel.Fastest;
-            });
-            services.Configure<GzipCompressionProviderOptions>(options =>
-            {
-                options.Level = CompressionLevel.Fastest;
-            });
-
-            services.RunKyzinConfigure(Configuration);
-
-            services.Configure<CodeMaze.Data.Systems.AppSettings>(AppSettingsSection);
-
-            services.AddDbContext<KyzinDbContext>(options =>
-               options.UseSqlServer(connectionString));
 
             services.AutoMapperConfigure();
-
-            services.CultureConfigure(AppSettingsSection["CultureDefault"]);
-
-            services.AddSession();
-
-            services.AddAntiforgery(options =>
-            {
-                var cookieBaseName = Configuration.GetValue<string>("CookieBaseName");
-                options.Cookie.Name = $"X-{cookieBaseName}";
-                options.FormFieldName = $"{cookieBaseName}-FORM";
-            });
-
+            services.RunKyzinConfigure(Configuration);
+            services.AddResponseCompressionService();
+            services.AddWebMarkupMinConfigure();
+            services.Configure<CodeMaze.Data.Systems.AppSettings>(AppSettingsSection);
+            services.AddDbContext<KyzinDbContext>(options => options.UseSqlServer(connectionString));
             services.AddRepositoryService();
             services.AddExtensionService();
+            services.CultureConfigure(cultureDefault);
+            services.AddAesService(cipherKey);
 
-            services.AddMvc(option =>
-            {
-                option.EnableEndpointRouting = false;
-                option.CacheProfiles.Add("Cache30", new CacheProfile
-                {
-                    Duration = 30,
-                    VaryByHeader = "User-Agent",
-                    Location = ResponseCacheLocation.Client
-                });
-            }).SetCompatibilityVersion(CompatibilityVersion.Latest)
-              .AddNewtonsoftJson(opt =>
-              {
-                  opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                  opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
-              }).AddNewtonsoftJson();
-
-            services.AddWebMarkupMinConfigure();
-
-            services.AddAuthenticationExtend();
+            services.AddSession();
+            services.AddAntiforgeryService(GetValueConfig<string>("CookieBaseName"));
+            services.AddMvcCacheService();
+            services.AddAuthenticationExtend(authToken);
 
             //services.AddCors(options =>
             //{
@@ -166,16 +111,16 @@ namespace CodeMaze.WebApp
             }
 
             //app.UseStatusCodePagesWithRedirects("/error/{0}.html");
-            // Support Viettnamese contents
-            app.SupportVietnameseContent();
+            app.SupportVietnameseContent();     // Support Viettnamese contents
             app.UseStaticFiles();
+            app.AddSecurityHeader(enforceHttps);
             app.UseRouting();
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSession();
             app.UseWebMarkupMin();
             app.UseMiddleware<PoweredByMiddleware>();
-            app.AddSecurityHeader(enforceHttps);
             app.UseResponseCaching();
             app.UseResponseCompression();
             //app.UseCors("app_codemaze");
@@ -213,6 +158,34 @@ namespace CodeMaze.WebApp
 
                 endpoints.MapRazorPages();
             });
+        }
+
+        private T GetValueConfig<T>(string key1 = null, string key2 = null, string key3 = null)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(key3))
+                {
+                    return Configuration.GetSection(key1).GetSection(key2).GetValue<T>(key1);
+                }
+                else if (!string.IsNullOrWhiteSpace(key2))
+                {
+                    return Configuration.GetSection(key1).GetValue<T>(key2);
+                }
+                return Configuration.GetValue<T>(key1);
+            }
+            catch (System.Exception)
+            {
+                return default(T);
+            }
+        }
+
+        private string GetValueConfigDecript(string key1 = null, string key2 = null, string key3 = null)
+        {
+            var value = GetValueConfig<string>(key1, key2, key3);
+            if (!string.IsNullOrWhiteSpace(value))
+                return Base64Encryptor.Decrypt(value);
+            return string.Empty;
         }
     }
 }

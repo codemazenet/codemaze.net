@@ -7,6 +7,7 @@
 
     public class AesEncryptor : IAesEncryptor
     {
+        private const string cipherKeyDefault = "ltV&kvwD$2";
         private const int AesBlockByteSize = 128 / 8;
 
         private const int PasswordSaltByteSize = 128 / 8;
@@ -28,7 +29,7 @@
 
         public AesEncryptor(string cipherKey)
         {
-            this.cipherKey = Base64Encryptor.Base64StringDecode(cipherKey) ?? "ltV&kvwD$2";
+            this.cipherKey = cipherKey ?? cipherKeyDefault;
         }
 
         public string Encrypt(string toEncrypt)
