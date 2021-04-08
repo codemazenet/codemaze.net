@@ -22,7 +22,7 @@
                 {
                     var aesEncryptionService = context.HttpContext.RequestServices.GetService(typeof(IAesEncryptor)) as IAesEncryptor;
 
-                    var antiToken = (string)context.HttpContext.Request.Headers["Kyzin-Token"];
+                    var antiToken = (string)context.HttpContext.Request.Headers["CodeMaze-Token"];
 
                     var tokenDecrypt = aesEncryptionService.Decrypt(antiToken);
 

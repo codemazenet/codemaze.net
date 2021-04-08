@@ -17,7 +17,7 @@ namespace CodeMaze.Extension
         public static string AppVersion =>
                Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 
-        public static string GetBaseUrl(string url = "", bool appendVersion = false)
+        public static string BaseUrl(string url = "", bool appendVersion = false)
         {
             var baseUrl = CodeMazeConfiguration.BaseUrl;
 

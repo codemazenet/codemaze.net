@@ -93,12 +93,12 @@ namespace CodeMaze.WebApp.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromForm] AccountLoginViewModel account = null)
         {
-            if (account is null || (account != null && string.IsNullOrEmpty(account.UserName) && string.IsNullOrEmpty(account.Password)))
+            if (account is null || (account != null && string.IsNullOrEmpty(account.Username) && string.IsNullOrEmpty(account.Password)))
             {
                 return Redirect("/login.html");
             }
 
-            var user = await repositoryFactory.User.SignInAsync(account.UserName, account.Password);
+            var user = await repositoryFactory.User.SignInAsync(account.Username, account.Password);
 
             if (user is null) return View();
 

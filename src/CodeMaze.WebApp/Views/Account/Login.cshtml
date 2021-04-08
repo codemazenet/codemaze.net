@@ -23,8 +23,8 @@
     <meta content="@applicationName" name="description" />
     <meta content="@CodeMazeConfiguration.ApplicationName" name="author" />
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-    <link href="@Utility.GetBaseUrl("/admin/css/plugin.login.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Utility.GetBaseUrl("/admin/css/page.login.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Utility.BaseUrl("/admin/css/plugin.login.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Utility.BaseUrl("/admin/css/page.login.min.css")" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="~/favicon.png" />
 </head>
 
@@ -151,13 +151,13 @@
     </div>
     <div class="copyright"> @DateTime.UtcNow.Year © @CodeMazeConfiguration.ApplicationName Admin. </div>
     <!--[if lt IE 9]>
-    <script src="@Utility.GetBaseUrl("/admin/plugins/respond.min.js")"></script>
-    <script src="@Utility.GetBaseUrl("/admin/plugins/excanvas.min.js")"></script>
-    <script src="@Utility.GetBaseUrl("/admin/plugins/ie8.fix.min.js")"></script>
+    <script src="@Utility.BaseUrl("/admin/plugins/respond.min.js")"></script>
+    <script src="@Utility.BaseUrl("/admin/plugins/excanvas.min.js")"></script>
+    <script src="@Utility.BaseUrl("/admin/plugins/ie8.fix.min.js")"></script>
     <![endif]-->
-    <script src="@Utility.GetBaseUrl("/admin/scripts/plugin.login.min.js")" type="text/javascript"></script>
+    <script src="@Utility.BaseUrl("/admin/scripts/plugin.login.min.js")" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
-    <script src="@Utility.GetBaseUrl("/admin/scripts/page.login.min.js")" type="text/javascript"></script>
+    <script src="@Utility.BaseUrl("/admin/scripts/page.login.min.js")" type="text/javascript"></script>
 
     <script>
         $(document).ready(function () {

@@ -24,7 +24,7 @@ namespace CodeMaze.WebApp.Extensions
                         .UnsafeEval();
                     //    // Whitelist Azure Application Insights
                     //    .From("https://*.vo.msecnd.net")
-                    //    .From("https://*.services.visualstudio.com");
+                        //.From(urlWhite);
                 })
                 // Microsoft believes privacy is a fundamental human right
                 // So should I
@@ -39,6 +39,7 @@ namespace CodeMaze.WebApp.Extensions
                 .RemoveServerHeader()
                 .RemoveCustomHeader("x-html-minification-powered-by")
                 .RemoveCustomHeader("x-powered-by-plesk")
+
             );
         }
     }

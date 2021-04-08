@@ -114,6 +114,18 @@ namespace CodeMaze.WebApp
             services.AddWebMarkupMinConfigure();
 
             services.AddAuthenticationExtend();
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: "app_codemaze",
+            //                      builder =>
+            //                      {
+            //                          builder.WithOrigins(Configuration.GetValue<string>("BaseUrl"),
+            //                                              "https://www.codemaze.net")
+            //                                    .AllowAnyHeader()
+            //                                    .WithMethods("POST");
+            //                      });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -166,6 +178,7 @@ namespace CodeMaze.WebApp
             app.AddSecurityHeader(enforceHttps);
             app.UseResponseCaching();
             app.UseResponseCompression();
+            //app.UseCors("app_codemaze");
 
             app.Use(async (context, next) =>
             {

@@ -39,12 +39,12 @@
     @*<base href="@CodeMazeConfiguration.BaseUrl" />*@
     <!-- Mobile Specific Metas -->
     <!-- Plugin required -->
-    <link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Utility.BaseUrl("/assets/default/css/bootstrap.min.css")">
     @*<link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/bootstrap.css")">*@
     <!-- Main Style -->
-    <link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/style.min.css")">
+    <link rel="stylesheet" href="@Utility.BaseUrl("/assets/default/css/style.min.css")">
     @*<link rel="stylesheet" href="@Utility.GetBaseUrl("/assets/default/css/style.css")">*@
-    <script src="@Utility.GetBaseUrl("/assets/default/js/plugins.min.js")"></script>
+    <script src="@Utility.BaseUrl("/assets/default/js/plugins.min.js")"></script>
     @*<script src="@Utility.GetBaseUrl("/assets/default/js/plugins.js")"></script>*@
     @RenderSection("StyleLibs", false)
     @RenderSection("JsLibs", false)
@@ -70,7 +70,7 @@
             </div><!-- End row -->
         </section><!-- End container -->
 
-        <input name="CSRF-MAZE-FORM" type="hidden" value="@Model.KyzinToken" />
+        <input name="CSRF-MAZE-FORM" type="hidden" value="@Model.MazeToken" />
 
         @*<partial name="Modules/_footer_content" />*@
         <partial name="Modules/_footer_bottom" />

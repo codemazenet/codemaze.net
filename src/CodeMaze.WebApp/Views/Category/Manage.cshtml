@@ -8,11 +8,11 @@
 }
 
 @section StyleLibs{
-    <link href="@Utility.GetBaseUrl("/admin/css/page.manage.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Utility.BaseUrl("/admin/css/page.manage.min.css")" rel="stylesheet" type="text/css" />
 }
 
 @section JsLibs{
-    <script src="@Utility.GetBaseUrl("/admin/scripts/category.manage.min.js")" type="text/javascript"></script>
+    <script src="@Utility.BaseUrl("/admin/scripts/category.manage.min.js")" type="text/javascript"></script>
 }
 <!-- BEGIN PAGE HEADER-->
 <!-- BEGIN PAGE BAR -->
@@ -102,7 +102,7 @@
                                     <input type="checkbox" class="bs-switch" @(category.Deleted ? "" : "checked") data-on-text="<i class='fa fa-unlock'></i> ON" data-off-text="<i class='fa fa-lock'></i> OFF" data-on-color="success" data-off-color="danger">
                                 </td>
                                 <td>
-                                    <a href="@Utility.GetBaseUrl($"/category/manage/update/{category.Id}", false)" class="btn btn-sm green btn-outline filter-submit">
+                                    <a href="@Utility.BaseUrl($"/category/manage/update/{category.Id}", false)" class="btn btn-sm green btn-outline filter-submit">
                                         <i class="fa fa-pencil"></i> Edit
                                     </a>
                                     <a class="btn btn-sm btn-outline @(category.Deleted?"disabled default":"red")" target="_blank" rel="nofollow" href="@category.Link" title="@category.DisplayName">

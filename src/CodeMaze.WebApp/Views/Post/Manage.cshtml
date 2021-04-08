@@ -10,11 +10,11 @@
 }
 
 @section StyleLibs{
-    <link href="@Utility.GetBaseUrl("/admin/css/page.manage.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Utility.BaseUrl("/admin/css/page.manage.min.css")" rel="stylesheet" type="text/css" />
 }
 
 @section JsLibs{
-    <script src="@Utility.GetBaseUrl("/admin/scripts/post.manage.js")" type="text/javascript"></script>
+    <script src="@Utility.BaseUrl("/admin/scripts/post.manage.js")" type="text/javascript"></script>
 }
 <!-- BEGIN PAGE HEADER-->
 <!-- BEGIN PAGE BAR -->
@@ -108,7 +108,7 @@
                                         <td> @post.EnableComment </td>
                                         <td> @post.IsPublished </td>
                                         <td>
-                                            <a href="@Utility.GetBaseUrl($"/post/manage/update/{post.Id}", false)" class="btn btn-sm green btn-outline filter-submit">
+                                            <a href="@Utility.BaseUrl($"/post/manage/update/{post.Id}", false)" class="btn btn-sm green btn-outline filter-submit">
                                                 <i class="fa fa-pencil"></i> Edit
                                             </a>
                                             <a class="btn btn-sm red btn-outline" target="_blank" rel="nofollow" href="@post.Link" title="@post.Title">

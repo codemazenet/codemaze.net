@@ -32,7 +32,7 @@ namespace CodeMaze.Extension
 
             CreateMap<UserViewModel, UserProfileViewModel>()
                .ForMember(dest => dest.Birthday, opt => opt.MapFrom(src => Utility.FormatDate(src.Birthday, "")))
-               .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Avatar) ? src.Avatar : Utility.GetBaseUrl("/assets/default/images/avatar.png", false)))
+               .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Avatar) ? src.Avatar : Utility.BaseUrl("/assets/default/images/avatar.png", false)))
                .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.DisplayName) ? src.DisplayName : (!string.IsNullOrEmpty(src.UserName) ? src.UserName : src.Email)));
 
 

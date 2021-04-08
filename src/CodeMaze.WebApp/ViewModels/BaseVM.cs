@@ -29,7 +29,7 @@ namespace CodeMaze.WebApp.ViewModels
                 Token = CodeMazeConfiguration.TokenValidatePost
             };
 
-            KyzinToken = _aceEncryptor.Encrypt(JsonConvert.SerializeObject(data));
+            MazeToken = _aceEncryptor.Encrypt(JsonConvert.SerializeObject(data));
 
             if (_httpContextAccessor.HttpContext.Session.HasValue(SessionHelper.SessionLogin))
             {

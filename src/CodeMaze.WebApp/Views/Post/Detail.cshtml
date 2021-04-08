@@ -1,7 +1,7 @@
 ﻿@model CodeMaze.WebApp.ViewModels.PostViewViewModel
 @{
     var postItem = Model.Item as PostItem;
-    var token = Model.KyzinToken;
+    var token = Model.MazeToken;
     var comments = postItem.Comments;
     var commentUpdate = new CommentEditViewModel();
     var commentCount = comments?.Count ?? 0;
@@ -16,10 +16,10 @@
 }
 
 @section JsLibs{
-    <script src="@Utility.GetBaseUrl("/models/post.min.js")"></script>
+    <script src="@Utility.BaseUrl("/models/post.min.js")"></script>
 }
 @section StyleLibs{
-    <link rel="stylesheet" href="@Utility.GetBaseUrl("/libs/summernote-0.8.12/summernote-lite.min.css", false)">
+    <link rel="stylesheet" href="@Utility.BaseUrl("/libs/summernote-0.8.12/summernote-lite.min.css", false)">
     <style type="text/css">
         .error {
             display: inline-block;
@@ -67,7 +67,7 @@
 
         @if (!string.IsNullOrEmpty(postItem.Image))
         {
-            <div class="post-img"><a href="@Utility.GetBaseUrl(postItem.Url)"><img data-src="@Utility.GetBaseUrl(postItem.Image)" alt="@postItem.Title"></a></div>
+            <div class="post-img"><a href="@Utility.BaseUrl(postItem.Url)"><img data-src="@Utility.BaseUrl(postItem.Image)" alt="@postItem.Title"></a></div>
         }
 
         <h2 class="post-title"><span class="post-type"><i class="icon-file-alt"></i></span>@postItem.Title</h2>
@@ -79,7 +79,7 @@
                     <i class="icon-list"></i>
                     @foreach (var category in postItem.Categories)
                     {
-                        <a href="@Utility.GetBaseUrl(@category.Link)" title="Click to open this category">@category.DisplayName</a>
+                        <a href="@Utility.BaseUrl(@category.Link)" title="Click to open this category">@category.DisplayName</a>
                     }
                 </span>
 
@@ -109,7 +109,7 @@
             <i class="icon-tags"></i>
             @foreach (var tag in tagList)
             {
-                <a href="@Utility.GetBaseUrl(tag.TagUrl)" title="@tag.TagName">@tag.TagName</a>
+                <a href="@Utility.BaseUrl(tag.TagUrl)" title="@tag.TagName">@tag.TagName</a>
             }
         }
     </div>
@@ -180,7 +180,7 @@
         <ul class="related-posts">
             @foreach (var relatedPost in relatedPosts)
             {
-                <li class="related-item"><h3><a href="@Utility.GetBaseUrl(@relatedPost.Link)"><i class="icon-double-angle-right"></i>@relatedPost.Title</a></h3></li>
+                <li class="related-item"><h3><a href="@Utility.BaseUrl(@relatedPost.Link)"><i class="icon-double-angle-right"></i>@relatedPost.Title</a></h3></li>
             }
         </ul>
     </div><!-- End related-posts -->
@@ -231,14 +231,14 @@
         @if (firstPost != null)
         {
             <p class="prev-post">
-                <a href="@Utility.GetBaseUrl(@firstPost.Link)" title="@firstPost.Title"><i class="icon-double-angle-left"></i>&nbsp;Prev post</a>
+                <a href="@Utility.BaseUrl(@firstPost.Link)" title="@firstPost.Title"><i class="icon-double-angle-left"></i>&nbsp;Prev post</a>
             </p>
         }
 
         @if (lastPost != null)
         {
             <p class="next-post">
-                <a href="@Utility.GetBaseUrl(@lastPost.Link)" title="@lastPost.Title">Next post&nbsp;<i class="icon-double-angle-right"></i></a>
+                <a href="@Utility.BaseUrl(@lastPost.Link)" title="@lastPost.Title">Next post&nbsp;<i class="icon-double-angle-right"></i></a>
             </p>
         }
     </div><!-- End post-next-prev -->
