@@ -6,6 +6,7 @@ using CodeMaze.Configuration;
 using System;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.CookiePolicy;
+using CodeMaze.WebApp.Extensions;
 
 namespace CodeMaze.WebApp
 {
@@ -22,6 +23,7 @@ namespace CodeMaze.WebApp
                 options.SlidingExpiration = true;
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                //options.EventsType = typeof(RevokeAuthenticationEvents);
             });
 
 
@@ -48,10 +50,6 @@ namespace CodeMaze.WebApp
 
             
             services.AddDistributedMemoryCache();
-
-            services.AddCookiePolicy(options => {
-            
-            });
 
             services.AddMvc(options => options.Filters.Add(new AuthorizeFilter())); 
         }

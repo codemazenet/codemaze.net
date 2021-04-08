@@ -63,9 +63,9 @@ namespace CodeMaze.WebApp
             services.AddMvcCacheService();
             services.AddAuthenticationExtend(authToken);
 
-            services.AddScoped<RevokeAuthenticationEvents>();
-            services.AddTransient<ITicketStore, InMemoryTicketStore>();
-            services.AddSingleton<IPostConfigureOptions<CookieAuthenticationOptions>, ConfigureCookieAuthenticationOptions>();
+            //services.AddScoped<RevokeAuthenticationEvents>();
+            //services.AddTransient<ITicketStore, InMemoryTicketStore>();
+            //services.AddSingleton<IPostConfigureOptions<CookieAuthenticationOptions>, ConfigureCookieAuthenticationOptions>();
 
 
             //services.AddCors(options =>
