@@ -35,7 +35,6 @@ $(function () {
         return check;
     }
 
-
     $('.validate-form .input100').each(function () {
         $(this).focus(function () {
             hideValidate(this);
@@ -68,11 +67,11 @@ $(function () {
     }
 
     $('.btn-login').click(function (e) {
-
         e.preventDefault();
 
-        if (validateForm()) {
+        $.showLoading();
 
+        if (validateForm()) {
             let form = $('#login-form').find('.login100-form')[0];
             let data = new FormData(form);
 
@@ -86,16 +85,15 @@ $(function () {
                 crossDomain: true,
                 success: function (response) {
                     if (!!response == true) {
-                        window.location.href = "/index.html";
-                        location.replace("/index.html")
+                        $.redirectToIndex();
                     }
-                        
                 },
                 error: function (response) {
                     console.log(response);
                 }
             });
         }
-    });
 
+        $.hideLoading();
+    });
 });

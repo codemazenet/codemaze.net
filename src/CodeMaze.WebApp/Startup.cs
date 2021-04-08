@@ -1,3 +1,4 @@
+using CodeMaze.Caching;
 using CodeMaze.Configuration;
 using CodeMaze.Cryptography;
 using CodeMaze.Cryptography.Symmetric;
@@ -6,6 +7,7 @@ using CodeMaze.Extension;
 using CodeMaze.Middleware;
 using CodeMaze.WebApp.Extensions;
 
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 using WebMarkupMin.AspNetCore3;
 
@@ -59,6 +62,11 @@ namespace CodeMaze.WebApp
             services.AddAntiforgeryService(GetValueConfig<string>("CookieBaseName"));
             services.AddMvcCacheService();
             services.AddAuthenticationExtend(authToken);
+
+            services.AddScoped<RevokeAuthenticationEvents>();
+            services.AddTransient<ITicketStore, InMemoryTicketStore>();
+            services.AddSingleton<IPostConfigureOptions<CookieAuthenticationOptions>, ConfigureCookieAuthenticationOptions>();
+
 
             //services.AddCors(options =>
             //{

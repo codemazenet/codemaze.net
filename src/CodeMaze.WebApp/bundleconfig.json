@@ -215,6 +215,7 @@
     "outputFileName": "wwwroot/assets/pages/login/script.bundle.js",
     "inputFiles": [
       "wwwroot/assets/vendor/jquery/jquery-3.6.0.min.js",
+      "wwwroot/assets/js/main.js",
       "wwwroot/assets/js/login.js"
     ]
   },
@@ -224,7 +225,8 @@
       "wwwroot/assets/vendor/bootstrap/css/bootstrap.min.css",
       "wwwroot/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
       "wwwroot/assets/css/util.css",
-      "wwwroot/assets/css/login.css"
+      "wwwroot/assets/css/login.css",
+      "wwwroot/assets/css/main.css"
     ]
   }
 ]

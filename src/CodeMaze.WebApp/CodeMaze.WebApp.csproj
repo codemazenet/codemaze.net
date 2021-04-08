@@ -97,6 +97,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CodeMaze.Caching\CodeMaze.Caching.csproj" />
     <ProjectReference Include="..\CodeMaze.Cryptography\CodeMaze.Cryptography.csproj" />
     <ProjectReference Include="..\CodeMaze.Middleware\CodeMaze.Middleware.csproj" />
     <ProjectReference Include="..\CodeMaze.Service\CodeMaze.Service.csproj" />

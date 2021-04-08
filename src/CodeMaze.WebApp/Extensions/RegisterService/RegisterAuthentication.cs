@@ -13,17 +13,12 @@ namespace CodeMaze.WebApp
     {
         public static void AddAuthenticationExtend(this IServiceCollection services, string authToken)
         {
-            services.AddAuthentication(options =>
-            {
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options =>
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
                 options.Cookie.Name = "MazeCore.AuthToken";
                 options.LoginPath = "/auth/login.html";
                 options.LogoutPath = "/auth/logout.html";
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(CodeMazeConfiguration.AppSettings.CookiesTimeOut);
+                options.ExpireTimeSpan = TimeSpan.FromDays(CodeMazeConfiguration.AppSettings.CookiesTimeOut);
                 options.SlidingExpiration = true;
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -35,7 +30,7 @@ namespace CodeMaze.WebApp
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.Strict;
-                options.HttpOnly = HttpOnlyPolicy.None;
+                options.HttpOnly = HttpOnlyPolicy.Always;
                 options.Secure = CookieSecurePolicy.Always;
             });
 
