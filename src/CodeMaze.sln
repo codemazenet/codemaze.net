@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze.WebApp", "CodeMaze.WebApp\CodeMaze.WebApp.csproj", "{B22668BF-C825-4219-AB38-AA9835E4AB3B}"
 EndProject
@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze.Middleware", "Code
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze.Service", "CodeMaze.Service\CodeMaze.Service.csproj", "{F6F70B96-269B-4349-8BC8-26172BD66304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMaze.Cryptography", "CodeMaze.Cryptography\CodeMaze.Cryptography.csproj", "{AF7995F7-3191-4AD4-9BB5-F0A4588915D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze.Cryptography", "CodeMaze.Cryptography\CodeMaze.Cryptography.csproj", "{AF7995F7-3191-4AD4-9BB5-F0A4588915D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMaze.App", "CodeMaze.App\CodeMaze.App.csproj", "{3D74E70E-9E9D-41F2-93B1-4D93A2211590}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{AF7995F7-3191-4AD4-9BB5-F0A4588915D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF7995F7-3191-4AD4-9BB5-F0A4588915D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF7995F7-3191-4AD4-9BB5-F0A4588915D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D74E70E-9E9D-41F2-93B1-4D93A2211590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D74E70E-9E9D-41F2-93B1-4D93A2211590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D74E70E-9E9D-41F2-93B1-4D93A2211590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D74E70E-9E9D-41F2-93B1-4D93A2211590}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,17 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using CodeMaze.Configuration;
+﻿using CodeMaze.Configuration;
 using CodeMaze.Data.ViewModels;
 using CodeMaze.Service.Factory;
 using CodeMaze.WebApp.ViewModels;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+
 using System.Diagnostics;
 using System.Threading.Tasks;
+
 using X.PagedList;
-using CodeMaze.Cryptography;
 
 namespace CodeMaze.WebApp.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : BaseController
     {
         public HomeController(

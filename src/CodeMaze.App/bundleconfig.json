@@ -1,0 +1,30 @@
+[
+  {
+    "outputFileName": "wwwroot/assets/js/scripts.bundle.js",
+    "inputFiles": [
+      "wwwroot/client/js/jquery-latest.min.js",
+      "wwwroot/client/js/bootstrap.js",
+      "wwwroot/client/js/theia-sticky-sidebar.js",
+      "wwwroot/client/js/modernizr.js",
+      "wwwroot/client/js/owl.carousel.js",
+      "wwwroot/client/js/shortcode-scripts.js",
+      "wwwroot/client/js/ot-lightbox.js",
+      "wwwroot/client/js/theme-scripts.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/style.bundle.css",
+    "inputFiles": [
+      "wwwroot/client/css/reset.min.css",
+      "wwwroot/client/css/font-awesome.min.css",
+      "wwwroot/client/css/bootstrap.min.css",
+      "wwwroot/client/css/owl.carousel.css",
+      "wwwroot/client/css/animate.css",
+      "wwwroot/client/css/main-stylesheet.css",
+      "wwwroot/client/css/ot-lightbox.min.css",
+      "wwwroot/client/css/shortcodes.css",
+      "wwwroot/client/css/responsive.css",
+      "wwwroot/client/css/custom-styles.css"
+    ]
+  }
+]
