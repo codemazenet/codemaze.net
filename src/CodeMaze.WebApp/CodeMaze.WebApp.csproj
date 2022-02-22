@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>aspnet-CodeMaze.WebApp-4E4C416A-20A2-41FA-8686-66446C8B66D0</UserSecretsId>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>

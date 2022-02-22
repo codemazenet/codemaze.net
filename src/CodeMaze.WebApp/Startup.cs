@@ -48,7 +48,7 @@ namespace CodeMaze.WebApp
             services.AddRazorPages();
 
             services.AutoMapperConfigure();
-            services.RunKyzinConfigure(Configuration);
+            services.RunConfigure(Configuration);
             services.AddResponseCompressionService();
             services.AddWebMarkupMinConfigure();
             services.Configure<CodeMaze.Data.Systems.AppSettings>(AppSettingsSection);

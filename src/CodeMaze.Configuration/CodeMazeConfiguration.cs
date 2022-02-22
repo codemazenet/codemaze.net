@@ -1,15 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-
+﻿using CodeMaze.Cryptography;
 //using CodeMaze.Extension.Firebase;
 //using CodeMaze.Extension.AesEncryption;
 using CodeMaze.Data.Systems;
-using CodeMaze.Data.ViewModels;
-using CodeMaze.Library;
+
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+using Newtonsoft.Json;
+
 using System.Collections.Generic;
 using System.Linq;
-using CodeMaze.Cryptography;
 
 namespace CodeMaze.Configuration
 {
@@ -28,7 +28,7 @@ namespace CodeMaze.Configuration
         //public static DatabaseInfo DatabaseInfo { get; set; }
         //public static FirebaseAuthInfo FirebaseAuth { get; set; }
 
-        public static void RunKyzinConfigure(this IServiceCollection services, IConfiguration configuration)
+        public static void RunConfigure(this IServiceCollection services, IConfiguration configuration)
         {
             ApplicationName = configuration.GetSection(Constants.ApplicationName).Value;
             DefaultSlogan = configuration.GetSection(Constants.DefaultSlogan).Value;
