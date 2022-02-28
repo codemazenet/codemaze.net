@@ -9,6 +9,42 @@ namespace CodeMaze.Service
 {
     public sealed class PostSpecial : BaseSpecification<PostEntity>
     {
+        public PostSpecial(int index, int size)
+            : base(p => !p.IsDeleted && p.IsPublished)
+        {
+            AddInclude(post => post
+                .Include(p => p.PostExtension)
+                .Include(p => p.Comment));
+
+            ApplyOrderByDescending(p => p.PubDateUtc);
+
+            ApplyPaging((index - 1) * size, size);
+        }
+
+
+        public PostSpecial(string url, string code)
+            : base(p => p.Url.Equals(url) && p.Code.Equals(code) && !p.IsDeleted && p.IsPublished)
+        {
+            AddInclude(post => post
+                .Include(p => p.PostExtension)
+                .Include(p => p.PostTag).ThenInclude(pt => pt.Tag)
+                .Include(p => p.PostCategory).ThenInclude(pc => pc.Category)
+                .Include(p => p.Comment).ThenInclude(c => c.CommentReply));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public PostSpecial(Guid? categoryId, int? top = null) :
             base(p => !p.IsDeleted &&
                       p.IsPublished &&
@@ -49,17 +85,7 @@ namespace CodeMaze.Service
         //        .Include(p => p.PostCategory).ThenInclude(pc => pc.Category));
         //}
 
-        public PostSpecial(int index, int size)
-            : base(p => !p.IsDeleted && p.IsPublished)
-        {
-            AddInclude(post => post
-                .Include(p => p.PostExtension)
-                .Include(p => p.Comment));
 
-            ApplyOrderByDescending(p => p.PubDateUtc);
-
-            ApplyPaging((index - 1) * size, size);
-        }
 
         public PostSpecial(Guid id, bool includeRelatedData = true) : base(p => p.Id == id)
         {
@@ -73,6 +99,9 @@ namespace CodeMaze.Service
                     .ThenInclude(pc => pc.Category));
             }
         }
+
+
+
 
         public PostSpecial(PostPublishStatus status)
         {

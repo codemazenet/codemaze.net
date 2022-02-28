@@ -8,11 +8,12 @@
 
         public PageView()
         {
+            this.Data = default(T);
         }
 
         public PageView(T data)
         {
-            this.Data = data ?? default(T);
+            this.Data = data;
         }
     }
 }

@@ -61,7 +61,12 @@ namespace CodeMaze.Service
             return _postRepository.SelectAsync(spec, p => _mapper.Map<PostItem>(p), true);
         }
 
+        public Task<PostView> GetPostAsync(string url, string code)
+        {
+            var spec = new PostSpecial(url, code);
 
+            return _postRepository.SelectFirstOrDefaultAsync(spec, p => _mapper.Map<PostView>(p), true);
+        }
 
         public int CountPostPublish(string categoryUrl = "", string categoryCode = "")
         {
@@ -170,26 +175,26 @@ namespace CodeMaze.Service
             });
         }
 
-        public Task<Response<PostItem>> GetPostAsync(string url, string code)
-        {
-            return TryExecuteAsync<PostItem>(async () =>
-            {
-                var response = await _postRepository.GetAsQueryable()
-                                                        .Include(post => post.PostCategory)
-                                                            .ThenInclude(postCat => postCat.Category)
-                                                        .Include(post => post.PostTag)
-                                                            .ThenInclude(postTag => postTag.Tag)
-                                                        .Include(post => post.PostExtension)
-                                                    .Where(post => post.Url.Equals(url) && post.Code.Equals(code))
-                                                    .FirstOrDefaultAsync();
-                if (response != null)
-                {
-                    return new SuccessResponse<PostItem>(_mapper.Map<PostItem>(response));
-                }
+        //public Task<Response<PostItem>> GetPostAsync(string url, string code)
+        //{
+        //    return TryExecuteAsync<PostItem>(async () =>
+        //    {
+        //        var response = await _postRepository.GetAsQueryable()
+        //                                                .Include(post => post.PostCategory)
+        //                                                    .ThenInclude(postCat => postCat.Category)
+        //                                                .Include(post => post.PostTag)
+        //                                                    .ThenInclude(postTag => postTag.Tag)
+        //                                                .Include(post => post.PostExtension)
+        //                                            .Where(post => post.Url.Equals(url) && post.Code.Equals(code))
+        //                                            .FirstOrDefaultAsync();
+        //        if (response != null)
+        //        {
+        //            return new SuccessResponse<PostItem>(_mapper.Map<PostItem>(response));
+        //        }
 
-                return new FailedResponse<PostItem>(404);
-            });
-        }
+        //        return new FailedResponse<PostItem>(404);
+        //    });
+        //}
 
         public Task<IReadOnlyList<PostViewModel>> GetPostByUserIdAsync(int userId)
         {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CodeMaze.ViewModels
+﻿namespace CodeMaze.ViewModels
 {
     public class CommentItem
     {
@@ -8,15 +6,14 @@ namespace CodeMaze.ViewModels
         public string Username { get; set; }
         public string Email { get; set; }
         public DateTime CreateOnUtc { get; set; }
-        public string CommentContent { get; set; }
-        public bool IsApproved { get; set; }
-        /// <summary>
-        /// Post title reference
-        /// </summary>
-        public string PostTitle { get; set; }
-        /// <summary>
-        /// Post link reference
-        /// </summary>
-        public string PostLink { get; set; }
+        public string CreatedateString => CreateOnUtc.AddHours(7).ToString("MMMM dd, yyyy");
+        public string Comment { get; set; }
+
+        public List<CommentItem> Comments { get; set; }
+
+        public CommentItem()
+        {
+            Comments = new List<CommentItem>();
+        }
     }
 }

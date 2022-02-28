@@ -10,6 +10,7 @@ namespace CodeMaze.Data.Entities
         public string UserAgent { get; set; }
         public string IpAddress { get; set; }
         public Guid? CommentId { get; set; }
+        public bool IsApproved { get; set; }
 
         public virtual CommentEntity Comment { get; set; }
     }

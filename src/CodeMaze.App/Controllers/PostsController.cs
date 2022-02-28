@@ -27,10 +27,10 @@ namespace CodeMaze.App.Controllers
 
 
         [Route("/post/{url}-{code}.html")]
-        public IActionResult PostDetail(string url, string code)
+        public async Task<IActionResult> PostDetail(string url, string code)
         {
-
-            return View();
+            var post = await repository.Post.GetPostAsync(url, code);
+            return View(post);
         }
     }
 }

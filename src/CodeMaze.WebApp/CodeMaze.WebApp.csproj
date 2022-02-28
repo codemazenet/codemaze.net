@@ -71,14 +71,6 @@
     <None Include="wwwroot\libs\holder-v2.9.0\src\lib\vendor\querystring.js" />
     <None Include="wwwroot\libs\holder-v2.9.0\src\meteor\package.js" />
     <None Include="wwwroot\libs\holder-v2.9.0\src\meteor\shim.js" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\.gitignore" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\holder.js" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\index.js" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\phantom.js" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\renderperf\.gitignore" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\renderperf\releases\holder-master\holder.js" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\renderperf\setup.sh" />
-    <None Include="wwwroot\libs\holder-v2.9.0\test\runner.js" />
   </ItemGroup>
 
   <ItemGroup>
