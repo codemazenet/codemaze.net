@@ -1,18 +1,16 @@
-﻿using AutoMapper;
+﻿using CodeMaze.Configuration;
+using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
+using CodeMaze.WebApp.ViewModels;
+
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
-using CodeMaze.Library;
-using CodeMaze.Service;
-using CodeMaze.WebApp.ViewModels;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CodeMaze.Service.Factory;
+
 using X.PagedList;
 
 namespace CodeMaze.WebApp.Controllers

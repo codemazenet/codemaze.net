@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+
 using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
+using CodeMaze.ViewModels;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

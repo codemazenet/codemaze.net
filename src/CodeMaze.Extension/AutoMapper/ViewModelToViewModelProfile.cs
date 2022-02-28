@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using CodeMaze.Data.ViewModels;
+
+using CodeMaze.ViewModels;
+
 using System;
 using System.Web;
 

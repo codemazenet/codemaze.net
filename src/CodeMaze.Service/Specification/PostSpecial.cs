@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using CodeMaze.Data.Entities;
+﻿using CodeMaze.Data.Entities;
+
+using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Linq;
 
@@ -22,16 +24,16 @@ namespace CodeMaze.Service
             }
         }
 
-        public PostSpecial(int year, int month = 0) :
-            base(p => p.PubDateUtc.Value.Year == year &&
-                      (month == 0 || p.PubDateUtc.Value.Month == month))
-        {
-            // Fix #313: Filter out unpublished posts
-            AddCriteria(p => p.IsPublished && !p.IsDeleted);
+        //public PostSpecial(int year, int month = 0) :
+        //    base(p => p.PubDateUtc.Value.Year == year &&
+        //              (month == 0 || p.PubDateUtc.Value.Month == month))
+        //{
+        //    // Fix #313: Filter out unpublished posts
+        //    AddCriteria(p => p.IsPublished && !p.IsDeleted);
 
-            AddInclude(post => post.Include(p => p));
-            ApplyOrderByDescending(p => p.PubDateUtc);
-        }
+        //    AddInclude(post => post.Include(p => p));
+        //    ApplyOrderByDescending(p => p.PubDateUtc);
+        //}
 
         //public PostSpecial(DateTime date, string slug)
         //    : base(p => p.Slug == slug &&
@@ -46,6 +48,18 @@ namespace CodeMaze.Service
         //        .Include(p => p.PostTag).ThenInclude(pt => pt.Tag)
         //        .Include(p => p.PostCategory).ThenInclude(pc => pc.Category));
         //}
+
+        public PostSpecial(int index, int size)
+            : base(p => !p.IsDeleted && p.IsPublished)
+        {
+            AddInclude(post => post
+                .Include(p => p.PostExtension)
+                .Include(p => p.Comment));
+
+            ApplyOrderByDescending(p => p.PubDateUtc);
+
+            ApplyPaging((index - 1) * size, size);
+        }
 
         public PostSpecial(Guid id, bool includeRelatedData = true) : base(p => p.Id == id)
         {
@@ -91,7 +105,7 @@ namespace CodeMaze.Service
         }
 
         public PostSpecial() :
-            base(p => p.IsDeleted)
+            base(p => !p.IsDeleted && p.IsPublished)
         {
         }
 

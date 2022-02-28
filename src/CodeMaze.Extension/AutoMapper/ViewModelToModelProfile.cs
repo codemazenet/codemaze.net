@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+
 using CodeMaze.Data.Entities;
-using CodeMaze.Data.ViewModels;
+using CodeMaze.ViewModels;
+
 using System;
 
 namespace CodeMaze.Extension

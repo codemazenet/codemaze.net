@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+
 using CodeMaze.Data.Entities;
-using CodeMaze.Data.ViewModels;
+using CodeMaze.ViewModels;
+
 using System;
 using System.Linq;
 using System.Web;
@@ -12,13 +14,13 @@ namespace CodeMaze.Extension
         public ModelToViewModelProfile()
         {
             CreateMap<CategoryEntity, CategoryViewModel>()
-                .ForMember(dest => dest.Link, opt => opt.MapFrom(src => $"/category/{src.Url}-{src.Code}.html"));
+                .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => $"/category/{src.Url}-{src.Code}.html"));
 
             CreateMap<CategoryEntity, CategoryManageViewModel>()
-                .ForMember(dest => dest.Link, opt => opt.MapFrom(src => $"/category/{src.Url}-{src.Code}.html"));
+                .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => $"/category/{src.Url}-{src.Code}.html"));
 
             CreateMap<CategoryEntity, CategoryItemViewModel>()
-               .ForMember(dest => dest.Link, opt => opt.MapFrom(src => $"/category/{src.Url}-{src.Code}.html"));
+               .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => $"/category/{src.Url}-{src.Code}.html"));
 
             CreateMap<CategoryEntity, CategoryEditViewModel>();
 
@@ -62,37 +64,51 @@ namespace CodeMaze.Extension
                 }).ToList()));
 
             CreateMap<PostEntity, PostItem>()
-              .ForMember(dest => dest.Link, opt => opt.MapFrom(src => $"/post/{src.Url}-{src.Code}.html"))
-              .ForMember(dest => dest.EnableComment, opt => opt.MapFrom(src => src.CommentEnabled))
-              .ForMember(dest => dest.Content, opt => opt.MapFrom(src => HttpUtility.HtmlDecode(Utility.ReplaceImgSrc(src.PostContent))))
-
+              .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => $"/post/{src.Url}-{src.Code}.html"))
+              .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.ContentAbstract.BreakWord(250)))
               .ForMember(dest => dest.PubDateUtc, opt => opt.MapFrom(src => src.PubDateUtc.GetValueOrDefault()))
-              .ForMember(dest => dest.Hits, opt => opt.MapFrom(src => src.PostExtension.Hits))
-              .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.PostExtension.Likes))
               .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.PostExtension.Views))
+              .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comment.Count))
+              .ForMember(dest => dest.Thumbnail, opt => opt.MapFrom(src => src.Image))
               .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.PostCategory.Select(c => new CategoryViewModel
               {
                   DisplayName = c.Category.DisplayName,
-                  Link = $"/category/{c.Category.Url}-{c.Category.Code}.html",
+                  Slug = $"/category/{c.Category.Url}-{c.Category.Code}.html",
                   Id = c.Category.Id
-              }).ToList()))
-              .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.PostTag.Select(t => new TagViewModel
-              {
-                  TagName = t.Tag.DisplayName,
-                  TagUrl = $"/tag/{t.Tag.NormalizedName}.html"
-              }).ToList()))
-              .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comment.Select(cm => new PostCommentListItem
-              {
-                  CommentContent = cm.CommentContent,
-                  Username = cm.Username,
-                  CreateOnUtc = cm.CreateOnUtc,
-                  CommentReplies = cm.CommentReply.Select(cmr => new CommentReplyItem
-                  {
-                      Username = cmr.UserAgent,
-                      ReplyContent = cmr.ReplyContent,
-                      ReplyTimeUtc = cmr.ReplyTimeUtc.GetValueOrDefault()
-                  }).ToList()
               }).ToList()));
+
+            //CreateMap<PostEntity, PostItem>()
+            //  .ForMember(dest => dest.Link, opt => opt.MapFrom(src => $"/post/{src.Url}-{src.Code}.html"))
+            //  .ForMember(dest => dest.EnableComment, opt => opt.MapFrom(src => src.CommentEnabled))
+            //  .ForMember(dest => dest.Content, opt => opt.MapFrom(src => HttpUtility.HtmlDecode(Utility.ReplaceImgSrc(src.PostContent))))
+
+            //  .ForMember(dest => dest.PubDateUtc, opt => opt.MapFrom(src => src.PubDateUtc.GetValueOrDefault()))
+            //  .ForMember(dest => dest.Hits, opt => opt.MapFrom(src => src.PostExtension.Hits))
+            //  .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.PostExtension.Likes))
+            //  .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.PostExtension.Views))
+            //  .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.PostCategory.Select(c => new CategoryViewModel
+            //  {
+            //      DisplayName = c.Category.DisplayName,
+            //      Link = $"/category/{c.Category.Url}-{c.Category.Code}.html",
+            //      Id = c.Category.Id
+            //  }).ToList()))
+            //  .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.PostTag.Select(t => new TagViewModel
+            //  {
+            //      TagName = t.Tag.DisplayName,
+            //      TagUrl = $"/tag/{t.Tag.NormalizedName}.html"
+            //  }).ToList()))
+            //  .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comment.Select(cm => new PostCommentListItem
+            //  {
+            //      CommentContent = cm.CommentContent,
+            //      Username = cm.Username,
+            //      CreateOnUtc = cm.CreateOnUtc,
+            //      CommentReplies = cm.CommentReply.Select(cmr => new CommentReplyItem
+            //      {
+            //          Username = cmr.UserAgent,
+            //          ReplyContent = cmr.ReplyContent,
+            //          ReplyTimeUtc = cmr.ReplyTimeUtc.GetValueOrDefault()
+            //      }).ToList()
+            //  }).ToList()));
 
             CreateMap<PostEntity, PostViewModel>();
 
@@ -143,7 +159,7 @@ namespace CodeMaze.Extension
 
             CreateMap<PostCategoryEntity, CategoryItemViewModel>()
                  .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.Category.DisplayName))
-                 .ForMember(dest => dest.Link, opt => opt.MapFrom(src => $"/category/{src.Category.Url}-{src.Category.Code}.html"));
+                 .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => $"/category/{src.Category.Url}-{src.Category.Code}.html"));
 
             CreateMap<UserEntity, UserViewModel>()
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => (UserRole)Enum.Parse(typeof(UserRole), src.Role, true)))

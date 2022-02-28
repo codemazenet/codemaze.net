@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using CodeMaze.Data.RequestResponse;
-using CodeMaze.Data.ViewModels;
+﻿using CodeMaze.Data.RequestResponse;
 using CodeMaze.Extension;
 using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
 using CodeMaze.WebApp.Extensions;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 using System.Net;
 using System.Threading.Tasks;
 

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CodeMaze.Configuration;
+using CodeMaze.Data.Systems;
+using CodeMaze.Service;
+using CodeMaze.ViewModels;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using CodeMaze.Configuration;
-using CodeMaze.Data.Systems;
-using CodeMaze.Data.ViewModels;
-using CodeMaze.Service;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

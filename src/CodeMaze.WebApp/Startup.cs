@@ -1,4 +1,3 @@
-using CodeMaze.Caching;
 using CodeMaze.Configuration;
 using CodeMaze.Cryptography;
 using CodeMaze.Cryptography.Symmetric;
@@ -7,7 +6,6 @@ using CodeMaze.Extension;
 using CodeMaze.Middleware;
 using CodeMaze.WebApp.Extensions;
 
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 
 using WebMarkupMin.AspNetCore3;
 
@@ -52,7 +49,7 @@ namespace CodeMaze.WebApp
             services.AddResponseCompressionService();
             services.AddWebMarkupMinConfigure();
             services.Configure<CodeMaze.Data.Systems.AppSettings>(AppSettingsSection);
-            services.AddDbContext<KyzinDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<MazeCoreDbContext>(options => options.UseSqlServer(connectionString));
             services.AddRepositoryService();
             services.AddExtensionService();
             services.CultureConfigure(cultureDefault);

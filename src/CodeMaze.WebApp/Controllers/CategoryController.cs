@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
+﻿using CodeMaze.Configuration;
 using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
 using CodeMaze.WebApp.ViewModels;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+
 using System.Threading.Tasks;
+
 using X.PagedList;
 
 namespace CodeMaze.WebApp.Controllers

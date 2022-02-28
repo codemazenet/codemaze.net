@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using CodeMaze.Configuration;
+using CodeMaze.Extension;
+using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
+using CodeMaze.ViewModels.Account;
+
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
-using CodeMaze.Data.ViewModels.Account;
-using CodeMaze.Extension;
-using CodeMaze.Service.Factory;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

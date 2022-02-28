@@ -102,7 +102,7 @@
                                         <td>
                                             @foreach (var category in post.Categories)
                                             {
-                                                <a target="_blank" rel="nofollow" href="@category.Link">@category.DisplayName, </a>
+                                                <a target="_blank" rel="nofollow" href="@category.Slug">@category.DisplayName, </a>
                                             }
                                         </td>
                                         <td> @post.EnableComment </td>

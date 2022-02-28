@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
+
 using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
+using CodeMaze.ViewModels;
+
+using Microsoft.Extensions.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

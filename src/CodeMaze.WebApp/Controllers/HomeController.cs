@@ -1,6 +1,6 @@
 ﻿using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
 using CodeMaze.WebApp.ViewModels;
 
 using Microsoft.AspNetCore.Authorization;

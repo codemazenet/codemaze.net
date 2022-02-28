@@ -1,7 +1,10 @@
-﻿using MailKit.Security;
+﻿using CodeMaze.Extension.TemplateEmail.Models;
+
+using MailKit.Security;
+
 using MimeKit;
 using MimeKit.Text;
-using CodeMaze.Extension.TemplateEmail.Models;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -133,19 +136,19 @@ namespace CodeMaze.Extension.TemplateEmail
 
             if (_mailConfiguration.CommonConfiguration.OverrideToAddress)
             {
-                messageToSend.To.Add(new MailboxAddress(_mailConfiguration.CommonConfiguration.ToAddress));
+                messageToSend.To.Add(new MailboxAddress(string.Empty, _mailConfiguration.CommonConfiguration.ToAddress));
             }
             else
             {
                 foreach (var add in enumerable)
                 {
-                    messageToSend.To.Add(new MailboxAddress(add));
+                    messageToSend.To.Add(new MailboxAddress(string.Empty, add));
                 }
             }
 
             if (!string.IsNullOrEmpty(ccAddress))
             {
-                messageToSend.Cc.Add(new MailboxAddress(ccAddress));
+                messageToSend.Cc.Add(new MailboxAddress(string.Empty, ccAddress));
             }
 
             try

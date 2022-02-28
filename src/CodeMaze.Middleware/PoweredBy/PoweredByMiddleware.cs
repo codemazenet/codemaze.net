@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using CodeMaze.Configuration;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using CodeMaze.Data.Systems;
+﻿using CodeMaze.Configuration;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+
+using System.Threading.Tasks;
 
 namespace CodeMaze.Middleware
 {
@@ -19,9 +19,9 @@ namespace CodeMaze.Middleware
         public Task Invoke(HttpContext httpContext)
         {
             var configuration = httpContext.RequestServices.GetService(typeof(IConfiguration)) as IConfiguration;
-            var appReady = configuration.GetValue<bool>("AppReady");
+            var appReady = bool.Parse(configuration["AppReady"]);
 
-            if(appReady == false)
+            if (appReady == false)
             {
                 return httpContext.Response.WriteAsync("Welcome to Code Maze, App isn't ready!");
             }

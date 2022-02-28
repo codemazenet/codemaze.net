@@ -1,8 +1,9 @@
 ﻿using CodeMaze.Configuration;
 using CodeMaze.Data.Entities;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
 using CodeMaze.Service;
+using CodeMaze.ViewModels;
+
 using System;
 using System.Linq;
 using System.Web;

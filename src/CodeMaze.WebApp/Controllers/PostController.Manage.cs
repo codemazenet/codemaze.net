@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CodeMaze.Configuration;
+using CodeMaze.ViewModels;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
+
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using X.PagedList;
 
 namespace CodeMaze.WebApp.Controllers

@@ -1,7 +1,7 @@
 ﻿using CodeMaze.Configuration;
 using CodeMaze.Cryptography.Symmetric;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
+using CodeMaze.ViewModels;
 
 using Microsoft.AspNetCore.Http;
 

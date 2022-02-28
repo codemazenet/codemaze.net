@@ -10,9 +10,9 @@ namespace CodeMaze.Service
 {
     public class DbContextRepository<T> : IRepository<T> where T : class
     {
-        protected readonly KyzinDbContext DbContext;
+        protected readonly MazeCoreDbContext DbContext;
 
-        public DbContextRepository(KyzinDbContext dbContext)
+        public DbContextRepository(MazeCoreDbContext dbContext)
         {
             DbContext = dbContext;
         }

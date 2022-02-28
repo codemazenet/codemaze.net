@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
-using NK.Extension;
+
 using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
+using CodeMaze.ViewModels;
+
+using NK.Extension;
+
 using System;
 using System.Linq;
 using System.Threading.Tasks;

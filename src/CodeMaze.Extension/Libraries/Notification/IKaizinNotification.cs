@@ -1,6 +1,7 @@
 ﻿using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
-using CodeMaze.Data.ViewModels;
+using CodeMaze.ViewModels;
+
 using System;
 using System.Threading.Tasks;
 

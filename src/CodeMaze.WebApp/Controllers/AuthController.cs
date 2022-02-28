@@ -1,8 +1,8 @@
 ﻿using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
-using CodeMaze.Data.ViewModels.Account;
 using CodeMaze.Extension;
 using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
+using CodeMaze.ViewModels.Account;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;

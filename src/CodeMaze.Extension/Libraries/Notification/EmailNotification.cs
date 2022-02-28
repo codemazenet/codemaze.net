@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using CodeMaze.Configuration;
+﻿using CodeMaze.Configuration;
 using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
 using CodeMaze.Data.Systems;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension.TemplateEmail;
+using CodeMaze.ViewModels;
+
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+using MimeKit;
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
+
 using EmailSettings = CodeMaze.Extension.TemplateEmail.EmailSettings;
 
 namespace CodeMaze.Extension.Notification

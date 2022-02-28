@@ -2,7 +2,7 @@
 {
     using CodeMaze.Configuration;
     using CodeMaze.Cryptography.Symmetric;
-    using CodeMaze.Data.ViewModels;
+    using CodeMaze.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;

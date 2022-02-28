@@ -14,4 +14,17 @@
     <None Include="bundleconfig.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeMaze.Caching\CodeMaze.Caching.csproj" />
+    <ProjectReference Include="..\CodeMaze.Service\CodeMaze.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

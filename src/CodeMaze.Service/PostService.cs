@@ -1,12 +1,16 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
 using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
 using CodeMaze.Data.Systems;
-using CodeMaze.Data.ViewModels;
 using CodeMaze.Extension;
+using CodeMaze.IServices;
+using CodeMaze.ViewModels;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace CodeMaze.Service
 {
-    public class PostService : BaseService
+    public class PostService : BaseService, IPostService
     {
         #region Repository Objects
 
@@ -46,7 +50,20 @@ namespace CodeMaze.Service
             _postCategoryRepository = postCategoryRepository;
         }
 
-        public int CountVisiblePosts(string categoryUrl = "", string categoryCode = "")
+        public Task<IReadOnlyList<PostItem>> GetPostItemListAsync(int index, int size)
+        {
+            if (size < 1) size = 20;
+
+            if (index < 1) index = 1;
+
+            var spec = new PostSpecial(index, size);
+
+            return _postRepository.SelectAsync(spec, p => _mapper.Map<PostItem>(p), true);
+        }
+
+
+
+        public int CountPostPublish(string categoryUrl = "", string categoryCode = "")
         {
             if (string.IsNullOrEmpty(categoryUrl) && string.IsNullOrEmpty(categoryCode))
                 return _postRepository.Count(new PostSpecial());
@@ -212,6 +229,9 @@ namespace CodeMaze.Service
                                 .Take(pageSize)
                                 .Select(post => _mapper.Map<PostListItem>(post)).ToList();
         }
+
+
+
 
         public async Task<IReadOnlyList<PostListItem>> GetArchivedPostsAsync(int year, int month = 0)
         {

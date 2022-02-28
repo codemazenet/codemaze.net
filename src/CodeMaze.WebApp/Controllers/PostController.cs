@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using CodeMaze.Configuration;
-using CodeMaze.Data.ViewModels;
+﻿using CodeMaze.Configuration;
 using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
 using CodeMaze.WebApp.Extensions;
 using CodeMaze.WebApp.ViewModels;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +23,7 @@ namespace CodeMaze.WebApp.Controllers
         { }
 
         [Route("/post/{url}-{code}.html")]
-        [ResponseCache(CacheProfileName ="Cache30")]
+        [ResponseCache(CacheProfileName = "Cache30")]
         public async Task<IActionResult> Detail(string url, string code, [FromServices] IMemoryCache memoryCache = null)
         {
             var postView = new PostViewViewModel(commonFactory.BlogConfig, commonFactory.HttpContextAccessor, commonFactory.AesEncryption);
@@ -36,7 +38,7 @@ namespace CodeMaze.WebApp.Controllers
                 return View("NotFound", postView);
             }
 
-            var userInfo = await memoryCache.GetOrCreateAsync($"UserId_{postInfo.Item.UserId}", entry => repositoryFactory.User.GetById(postInfo.Item.UserId));
+            //var userInfo = await memoryCache.GetOrCreateAsync($"UserId_{postInfo.Item.UserId}", entry => repositoryFactory.User.GetById(postInfo.Item.UserId));
 
             var relatedPosts = await repositoryFactory.Post.GetRelatedPostsAsync(postInfo.Item.Categories.ToList(), CodeMazeConfiguration.RelatedPostSize);
 
@@ -44,7 +46,7 @@ namespace CodeMaze.WebApp.Controllers
 
             postView.Item = postInfo.Item;
             postView.RelatedPosts = relatedPosts.Item;
-            postView.Author = userInfo;
+            //postView.Author = userInfo;
             postView.Token = commonFactory.AesEncryption.Encrypt($"{url}-{code}");
 
             return View(postView);

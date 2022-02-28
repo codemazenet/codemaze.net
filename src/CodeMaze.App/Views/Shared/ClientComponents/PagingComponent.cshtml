@@ -1,0 +1,32 @@
+﻿@model PageListView<PostItem>
+@{
+    var pageView = Model;
+}
+<div class="zanevn-panel-pager">
+    @if (pageView?.Total > 0)
+    {
+        var prev_href = pageView.Current > 1 ? $"?page={pageView.Current - 1}" : "javascript:void(0);";
+        var next_href = pageView.Current < pageView.Total ? $"?page={pageView.Current + 1}" : "javascript:void(0);";
+
+        <a class="prev page-numbers" href="@prev_href">
+            <i class="fa fa-angle-left"></i>Previous
+        </a>
+
+        for (var page = 1; page <= pageView.Total; page++)
+        {
+            if(page == pageView.Current)
+            {
+                <span class="page-numbers current">@(page)</span>
+            }
+            else
+            {
+                <a class="page-numbers" href="?page=@(page)">@(page)</a>
+            }
+        }
+
+        <a class="next page-numbers" href="@next_href">
+            Next<i class="fa fa-angle-right"></i>
+        </a>
+    }
+
+</div>

@@ -5,13 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CodeMaze.Data\CodeMaze.Data.csproj" />
     <ProjectReference Include="..\CodeMaze.Extension\CodeMaze.Extension.csproj" />
+    <ProjectReference Include="..\CodeMaze.IServices\CodeMaze.IServices.csproj" />
+    <ProjectReference Include="..\CodeMaze.ViewModels\CodeMaze.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

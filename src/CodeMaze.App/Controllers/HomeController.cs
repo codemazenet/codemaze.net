@@ -1,24 +1,49 @@
-﻿using CodeMaze.App.Models;
+﻿using CodeMaze.Caching;
+using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
-using System.Diagnostics;
-
 namespace CodeMaze.App.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger,
+            RepositoryFactory repositoryFactory,
+            CommonFactory commonFactory,
+            IBlogCache blogCache)
+            : base(repositoryFactory, commonFactory)
         {
             _logger = logger;
+            this.repositoryFactory = repositoryFactory;
+            this.commonFactory = commonFactory;
+            this.blogCache = blogCache;
         }
 
+        private readonly ILogger<HomeController> _logger;
+        private readonly RepositoryFactory repositoryFactory;
+        private readonly CommonFactory commonFactory;
+        private readonly IBlogCache blogCache;
+
         [Route("/"), Route("/index.html")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View();
+            if (page < 1) page = 1;
+            var size = 12;
+
+            var posts = await repository.Post.GetPostItemListAsync(page, size);
+
+            var pageview = new PageListView<PostItem>(posts, page);
+
+            if (posts?.Any() == true)
+            {
+                var total = blogCache.GetOrCreate(CacheDivision.Post, "post_count_publish", count => repository.Post.CountPostPublish());
+
+                pageview.Total = (int)Math.Ceiling((decimal)total / size);
+            }
+
+            return View("View", pageview);
         }
 
         [Route("/archive.html")]
@@ -33,10 +58,10 @@ namespace CodeMaze.App.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

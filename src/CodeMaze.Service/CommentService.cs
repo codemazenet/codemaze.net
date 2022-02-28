@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
 using CodeMaze.Configuration;
 using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
 using CodeMaze.Data.Systems;
-using CodeMaze.Data.ViewModels;
+using CodeMaze.ViewModels;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +55,7 @@ namespace CodeMaze.Service
                     var commentEntity = _mapper.Map<CommentEntity>(comment);
                     var result = await _commentRepository.AddAsync(commentEntity);
                     return new SuccessResponse<CommentEntity>(result);
-                    
+
                 }
             }
             catch (Exception ex)
