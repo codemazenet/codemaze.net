@@ -1,4 +1,5 @@
-﻿<!-- BEGIN .header -->
+﻿@using CodeMaze.App.ViewComponents
+<!-- BEGIN .header -->
 <div class="header">
     <div class="main-menu-wrapper">
         <!-- BEGIN .wrapper -->
@@ -7,13 +8,9 @@
                 <ul>
                     <li><a href="/index.html">Code <span class="opacity-75">Maze</span></a></li>
 
-                    <li><a href="blog.html"><span class="has-sub">Blog page</span></a>
-                        <ul class="sub-menu">
-                            <li><a href="blog2.html">Blog style 2</a></li>
-                            <li><a href="blog3.html">Blog style 3</a></li>
-                            <li><a href="blog4.html">Blog style 4</a></li>
-                        </ul>
-                    </li>
+                    <cache expires-after="TimeSpan.FromMinutes(30)">
+                        @await Component.InvokeAsync(typeof(CategoriesViewComponent), new {view = "Header"})
+                    </cache>
 
                     <li><a href="/archive.html">Archive</a></li>
                     <li><a href="/contact.html">Contact us</a></li>

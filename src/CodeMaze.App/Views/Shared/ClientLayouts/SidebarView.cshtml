@@ -1,4 +1,5 @@
-﻿<!-- BEGIN #sidebar -->
+﻿@using CodeMaze.App.ViewComponents
+<!-- BEGIN #sidebar -->
 <aside id="sidebar">
 
     <!-- BEGIN .widget -->
@@ -51,35 +52,14 @@
         </div>
     </div>
 
-    <!-- BEGIN .widget -->
-    <div class="widget">
-        <div class="panel panel-default">
-            <div class="panel-heading">Categories</div>
-            <div class="list-group">
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Dapibus
-                    ac facilisis in
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Morbi
-                    leo risus
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Porta ac
-                    consectetur ac
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i>
-                    Vestibulum at eros
-                </a>
-            </div>
-        </div>
-    </div>
+    <cache expires-after="TimeSpan.FromMinutes(30)">
+        @await Component.InvokeAsync(typeof(CategoriesViewComponent), new {view = "Sidebar"})
+    </cache>
 
     <!-- BEGIN .widget -->
     <div class="widget">
         <div class="panel panel-default">
-            <div class="panel-heading">Categories</div>
+            <div class="panel-heading">Links</div>
             <div class="list-group">
                 <a href="#" class="list-group-item">
                     <i class="fa fa-link"></i> Dapibus ac

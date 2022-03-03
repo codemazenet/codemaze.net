@@ -41,6 +41,15 @@ namespace CodeMaze.Service
             return category?.DisplayName;
         }
 
+        public Task<IReadOnlyList<CategoryItem>> GetCategoriesPublishAsync()
+        {
+            var spec = new CategorySpecial(false);
+            return _categoryRepository.SelectAsync(
+                                    spec,
+                                    c => _mapper.Map<CategoryItem>(c),
+                                    true);
+        }
+
         public async Task<IReadOnlyList<CategoryViewModel>> GetAllAsync()
         {
             return await _categoryRepository.SelectAsync(

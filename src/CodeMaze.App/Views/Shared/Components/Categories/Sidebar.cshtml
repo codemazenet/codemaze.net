@@ -1,0 +1,22 @@
+﻿@model IReadOnlyList<CategoryItem>
+@{
+    var categories = Model;
+}
+<!-- BEGIN .widget -->
+<div class="widget">
+    <div class="panel panel-default">
+        <div class="panel-heading">Categories</div>
+        <div class="list-group">
+            @if (categories?.Any() == true)
+            {
+                foreach (var item in categories)
+                {
+                    <a href="@item.Slug" class="list-group-item">
+                        <i class="fa fa-folder-open-o"></i> @item.Title
+                    </a>
+                }
+            }
+
+        </div>
+    </div>
+</div>

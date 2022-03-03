@@ -1,4 +1,5 @@
 ﻿using CodeMaze.Data.Entities;
+
 using System;
 using System.Collections.Generic;
 
@@ -19,6 +20,7 @@ namespace CodeMaze.Service
         public CategorySpecial(bool isDeleted) :
             base(c => c.Deleted == isDeleted)
         {
+            ApplyOrderBy(c => c.Position);
         }
 
         public CategorySpecial(List<Guid> ids) :
