@@ -1,6 +1,7 @@
 ﻿@model IReadOnlyList<CategoryItem>
 @{
-    var categories = Model;
+    var categories = Model.Where(c => !c.ShowOnTab);
+    var categories_specs = Model.Where(c => c.ShowOnTab);
 }
 
 <li>
@@ -15,3 +16,11 @@
         }
     </ul>
 </li>
+
+@if(categories_specs?.Any() == true)
+{
+    foreach (var item in categories_specs)
+    {
+        <li><a href="@item.Slug">@item.Title</a></li>
+    }
+}
