@@ -1,13 +1,14 @@
 ﻿using CodeMaze.Caching;
 using CodeMaze.Service.Factory;
+using CodeMaze.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeMaze.App.Controllers
 {
-    public class PostsController : BaseController
+    public class PostController : BaseController
     {
-        public PostsController(
+        public PostController(
             ILogger<HomeController> logger,
             RepositoryFactory repositoryFactory,
             CommonFactory commonFactory,
@@ -30,7 +31,14 @@ namespace CodeMaze.App.Controllers
         public async Task<IActionResult> PostDetail(string url, string code)
         {
             var post = await repository.Post.GetPostAsync(url, code);
-            return View(post);
+
+            if (post == null) return NotFound();
+
+            var view = new PageView<PostView>(post);
+            view.EnableSidebar = true;
+            view.EnableComment = post.EnableComment;
+
+            return View("PostDetail", view);
         }
     }
 }

@@ -1,0 +1,220 @@
+﻿@model PageView<PostView>
+@{
+    var post = Model.Data;
+    var enableSidebar = Model.EnableSidebar;
+    var enableComment = Model.EnableComment;
+}
+
+<!-- BEGIN .zanevn-main-content -->
+<div class="zanevn-main-content zanevn-main-content-s-1">
+
+    <div class="theiaStickySidebar">
+
+        <!-- BEGIN .zanevn-panel -->
+        <div class="zanevn-panel">
+
+            <div class="zanevn-panel-inner">
+
+                <div class="zanevn-main-article-content">
+
+                    <h1>@post.Title</h1>
+
+                    <div class="zanevn-main-article-head">
+                        @if (!string.IsNullOrWhiteSpace(post.Image))
+                        {
+                            <div class="zanevn-main-article-media">
+                                <img src="@post.Image" alt="@post.Title" />
+                            </div>
+                        }
+
+                        <div class="zanevn-main-article-meta">
+                            <span class="item"><i class="fa fa-user"></i>Duy Khanh</span>
+                            <span class="item">
+                                <i class="fa fa-calendar"></i>@post.DateString
+                            </span>
+                            <span class="item">
+                                <i class="fa fa-folder-open-o"></i>
+                                @foreach (var category in post.Categories.OrderBy(p => p.Position))
+                                {
+                                    <a href="@category.Slug" title="@category.Title">@category.Title</a>
+                                }
+                            </span>
+                            <span class="item"><i class="fa fa-eye"></i>@(post.Views)</span>
+                        </div>
+                    </div>
+
+                    <div class="shortcode-content">
+                        @Html.Raw(post.Content)
+                    </div>
+
+                    @if (post.Tags.Any() == true)
+                    {
+                        <div class="zanevn-tag-list">
+                            @foreach (var item in post.Tags)
+                            {
+                                <a href="@item.Slug" title="@item.Title">@item.Title</a>
+                            }
+                        </div>
+                    }
+
+                    <div class="zanevn-author-block">
+                        <div class="item-header">
+                            <a href="#"><img src="~/assets/images/photos/avatar-3.jpg" alt="Duy Khanh" /></a>
+                        </div>
+                        <div class="item-content">
+                            <strong>Duy Khanh</strong>
+                            <p>
+                                Tota argumentum nec in. Sed an everti melius eleifend. Et tation
+                                legere referrentur eos. Duo eos ex facilis rationibus.
+                            </p>
+                        </div>
+                    </div>
+
+                    @if (false)//(enableComment)
+                    {
+                        <div class="zanevn-comments">
+                            <div class="zanevn-secondary-title">
+                                <a href="#writeacomment" class="right zanevn-button"><i class="fa fa-pencil"></i> Comment</a>
+                                <strong><i class="material-icons">comment</i>@(post.Comments.Count) Responses</strong>
+                            </div>
+                            <div class="comment-list">
+                                <ol id="comments">
+
+                                    @if (post.Comments.Any())
+                                    {
+                                        foreach (var item in post.Comments)
+                                        {
+                                            <li class="comment">
+                                                <div class="comment-block">
+                                                    <a href="#" class="image-avatar"> <img src="~/assets/images/photos/avatar-4.jpg" alt="" title="" /> </a>
+                                                    <div class="comment-text">
+                                                        <span class="time-stamp right"> @item.CreatedateString </span>
+                                                        <strong class="user-nick">
+                                                            <a href="#"> @item.Username </a><span class="user-label">Author</span>
+                                                        </strong>
+                                                        <div class="shortcode-content">
+                                                            @Html.Raw(item.Comment)
+                                                        </div>
+                                                        <a class="zanevn-button read-more-button" href="#">
+                                                            <i class="material-icons">reply</i>Reply this comment
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                @if (item.Comments.Any())
+                                                {
+                                                    <ul class="children">
+                                                        @foreach (var childItem in item.Comments)
+                                                        {
+                                                            <li class="comment">
+                                                                <div class="comment-block">
+                                                                    <a href="#" class="image-avatar">
+                                                                        <img src="~/assets/images/photos/avatar-5.jpg" alt="" title="" />
+                                                                    </a>
+                                                                    <div class="comment-text">
+                                                                        <span class="time-stamp right"> @childItem.CreatedateString </span>
+                                                                        <strong class="user-nick">
+                                                                            <a href="#"> @childItem.Username </a><span class="user-label">Author</span>
+                                                                        </strong>
+                                                                        <div class="shortcode-content">
+                                                                            @Html.Raw(childItem.Comment)
+                                                                        </div>
+                                                                        <a class="zanevn-button read-more-button" href="#">
+                                                                            <i class="material-icons">reply</i>Reply this comment
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
+
+                                            </li>
+                                        }
+                                    }
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="zanevn-comments">
+                            <div class="zanevn-secondary-title">
+                                <!-- <a href="#comments" class="right zanevn-button">all responses</a> -->
+                            <strong>
+                                    <i class="material-icons">mode_edit</i>Leave a
+                                    response
+                                </strong>
+                            </div>
+                            <div class="comment-form">
+                                <div id="writeacomment" class="comment-respond">
+
+                                    <form action="#" class="comment-form">
+                                        <div class="comment-info">
+                                            <strong>Your data will be safe!</strong>
+                                            <span>
+                                                Your e-mail address will not be published. Also
+                                                other data will not be shared with third
+                                                person.
+                                            </span>
+                                        </div>
+                                        @*<div class="alert-message ot-shortcode-alert-message alert-green">
+                                            <strong>Success! This a success message</strong>
+                                            </div>
+                                            <div class="alert-message ot-shortcode-alert-message alert-red">
+                                            <strong>Error! This an error message</strong>
+                                            </div>
+                                            <div class="alert-message ot-shortcode-alert-message">
+                                            <strong>Warning! This a warning message</strong>
+                                            </div>*@
+                                        <div class="contact-form-content">
+                                            <div class="contact-form-general">
+                                                <p class="contact-form-user">
+                                                    <label class="label-input">
+                                                        <span>Nickname<i class="required">*</i></span>
+                                                        <input type="text" placeholder="Nickname"
+                                                           name="nickname" value="">
+                                                    </label>
+                                                </p>
+                                                <p class="contact-form-email">
+                                                    <label class="label-input">
+                                                        <span>E-mail<i class="required">*</i></span>
+                                                        <input type="email" placeholder="E-mail"
+                                                           name="email" value="">
+                                                    </label>
+                                                </p>
+                                            </div>
+
+                                            <p class="contact-form-comment">
+                                                <label class="label-input">
+                                                    <span>
+                                                        Comment text<i class="required">*</i>
+                                                    </span>
+                                                    <textarea name="comment"
+                                                          placeholder="Comment text"></textarea>
+                                                </label>
+                                            </p>
+                                            <p class="form-submit">
+                                                <button type="submit" id="submit" name="submit" class="submit button"><i class="fa fa-pencil"></i> Comment</button>
+                                            </p>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+
+            <!-- END .zanevn-panel -->
+        </div>
+
+    </div>
+
+    <!-- END .zanevn-main-content -->
+</div>
+
+<cache expires-after="TimeSpan.FromMinutes(30)">
+    <partial name="ClientLayouts/SidebarView" />
+</cache>

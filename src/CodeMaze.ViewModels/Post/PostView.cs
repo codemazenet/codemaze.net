@@ -19,6 +19,7 @@
         public bool IsFeedIncluded { get; set; }
         public DateTime? PubDateUtc { get; set; }
         public DateTime? LastModifiedUtc { get; set; }
+        public string DateString => LastModifiedUtc.GetValueOrDefault().AddHours(7).ToString("MMMM dd, yyyy");
         public bool IsPublished { get; set; }
         public bool IsDeleted { get; set; }
         public int Hits { get; set; }
