@@ -1,0 +1,65 @@
+﻿@model PageListView<PostItem>
+@{
+    ViewData["Title"] = "Home Page";
+    var pageView = Model;
+    var posts = pageView?.Data;
+}
+
+<!-- BEGIN .zanevn-main-content -->
+<div class="zanevn-main-content zanevn-main-content-s-1">
+
+    <!-- BEGIN .zanevn-panel -->
+    <div class="zanevn-panel">
+
+        <div class="zanevn-panel-title">
+            <strong>@(!string.IsNullOrEmpty(pageView?.PageTitle)?pageView.PageTitle:"Posts by category")</strong>
+        </div>
+
+        <div class="zanevn-panel-inner">
+
+            <div class="zanevn-blog-list lets-do-1">
+
+                @if (posts?.Count > 0)
+                {
+                    foreach (var post in posts)
+                    {
+                        var category = post.Categories.FirstOrDefault();
+                        <div class="item">
+                            <div class="item-header">
+                                <a href="@category?.Slug" class="img-read-later-button">@category?.DisplayName</a>
+                                <a href="@post.Slug"><img src="@post.Thumbnail" alt="@post.Title" /></a>
+                            </div>
+                            <div class="item-content">
+                                <h2>
+                                    <a href="@post.Slug" target="_self">@post.Title</a>
+                                </h2>
+                                <span class="item-meta">
+                                    <span class="item-meta-item">
+                                        <i class="fa fa-user"></i> @post.Author
+                                    </span>
+                                    <span class="item-meta-item">
+                                        <i class="fa fa-calendar"></i> @post.PubdateString
+                                    </span>
+                                    <a href="post.html#comments" class="item-meta-item">
+                                        <i class="material-icons">chat_bubble_outline</i> @post.Comments
+                                    </a>
+                                </span>
+                                <p>
+                                    @post.Content
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <partial name="ClientComponents/PagingComponent" model="pageView" />
+
+    </div> <!-- END .zanevn-panel -->
+
+</div>  <!-- END .zanevn-main-content -->
+
+<cache expires-after="TimeSpan.FromMinutes(30)">
+    <partial name="ClientLayouts/SidebarView" />
+</cache>

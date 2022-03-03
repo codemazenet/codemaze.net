@@ -23,6 +23,7 @@ builder.Services.AddScoped(typeof(CommonFactory));
 builder.Services.AddScoped(typeof(RepositoryFactory));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(DbContextRepository<>));
 builder.Services.AddScoped(typeof(IPostService), typeof(PostService));
+builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
 
 builder.Services.AddDbContext<MazeCoreDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection")));
 

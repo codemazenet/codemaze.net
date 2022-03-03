@@ -9,6 +9,26 @@ namespace CodeMaze.Service
 {
     public sealed class PostSpecial : BaseSpecification<PostEntity>
     {
+        /// <summary>
+        /// Get single post
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="code"></param>
+        public PostSpecial(string url, string code)
+            : base(p => p.Url.Equals(url) && p.Code.Equals(code) && !p.IsDeleted && p.IsPublished)
+        {
+            AddInclude(post => post
+                .Include(p => p.PostExtension)
+                .Include(p => p.PostTag).ThenInclude(pt => pt.Tag)
+                .Include(p => p.PostCategory).ThenInclude(pc => pc.Category)
+                .Include(p => p.Comment).ThenInclude(c => c.CommentReply));
+        }
+
+        /// <summary>
+        /// Get posts list
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="size"></param>
         public PostSpecial(int index, int size)
             : base(p => !p.IsDeleted && p.IsPublished)
         {
@@ -21,16 +41,31 @@ namespace CodeMaze.Service
             ApplyPaging((index - 1) * size, size);
         }
 
-
-        public PostSpecial(string url, string code)
-            : base(p => p.Url.Equals(url) && p.Code.Equals(code) && !p.IsDeleted && p.IsPublished)
+        /// <summary>
+        /// Get posts list by category
+        /// </summary>
+        /// <param name="url">url of category</param>
+        /// <param name="code">code of category</param>
+        /// <param name="index"></param>
+        /// <param name="size"></param>
+        public PostSpecial(string url, string code, int index, int size)
+            : base(p => p.PostCategory.Any(c =>
+                        c.Category.Url.Equals(url) &&
+                        c.Category.Code.Equals(code)) &&
+                    !p.IsDeleted &&
+                    p.IsPublished)
         {
             AddInclude(post => post
+                .Include(p => p.PostCategory).ThenInclude(c => c.Category)
                 .Include(p => p.PostExtension)
-                .Include(p => p.PostTag).ThenInclude(pt => pt.Tag)
-                .Include(p => p.PostCategory).ThenInclude(pc => pc.Category)
-                .Include(p => p.Comment).ThenInclude(c => c.CommentReply));
+                .Include(p => p.Comment));
+
+            ApplyOrderByDescending(p => p.PubDateUtc);
+
+            ApplyPaging((index - 1) * size, size);
         }
+
+
 
 
 

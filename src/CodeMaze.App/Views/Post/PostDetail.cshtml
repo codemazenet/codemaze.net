@@ -19,14 +19,7 @@
 
                     <h1>@post.Title</h1>
 
-                    <div class="zanevn-main-article-head">
-                        @if (!string.IsNullOrWhiteSpace(post.Image))
-                        {
-                            <div class="zanevn-main-article-media">
-                                <img src="@post.Image" alt="@post.Title" />
-                            </div>
-                        }
-
+                    <div class="zanevn-main-article-head">      
                         <div class="zanevn-main-article-meta">
                             <span class="item"><i class="fa fa-user"></i>Duy Khanh</span>
                             <span class="item">
@@ -41,6 +34,15 @@
                             </span>
                             <span class="item"><i class="fa fa-eye"></i>@(post.Views)</span>
                         </div>
+                    </div>
+
+                    <div class="zanevn-main-article-head">
+                        @if (!string.IsNullOrWhiteSpace(post.Image))
+                        {
+                            <div class="zanevn-main-article-media">
+                                <img src="@post.Image" alt="@post.Title" />
+                            </div>
+                        }                        
                     </div>
 
                     <div class="shortcode-content">

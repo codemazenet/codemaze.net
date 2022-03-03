@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using CodeMaze.Data.Entities;
+﻿using CodeMaze.Data.Entities;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeMaze.Service
 {
@@ -9,7 +10,7 @@ namespace CodeMaze.Service
             : base(p => (p.Category.Url.Equals(categoryUrl) && p.Category.Code.Equals(categoryCode)) && p.Post.IsPublished && !p.Post.IsDeleted)
         {
             AddInclude(pc => pc
-                .Include(pc => pc)
+                .Include(p => p.Post)
                 .Include(c => c.Category));
         }
     }

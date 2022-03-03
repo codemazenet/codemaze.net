@@ -5,6 +5,7 @@ namespace CodeMaze.IServices
     public interface IPostService
     {
         Task<IReadOnlyList<PostItem>> GetPostItemListAsync(int index, int size);
+        Task<IReadOnlyList<PostItem>> GetPostItemListByCategoryAsync(string url, string code, int index, int size);
 
         int CountPostPublish(string categoryUrl = "", string categoryCode = "");
 

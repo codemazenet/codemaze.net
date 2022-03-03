@@ -3,6 +3,7 @@
 using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
 using CodeMaze.Extension;
+using CodeMaze.IServices;
 using CodeMaze.ViewModels;
 
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CodeMaze.Service
 {
-    public class CategoryService : BaseService
+    public class CategoryService : BaseService, ICategoryService
     {
         private readonly IRepository<CategoryEntity> _categoryRepository;
         private readonly IRepository<PostCategoryEntity> _postCategoryRepository;
@@ -27,6 +28,11 @@ namespace CodeMaze.Service
             _categoryRepository = categoryRepository;
             _postCategoryRepository = postCategoryRepository;
         }
+
+        //public Task<CategoryItem> GetCategoryAsync(string url, string code)
+        //{
+        //    return GetAsync(url, code);
+        //}
 
         public async Task<string> GetNameAsync(string url = "", string code = "")
         {

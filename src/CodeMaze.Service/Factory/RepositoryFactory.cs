@@ -4,7 +4,7 @@ namespace CodeMaze.Service.Factory
 {
     public class RepositoryFactory
     {
-        //public CategoryService Category { get; private set; }
+        public ICategoryService Category { get; private set; }
         public IPostService Post { get; private set; }
         //public TagService Tag { get; private set; }
         //public UserService User { get; private set; }
@@ -13,7 +13,7 @@ namespace CodeMaze.Service.Factory
         //public ConfigurationService Configuration { get; private set; }
 
         public RepositoryFactory(
-            //CategoryService category,
+            ICategoryService category,
             IPostService post)//,
                               //TagService tag,
                               //UserService user,
@@ -21,7 +21,7 @@ namespace CodeMaze.Service.Factory
                               //SearchEngineService searchEngine,
                               //ConfigurationService configuration)
         {
-            //if (category != null) this.Category = category;
+            if (category != null) this.Category = category;
             if (post != null) this.Post = post;
             //if (tag != null) this.Tag = tag;
             //if (user != null) this.User = user;

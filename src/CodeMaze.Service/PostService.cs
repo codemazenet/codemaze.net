@@ -61,6 +61,17 @@ namespace CodeMaze.Service
             return _postRepository.SelectAsync(spec, p => _mapper.Map<PostItem>(p), true);
         }
 
+        public Task<IReadOnlyList<PostItem>> GetPostItemListByCategoryAsync(string url, string code, int index, int size)
+        {
+            if (size < 1) size = 20;
+
+            if (index < 1) index = 1;
+
+            var spec = new PostSpecial(url, code, index, size);
+
+            return _postRepository.SelectAsync(spec, p => _mapper.Map<PostItem>(p), true);
+        }
+
         public Task<PostView> GetPostAsync(string url, string code)
         {
             var spec = new PostSpecial(url, code);

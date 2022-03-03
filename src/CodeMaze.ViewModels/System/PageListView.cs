@@ -2,6 +2,7 @@
 {
     public class PageListView<T> where T : class
     {
+        public string PageTitle { get; set; } = "All Posts";
         public List<T> Data { get; set; }
         public int Current { get; set; }
         public int Total { get; set; }
