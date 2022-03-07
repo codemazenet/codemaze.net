@@ -1,0 +1,80 @@
+﻿<!-- Header -->
+<header id="page-header">
+<!-- Header Content -->
+<div class="content-header">
+    <!-- Left Section -->
+    <div>
+    <!-- Toggle Sidebar -->
+    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+    <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="sidebar_toggle">
+        <i class="fa fa-fw fa-bars"></i>
+    </button>
+    <!-- END Toggle Sidebar -->
+    </div>
+    <!-- END Left Section -->
+
+    <!-- Right Section -->
+    <div>
+    <!-- Open Search Section -->
+    <button type="button" class="btn btn-alt-secondary" data-toggle="layout" data-action="header_search_on">
+        <i class="fa fa-fw fa-search"></i>
+    </button>
+    <!-- END Open Search Section -->
+
+    <!-- User Dropdown -->
+    <div class="dropdown d-inline-block">
+        <button type="button" class="btn btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-fw fa-user-circle"></i>
+            <i class="fa fa-fw fa-angle-down d-none opacity-50 d-sm-inline-block"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
+            <div class="bg-primary-dark rounded-top fw-semibold text-white text-center p-3">
+            <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/media/avatars/avatar10.jpg" alt="">
+            <div class="pt-2">
+                <a class="text-white fw-semibold" href="be_pages_generic_profile.html">Duy Khanh</a>
+            </div>
+            </div>
+            <div class="p-2">
+            <a class="dropdown-item" href="javascript:void(0)">
+                <i class="fa fa-fw fa-cog me-1"></i> Settings
+            </a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="op_auth_signin.html">
+                <i class="fa fa-fw fa-arrow-alt-circle-left me-1"></i> Log Out
+            </a>
+            </div>
+        </div>
+        </div>
+        <!-- END User Dropdown -->
+    </div>
+    <!-- END Right Section -->
+</div>
+<!-- END Header Content -->
+
+<!-- Header Search -->
+<div id="page-header-search" class="overlay-header bg-primary">
+    <div class="content-header">
+    <form class="w-100" action="be_pages_generic_search.html" method="POST">
+        <div class="input-group">
+        <input type="text" class="form-control border-0" placeholder="Search your network.." id="page-header-search-input" name="page-header-search-input">
+        <button type="button" class="btn btn-primary" data-toggle="layout" data-action="header_search_off">
+            <i class="fa fa-fw fa-times-circle"></i>
+        </button>
+        </div>
+    </form>
+    </div>
+</div>
+<!-- END Header Search -->
+
+<!-- Header Loader -->
+<!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
+<div id="page-header-loader" class="overlay-header bg-primary-darker">
+    <div class="content-header">
+    <div class="w-100 text-center">
+        <i class="fa fa-fw fa-2x fa-sun fa-spin text-white"></i>
+    </div>
+    </div>
+</div>
+<!-- END Header Loader -->
+</header>
+<!-- END Header -->

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CodeMaze.App.Controllers
 {
-    public class CategoryController : BaseController
+    public partial class CategoryController : BaseController
     {
         private readonly ILogger<HomeController> logger;
         private readonly IBlogCache blogCache;

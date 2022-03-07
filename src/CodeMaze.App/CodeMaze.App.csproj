@@ -12,6 +12,16 @@
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="wwwroot\admin\fonts\fontawesome\fa-brands-400.svg" />
+    <None Include="wwwroot\admin\fonts\fontawesome\fa-brands-400.woff2" />
+    <None Include="wwwroot\admin\fonts\fontawesome\fa-regular-400.svg" />
+    <None Include="wwwroot\admin\fonts\fontawesome\fa-regular-400.woff2" />
+    <None Include="wwwroot\admin\fonts\fontawesome\fa-solid-900.svg" />
+    <None Include="wwwroot\admin\fonts\fontawesome\fa-solid-900.woff2" />
+    <None Include="wwwroot\admin\fonts\simple-line-icons\Simple-Line-Icons.svg" />
+    <None Include="wwwroot\admin\fonts\simple-line-icons\Simple-Line-Icons.woff2" />
+    <None Include="wwwroot\admin\js\magnific-popup\jquery.magnific-popup.js" />
+    <None Include="wwwroot\admin\js\magnific-popup\jquery.magnific-popup.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="wwwroot\admin\theme\" />
   </ItemGroup>
 
 </Project>

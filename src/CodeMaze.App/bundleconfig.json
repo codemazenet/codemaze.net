@@ -26,5 +26,25 @@
       "wwwroot/client/css/responsive.css",
       "wwwroot/client/css/custom-styles.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/app.min.css",
+    "inputFiles": [
+      "wwwroot/admin/css/app.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/theme.min.css",
+    "inputFiles": [
+      "wwwroot/admin/css/theme.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/admin/theme/theme.bundle.css",
+    "inputFiles": [
+      "wwwroot/admin/js/magnific-popup/magnific-popup.css",
+      "wwwroot/admin/css/app.css",
+      "wwwroot/admin/css/theme.css"
+    ]
   }
 ]
