@@ -4,9 +4,9 @@ namespace CodeMaze.App.Controllers
 {
     public partial class CategoryController
     {
-        [Route("/manage/category")]
+        [Route("/manage/category/{view?}")]
         [HttpGet]
-        public IActionResult Manage()
+        public IActionResult Manage(string view = "")
         {
 
             return View("ManageView");
