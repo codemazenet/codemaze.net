@@ -6,10 +6,15 @@ namespace CodeMaze.App.Controllers
     {
         [Route("/manage/category/{view?}")]
         [HttpGet]
-        public IActionResult Manage(string view = "")
+        public async Task<IActionResult> Manage(string view = "")
         {
+            if (!view.Equals("ontab", StringComparison.CurrentCultureIgnoreCase) &&
+               !view.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
+                view = String.Empty;
 
-            return View("ManageView");
+            var categories = await repository.Category.GetCategoriesByStatusAsync(view.Trim().ToLower());
+
+            return View("ManageView", categories);
         }
     }
 }

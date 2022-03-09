@@ -7,6 +7,9 @@ namespace CodeMaze.IServices
         //Task<CategoryItem> GetCategoryAsync(string url, string code);
 
         Task<string> GetNameAsync(string url, string code);
+
         Task<IReadOnlyList<CategoryItem>> GetCategoriesPublishAsync();
+
+        Task<IReadOnlyList<CategoryViewModel>> GetCategoriesByStatusAsync(string status);
     }
 }

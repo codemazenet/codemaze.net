@@ -50,6 +50,16 @@ namespace CodeMaze.Service
                                     true);
         }
 
+        public Task<IReadOnlyList<CategoryViewModel>> GetCategoriesByStatusAsync(string status)
+        {
+            var spec = new CategorySpecial(status);
+
+            return _categoryRepository.SelectAsync(
+                                    spec,
+                                    c => _mapper.Map<CategoryViewModel>(c),
+                                    true);
+        }
+
         public async Task<IReadOnlyList<CategoryViewModel>> GetAllAsync()
         {
             return await _categoryRepository.SelectAsync(

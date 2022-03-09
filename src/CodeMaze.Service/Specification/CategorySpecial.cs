@@ -23,6 +23,21 @@ namespace CodeMaze.Service
             ApplyOrderBy(c => c.Position);
         }
 
+        public CategorySpecial(string status)
+        {
+            if (!string.IsNullOrWhiteSpace(status))
+            {
+                if (status.Equals("ontab"))
+                    AddCriteria(c => c.ShowOnTab == true && c.Deleted == false);
+
+                if (status.Equals("trash"))
+                    AddCriteria(c => c.Deleted == true);
+            }
+
+            ApplyOrderBy(c => c.Position);
+        }
+
+
         public CategorySpecial(List<Guid> ids) :
             base(c => ids.Contains(c.Id))
         {

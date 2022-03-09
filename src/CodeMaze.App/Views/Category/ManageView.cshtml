@@ -1,5 +1,8 @@
-﻿@{
+﻿@model IReadOnlyList<CategoryViewModel>
+@{
     Layout = "_LayoutAdmin";
+    var index = 0;
+    var categories = Model ?? new List<CategoryViewModel>();
 }
 
 <nav aria-label="breadcrumb">
@@ -10,7 +13,7 @@
             </a>
         </li>
         <li class="breadcrumb-item" aria-current="page">
-            <a  class="text-primary" href="/admin/dashboard"> Dashboard </a>
+            <a class="text-primary" href="/admin/dashboard"> Dashboard </a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
             <span class="text-primary">Categories</span>
@@ -67,7 +70,7 @@
     </div>
     <div class="col-6 col-xl-3">
         <!-- New Post -->
-        <a class="block block-rounded" href="/manage/category/add">
+        <a class="block block-rounded" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-category">
             <div class="block-content block-content-full">
                 <div class="">
                     <div class="d-none d-md-block">
@@ -95,59 +98,133 @@
                 <tr class="bg-body-dark">
                     <th class="text-center" style="width: 50px;">#</th>
                     <th>Tên</th>
-                    <th class="d-none d-sm-table-cell" style="width: 15%;">Trạng thái</th>
-                    <th class="text-center" style="width: 100px;">Thao tác</th>
+                    <th class="d-none d-md-table-cell text-center" style="width: 200px;">Show On-Tabs</th>
+                    <th class="d-none d-sm-table-cell text-center" style="width: 100px;">Status</th>
+                    <th class="d-none d-md-table-cell text-center" style="width: 100px;">Position</th>
+                    <th class="text-center" style="width: 100px;">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @* @foreach (var item in Model!)
+                @if (categories?.Count > 0)
+                {
+                    foreach (var item in Model!)
                     {
+                        <tr>
+                            <td class="text-center" scope="row">@(++index)</td>
+                            <td class="fw-semibold">
+                                @item.DisplayName
+                            </td>
+                            <td class="d-none d-md-table-cell text-center">
+                                @if (item.ShowOnTab)
+                                {
+                                    <span class="badge bg-success">True</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">False</span>
+                                }
+                            </td>
+                            <td class="d-none d-sm-table-cell text-center">
+                                @if (item.Deleted)
+                                {
+                                    <span class="badge bg-danger">Deleted</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                            </td>
+                            <td class="d-none d-md-table-cell text-center"> @(item.Position) </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-alt-primary" data-bs-toggle="modal" data-bs-target="#modal-category">
+                                        <i class="fa fa-pencil-alt text-primary"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-sm btn-alt-primary" data-bs-toggle="modal" data-bs-target="#modal-category">
+                                        <i class="fa fa-times text-danger"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
                     <tr>
-                    <td class="text-center" scope="row">@item.Id</td>
-                    <td class="fw-semibold">
-                    @item.Name
-                    </td>
-                    <td class="d-none d-sm-table-cell">
-                    @if (item.IsDelete!.Value)
-                    {
-                    <span class="badge bg-success">Hoạt động</span>
-                    }
-                    else
-                    {
-                    <span class="badge bg-warning">Khóa</span>
-                    }
-                    </td>
-                    <td class="text-center">
-                    <div class="btn-group">
-                    <a href="/Admin/Category/Edit/@item.Id" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip"
-                    title="Edit">
-                    <i class="fa fa-pencil-alt text-primary"></i>
-                    </a>
-                    <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Delete" onclick="onDeleteCategory(@item.Id)">
-                    <i class="fa fa-times text-danger"></i>
-                    </button>
-                    </div>
-                    </td>
+                        <td colspan="6">
+                            <div class="alert alert-info" role="alert">
+                                <p class="mb-0">No Data!</p>
+                            </div>
+                        </td>
                     </tr>
-                    }*@
+                }
 
             </tbody>
         </table>
     </div>
+
+    <div class="modal fade" id="modal-category" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Manage Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pb-1">
+                    <div class="row justify-content-center py-sm-3 py-md-4">
+                        <div class="col-sm-11 col-md-11">
+                            <div class="mb-4">
+                                <label class="form-label" for="block-form-username">Title</label>
+                                <input type="text" class="form-control" name="title" placeholder="Enter title">
+                            </div>
+                            <div class="mb-4">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <label class="form-label" for="block-form-password">Url</label>
+                                        <div class="input-group">
+                                            <label class="input-group-text pt-1" for="enable-url-edit">
+                                                <input class="form-check-input" id="enable-url-edit" type="checkbox" value="" name="enable-url-edit">
+                                            </label>
+                                            <input type="text" class="form-control" name="url" placeholder="https://codemaze.net/url-special.html" readonly>
+                                            <span class="input-group-text">
+                                                <i class="fa fa-link"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="block-form-password">Code</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="category-code" name="code" placeholder="MAZE" readonly>
+                                            <span class="input-group-text">
+                                                <i class="fa fa-qrcode"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="block-form-password">Position</label>
+                                <input type="number" min="0" max="99" value="0" inputmode="numeric" step="1" class="form-control" name="position" placeholder="Enter position..">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="block-form-password">Note</label>
+                                <textarea class="form-control" cols=5></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" value="true" id="category-publish" name="publish" checked>
+                                    <label class="form-check-label" for="category-publish">Publish</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary" ><i class="fa fa-check"></i> Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<script>
-
-
-    function onDeleteCategory(id){
-        var rs = confirm("Đồng ý xóa danh mục");
-        if(rs){
-            $.post('/Admin/Category/Delete', {Id: id}, function(re){
-                if(re.data == 200){
-                    window.location.reload();
-                }
-            })
-        }
-    }
-
-</script>
