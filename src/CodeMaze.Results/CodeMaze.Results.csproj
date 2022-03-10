@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CodeMaze.Results\CodeMaze.Results.csproj" />
-    <ProjectReference Include="..\CodeMaze.ViewModels\CodeMaze.ViewModels.csproj" />
-  </ItemGroup>
-
 </Project>

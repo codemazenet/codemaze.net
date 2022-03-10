@@ -26,7 +26,7 @@
                         var category = post.Categories.FirstOrDefault();
                         <div class="item">
                             <div class="item-header">
-                                <a href="@category?.Slug" class="img-read-later-button">@category?.DisplayName</a>
+                                <a href="@category?.Slug" class="img-read-later-button">@category?.Title</a>
                                 <a href="@post.Slug"><img src="@post.Thumbnail" alt="@post.Title" /></a>
                             </div>
                             <div class="item-content">

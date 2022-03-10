@@ -1,8 +1,12 @@
 ﻿@model IReadOnlyList<CategoryViewModel>
+@using Newtonsoft.Json
 @{
     Layout = "_LayoutAdmin";
     var index = 0;
     var categories = Model ?? new List<CategoryViewModel>();
+}
+@section scripts{
+<script src="~/assets/js/category.manage.js"></script>
 }
 
 <nav aria-label="breadcrumb">
@@ -112,7 +116,7 @@
                         <tr>
                             <td class="text-center" scope="row">@(++index)</td>
                             <td class="fw-semibold">
-                                @item.DisplayName
+                                @item.Title
                             </td>
                             <td class="d-none d-md-table-cell text-center">
                                 @if (item.ShowOnTab)
@@ -125,19 +129,23 @@
                                 }
                             </td>
                             <td class="d-none d-sm-table-cell text-center">
-                                @if (item.Deleted)
+                                @if (!item.Publish)
                                 {
-                                    <span class="badge bg-danger">Deleted</span>
+                                    <span class="badge bg-danger">Draft</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-success">Publish</span>
                                 }
                             </td>
                             <td class="d-none d-md-table-cell text-center"> @(item.Position) </td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-alt-primary" data-bs-toggle="modal" data-bs-target="#modal-category">
+                                    <button type="button"
+                                    class="btn btn-sm btn-alt-primary btn-category-update"
+                                    data-model="@(JsonConvert.SerializeObject(item))"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal-category">
                                         <i class="fa fa-pencil-alt text-primary"></i>
                                     </button>
 
@@ -172,57 +180,72 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
-                    <div class="row justify-content-center py-sm-3 py-md-4">
-                        <div class="col-sm-11 col-md-11">
-                            <div class="mb-4">
-                                <label class="form-label" for="block-form-username">Title</label>
-                                <input type="text" class="form-control" name="title" placeholder="Enter title">
-                            </div>
-                            <div class="mb-4">
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <label class="form-label" for="block-form-password">Url</label>
-                                        <div class="input-group">
-                                            <label class="input-group-text pt-1" for="enable-url-edit">
-                                                <input class="form-check-input" id="enable-url-edit" type="checkbox" value="" name="enable-url-edit">
-                                            </label>
-                                            <input type="text" class="form-control" name="url" placeholder="https://codemaze.net/url-special.html" readonly>
-                                            <span class="input-group-text">
-                                                <i class="fa fa-link"></i>
-                                            </span>
+                    <form action="/api/manage/category" accept-charset='utf-8'>
+                        <input type="hidden" name="Id" value="" />
+                        @Html.AntiForgeryToken()
+                        <div class="row justify-content-center py-sm-3 py-md-4">
+                            <div class="col-sm-11 col-md-11">
+                                <div class="mb-4">
+                                    <label class="form-label" for="category-title">Title</label>
+                                    <input type="text" id="category-title" class="form-control" name="title" placeholder="Enter title">
+                                </div>
+                                <div class="mb-4">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <label class="form-label" for="category-url">Url <small class="text-danger">(Note: Auto generate)</small> </label>
+                                            <div class="input-group">
+                                                <label class="input-group-text pt-1" for="enable-url-edit">
+                                                    <input class="form-check-input" id="enable-url-edit" type="checkbox" value="false" name="enable-url-edit">
+                                                </label>
+                                                <input type="text" class="form-control" id="category-url" name="url" placeholder="https://codemaze.net/url-special.html" readonly>
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-link"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label" for="block-form-password">Code</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="category-code" name="code" placeholder="MAZE" readonly>
-                                            <span class="input-group-text">
-                                                <i class="fa fa-qrcode"></i>
-                                            </span>
+                                        <div class="col-md-3">
+                                            <label class="form-label" for="category-code">Code</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="category-code" name="code" placeholder="MAZE" readonly >
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-qrcode"></i>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label" for="block-form-password">Position</label>
-                                <input type="number" min="0" max="99" value="0" inputmode="numeric" step="1" class="form-control" name="position" placeholder="Enter position..">
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label" for="block-form-password">Note</label>
-                                <textarea class="form-control" cols=5></textarea>
-                            </div>
-                            <div class="mb-4">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" value="true" id="category-publish" name="publish" checked>
-                                    <label class="form-check-label" for="category-publish">Publish</label>
+                                <div class="mb-4">
+                                    <label class="form-label" for="category-position">Position</label>
+                                    <input type="number" id="category-position" min="0" max="99" value="0" inputmode="numeric" step="1" class="form-control" name="position" placeholder="Enter position..">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label" for="category-note">Note</label>
+                                    <textarea class="form-control" id="category-note" rows="3" name="note"></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="row">
+                                        <div class='col-md-6 col-sm-12'>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" value="true" id="category-publish" name="publish" checked>
+                                                <label class="form-check-label" for="category-publish">Publish</label>
+                                            </div>
+                                        </div>
+                                        <div class='col-md-6 col-sm-12'>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" value="true" id="category-showOnTab" name="showOnTab">
+                                                <label class="form-check-label" for="category-showOnTab">Show On-Tab</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-sm btn-primary" ><i class="fa fa-check"></i> Submit</button>
+                    <button type="button" class="btn btn-sm btn-primary btn-category-submit"><i class="fa fa-check"></i> Submit</button>
                 </div>
             </div>
         </div>

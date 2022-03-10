@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using CodeMaze.Data;
+﻿using CodeMaze.Data;
+
+using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -226,10 +228,10 @@ namespace CodeMaze.Service
             return entity;
         }
 
-        public async Task UpdateAsync(T entity)
+        public Task<int> UpdateAsync(T entity)
         {
             DbContext.Entry(entity).State = EntityState.Modified;
-            await DbContext.SaveChangesAsync();
+            return DbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(T entity)

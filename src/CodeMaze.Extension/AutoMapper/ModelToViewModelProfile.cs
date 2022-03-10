@@ -22,13 +22,13 @@ namespace CodeMaze.Extension
               .ForMember(dest => dest.Thumbnail, opt => opt.MapFrom(src => src.Image))
               .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.PostCategory.Select(c => new CategoryViewModel
               {
-                  DisplayName = c.Category.DisplayName,
+                  Title = c.Category.Title,
                   Slug = $"/category/{c.Category.Url}-{c.Category.Code}.html",
                   Id = c.Category.Id
               }).ToList()));
 
             CreateMap<CategoryEntity, CategoryItem>()
-                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.DisplayName))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => $"/category/{src.Url}-{src.Code}.html"))
                 .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position))
                 .ForMember(dest => dest.ShowOnTab, opt => opt.MapFrom(src => src.ShowOnTab));
@@ -42,7 +42,7 @@ namespace CodeMaze.Extension
              .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.PostExtension.Views))
              .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.PostCategory.Select(c => new CategoryItem
              {
-                 Title = c.Category.DisplayName,
+                 Title = c.Category.Title,
                  Slug = $"/category/{c.Category.Url}-{c.Category.Code}.html",
                  Position = c.Category.Position.GetValueOrDefault()
              }).ToList()))
@@ -115,7 +115,7 @@ namespace CodeMaze.Extension
                 }).ToList()))
                 .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.PostCategory.Where(pc => pc.PostId == src.Id).Select(pc => new CategoryViewModel()
                 {
-                    DisplayName = pc.Category.DisplayName,
+                    Title = pc.Category.Title,
                     Url = $"/category/{pc.Category.Url}-{pc.Category.Code}.html",
                 }).ToList()));
 
@@ -160,7 +160,7 @@ namespace CodeMaze.Extension
                 }).ToList()))
                 .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Post.PostCategory.Select(pc => new CategoryViewModel()
                 {
-                    DisplayName = pc.Category.DisplayName,
+                    Title = pc.Category.Title,
                     Url = $"/category/{pc.Category.Url}-{pc.Category.Code}.html",
                 }).ToList()));
 
@@ -171,7 +171,7 @@ namespace CodeMaze.Extension
                .ForMember(dest => dest.TagUrl, opt => opt.MapFrom(src => $"/tag/{src.NormalizedName}.html"));
 
             CreateMap<PostCategoryEntity, CategoryItemViewModel>()
-                 .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.Category.DisplayName))
+                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Category.Title))
                  .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => $"/category/{src.Category.Url}-{src.Category.Code}.html"));
 
             CreateMap<UserEntity, UserViewModel>()

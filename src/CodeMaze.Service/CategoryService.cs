@@ -4,6 +4,7 @@ using CodeMaze.Data.Entities;
 using CodeMaze.Data.RequestResponse;
 using CodeMaze.Extension;
 using CodeMaze.IServices;
+using CodeMaze.Results;
 using CodeMaze.ViewModels;
 
 using Microsoft.Extensions.Logging;
@@ -38,7 +39,7 @@ namespace CodeMaze.Service
         {
             var category = await GetAsync(url, code);
 
-            return category?.DisplayName;
+            return category?.Title;
         }
 
         public Task<IReadOnlyList<CategoryItem>> GetCategoriesPublishAsync()
@@ -59,6 +60,60 @@ namespace CodeMaze.Service
                                     c => _mapper.Map<CategoryViewModel>(c),
                                     true);
         }
+
+        public Task<IResult<bool>> ExecuteUpdateAsync(Guid id, CategoryRequest request)
+        {
+            return TryExecuteAsync<IResult<bool>>(async () =>
+            {
+                var category = _categoryRepository.Get(id);
+                if (null == category) return await Result<bool>.FailAsync();
+
+                if (!category.Title.Equals(request.Title))
+                {
+                    if (category.Url.Equals(request.Url))
+                        category.Url = request.Title.ConvertToUrl();
+                    else
+                        category.Url = request.Url;
+                    category.Title = request.Title;
+                }
+                else if (!category.Url.Equals(request.Url))
+                {
+                    category.Url = request.Url;
+                }
+
+                category.Note = request.Note;
+                category.Position = request.Position;
+                category.Publish = request.Publish;
+                category.ShowOnTab = request.ShowOnTab;
+
+                var result = await _categoryRepository.UpdateAsync(category);
+
+                return await Result<bool>.SuccessAsync(result > 0);
+            }, "ExecuteUpdateAsync", new { request });
+        }
+
+        public Task<IResult<bool>> ExecuteAddAsync(CategoryRequest request)
+        {
+            return TryExecuteAsync<IResult<bool>>(async () =>
+            {
+                var entry = _mapper.Map<CategoryEntity>(request);
+
+                var exists = _categoryRepository.Any(c => c.Url == entry.Url && c.Code == entry.Code);
+                if (exists)
+                    return await Result<bool>.FailAsync($"Category titled: [{request.Title}] already exists.");
+
+                Logger.LogInformation("Adding new categoryEntity to database.");
+                var result = await _categoryRepository.AddAsync(entry);
+
+                if (result != null)
+                    return await Result<bool>.SuccessAsync();
+
+                return await Result<bool>.FailAsync();
+            });
+        }
+
+
+
 
         public async Task<IReadOnlyList<CategoryViewModel>> GetAllAsync()
         {
@@ -91,7 +146,7 @@ namespace CodeMaze.Service
 
             if (null == category) return false;
 
-            category.Deleted = isDelete;
+            category.Publish = isDelete;
             var rows = _categoryRepository.Update(category);
 
             return rows > 0;
@@ -126,7 +181,7 @@ namespace CodeMaze.Service
                     Code = createRequest.Code,
                     Note = createRequest.Note,
                     Position = createRequest.Position,
-                    DisplayName = createRequest.DisplayName
+                    Title = createRequest.DisplayName
                 };
 
                 Logger.LogInformation("Adding new categoryEntity to database.");
@@ -160,10 +215,10 @@ namespace CodeMaze.Service
                 var category = _categoryRepository.Get(editRequest.Id);
                 if (null == category) return new FailedResponse($"CategoryEntity id {editRequest.Id} not found.");
 
-                if (!category.DisplayName.Equals(editRequest.DisplayName))
+                if (!category.Title.Equals(editRequest.DisplayName))
                 {
                     category.Url = editRequest.DisplayName.ConvertToUrl();
-                    category.DisplayName = editRequest.DisplayName;
+                    category.Title = editRequest.DisplayName;
                 }
 
                 category.Note = editRequest.Note;
@@ -189,14 +244,14 @@ namespace CodeMaze.Service
             if (categoryIds?.Count > 0)
                 return categories?.Select(p =>
                                 new CheckBoxViewModel(
-                                    p.DisplayName,
+                                    p.Title,
                                     p.Id.ToString(),
                                     categoryIds.Any(categoryId => categoryId == p.Id)))
                                                .ToList();
 
             return categories?.Select(p =>
                     new CheckBoxViewModel(
-                        p.DisplayName,
+                        p.Title,
                         p.Id.ToString(),
                         false)).ToList();
         }

@@ -78,7 +78,7 @@ namespace CodeMaze.Service
 
         Task<T> AddAsync(T entity);
 
-        Task UpdateAsync(T entity);
+        Task<int> UpdateAsync(T entity);
 
         Task DeleteAsync(T entity);
 

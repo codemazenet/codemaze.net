@@ -20,6 +20,9 @@ namespace CodeMaze.Service
         public CategorySpecial(bool isDeleted) :
             base(c => c.Deleted == isDeleted)
         {
+            if (!isDeleted)
+                AddCriteria(c => c.Publish);
+
             ApplyOrderBy(c => c.Position);
         }
 
@@ -32,6 +35,10 @@ namespace CodeMaze.Service
 
                 if (status.Equals("trash"))
                     AddCriteria(c => c.Deleted == true);
+            }
+            else
+            {
+                AddCriteria(c => c.Deleted == false);
             }
 
             ApplyOrderBy(c => c.Position);

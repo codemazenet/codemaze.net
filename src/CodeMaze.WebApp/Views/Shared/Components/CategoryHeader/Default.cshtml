@@ -11,7 +11,7 @@
                 {
                     foreach (var item in categories)
                     {
-                        <li><a href="@item.Slug" title="@item.DisplayName">@item.DisplayName</a></li>
+                        <li><a href="@item.Slug" title="@item.Title">@item.Title</a></li>
                     }
                 }
             }
@@ -23,7 +23,7 @@
     {
         foreach (var item in categoryShowOnTabs)
         {
-            <li><a href="@item.Slug" title="@item.DisplayName">@item.DisplayName</a></li>
+            <li><a href="@item.Slug" title="@item.Title">@item.Title</a></li>
         }
     }
 }

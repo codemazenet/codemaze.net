@@ -15,10 +15,11 @@ namespace CodeMaze.Data.Entities
         public Guid Id { get; set; }
         public string Url { get; set; }
         public string Code { get; set; }
-        public string DisplayName { get; set; }
+        public string Title { get; set; }
         public string Note { get; set; }
         public int? Position { get; set; }
         public bool Deleted { get; set; }
+        public bool Publish { get; set; }
         public bool ShowOnTab { get; set; }
 
         public virtual ICollection<PostCategoryEntity> PostCategory { get; set; }

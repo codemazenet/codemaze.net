@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze.App", "CodeMaze.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze.ViewModels", "CodeMaze.ViewModels\CodeMaze.ViewModels.csproj", "{F4EE2D69-625D-4FCB-BA4D-E9926F4B29C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMaze.IServices", "CodeMaze.IServices\CodeMaze.IServices.csproj", "{B5A2C43A-0A70-4503-9B6E-2F5CA8D1BD8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze.IServices", "CodeMaze.IServices\CodeMaze.IServices.csproj", "{B5A2C43A-0A70-4503-9B6E-2F5CA8D1BD8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMaze.Results", "CodeMaze.Results\CodeMaze.Results.csproj", "{169A1454-28D1-4D91-A2FE-B81CD32BBCB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{B5A2C43A-0A70-4503-9B6E-2F5CA8D1BD8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5A2C43A-0A70-4503-9B6E-2F5CA8D1BD8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5A2C43A-0A70-4503-9B6E-2F5CA8D1BD8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169A1454-28D1-4D91-A2FE-B81CD32BBCB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169A1454-28D1-4D91-A2FE-B81CD32BBCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169A1454-28D1-4D91-A2FE-B81CD32BBCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169A1454-28D1-4D91-A2FE-B81CD32BBCB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

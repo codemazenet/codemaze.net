@@ -1,4 +1,5 @@
 ﻿using CodeMaze.Configuration;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,9 +63,7 @@ namespace CodeMaze.Extension
 
         public static string ConvertToCode(this string text)
         {
-            var random = new Random();
-
-            return (NK.Extension.KeyGenerator.GetUniqueKey(random.Next(8, 16)));
+            return (NK.Extension.KeyGenerator.GetUniqueKey(8));
         }
 
         public static string[] ConvertToTags(this string tag)

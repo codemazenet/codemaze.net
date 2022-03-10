@@ -1,4 +1,5 @@
-﻿using CodeMaze.ViewModels;
+﻿using CodeMaze.Results;
+using CodeMaze.ViewModels;
 
 namespace CodeMaze.IServices
 {
@@ -11,5 +12,9 @@ namespace CodeMaze.IServices
         Task<IReadOnlyList<CategoryItem>> GetCategoriesPublishAsync();
 
         Task<IReadOnlyList<CategoryViewModel>> GetCategoriesByStatusAsync(string status);
+
+        Task<IResult<bool>> ExecuteUpdateAsync(Guid id, CategoryRequest request);
+
+        Task<IResult<bool>> ExecuteAddAsync(CategoryRequest request);
     }
 }

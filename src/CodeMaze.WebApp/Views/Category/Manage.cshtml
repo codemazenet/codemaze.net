@@ -95,7 +95,7 @@
                                 {
                             <tr>
                                 <td data-id="@category.Id"> @category.Position </td>
-                                <td title="@category.DisplayName"> <a target="_blank" rel="nofollow" href="@category.Slug">@category.DisplayName</a> </td>
+                                <td title="@category.Title"> <a target="_blank" rel="nofollow" href="@category.Slug">@category.Title</a> </td>
                                 <td> @category.Code </td>
 
                                 <td>
@@ -105,7 +105,7 @@
                                     <a href="@Utility.BaseUrl($"/category/manage/update/{category.Id}", false)" class="btn btn-sm green btn-outline filter-submit">
                                         <i class="fa fa-pencil"></i> Edit
                                     </a>
-                                    <a class="btn btn-sm btn-outline @(category.Deleted?"disabled default":"red")" target="_blank" rel="nofollow" href="@category.Slug" title="@category.DisplayName">
+                                    <a class="btn btn-sm btn-outline @(category.Deleted?"disabled default":"red")" target="_blank" rel="nofollow" href="@category.Slug" title="@category.Title">
                                         <i class="fa fa-eye"></i> View
                                     </a>
                                 </td>

@@ -3,7 +3,7 @@
     public class CategoryItemViewModel : CategoryRequestViewModel
     {
         public string Slug { get; set; }
-        public string DisplayName { get; set; }
+        public string Title { get; set; }
     }
 
     public class CategoryItem

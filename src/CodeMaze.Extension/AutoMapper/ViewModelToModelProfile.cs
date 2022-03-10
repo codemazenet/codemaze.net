@@ -13,7 +13,12 @@ namespace CodeMaze.Extension
         {
             CreateMap<UserViewModel, UserEntity>();
 
-            CreateMap<CategoryViewModel, CategoryEditViewModel>();
+            CreateMap<CategoryRequest, CategoryEntity>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.RemoveMultipleWhiteSpaces()))
+                .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Title.ConvertToUrl()))
+                .ForMember(dest => dest.Code, opt => opt.MapFrom(src => src.Title.ConvertToCode()))
+                .ForMember(dest => dest.Note, opt => opt.MapFrom(src => src.Note.BreakWord(250)));
 
             CreateMap<CommentRequest, CommentEntity>()
                 .ForMember(dest => dest.IsApproved, opt => opt.MapFrom(src => false));

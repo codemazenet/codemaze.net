@@ -9,7 +9,7 @@ namespace CodeMaze.Data.Configurations
         public void Configure(EntityTypeBuilder<CategoryEntity> builder)
         {
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
-            builder.Property(e => e.DisplayName).HasMaxLength(64);
+            builder.Property(e => e.Title).HasMaxLength(64);
             builder.Property(e => e.Note).HasMaxLength(128);
             builder.Property(e => e.Url).HasMaxLength(64);
             builder.Property(e => e.Code).HasMaxLength(64);
