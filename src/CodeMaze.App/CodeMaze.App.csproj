@@ -22,6 +22,10 @@
     <None Include="wwwroot\admin\fonts\simple-line-icons\Simple-Line-Icons.woff2" />
     <None Include="wwwroot\admin\js\magnific-popup\jquery.magnific-popup.js" />
     <None Include="wwwroot\admin\js\magnific-popup\jquery.magnific-popup.min.js" />
+    <None Include="wwwroot\admin\js\sweetalert2\sweetalert2.all.js" />
+    <None Include="wwwroot\admin\js\sweetalert2\sweetalert2.all.min.js" />
+    <None Include="wwwroot\admin\js\sweetalert2\sweetalert2.js" />
+    <None Include="wwwroot\admin\js\sweetalert2\sweetalert2.min.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -46,5 +46,11 @@
       "wwwroot/admin/css/app.css",
       "wwwroot/admin/css/theme.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/js/category.manage.min.js",
+    "inputFiles": [
+      "wwwroot/assets/js/category.manage.js"
+    ]
   }
 ]

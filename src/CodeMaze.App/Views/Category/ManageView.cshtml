@@ -6,7 +6,12 @@
     var categories = Model ?? new List<CategoryViewModel>();
 }
 @section scripts{
+<script src="~/admin/js/sweetalert2/sweetalert2.min.js"></script>
 <script src="~/assets/js/category.manage.js"></script>
+}
+
+@section styles{
+<link rel="stylesheet" href="~/admin/js/sweetalert2/sweetalert2.min.css">
 }
 
 <nav aria-label="breadcrumb">
@@ -51,7 +56,7 @@
                         <i class="far fa-2x fa-list-alt text-primary"></i>
                     </div>
                     <p class="fs-4 fw-bold mb-0"> 20 </p>
-                    <p class="text-muted mb-0"> Categories On-Tabs </p>
+                    <p class="text-muted mb-0"> On-Tabs </p>
                 </div>
             </div>
         </a>
@@ -74,7 +79,7 @@
     </div>
     <div class="col-6 col-xl-3">
         <!-- New Post -->
-        <a class="block block-rounded" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-category">
+        <a class="block block-rounded btn-category-add" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-category">
             <div class="block-content block-content-full">
                 <div class="">
                     <div class="d-none d-md-block">
@@ -97,6 +102,7 @@
         <h3 class="block-title text-primary">Manage Categories</h3>
     </div>
     <div class="block-content bg-body-extra-light">
+        @Html.AntiForgeryToken()
         <table class="table table-striped table-borderless table-vcenter">
             <thead>
                 <tr class="bg-body-dark">
@@ -141,16 +147,44 @@
                             <td class="d-none d-md-table-cell text-center"> @(item.Position) </td>
                             <td class="text-center">
                                 <div class="btn-group">
+                                    @if (item.Deleted)
+                                    {
+                                        <button type="button"
+                                                class="btn btn-sm btn-alt-primary btn-category-recovery"
+                                                data-id="@item.Id"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Restore">
+                                            <i class="fa fa-trash-restore text-warning"></i>
+                                        </button>
+                                    }
+
                                     <button type="button"
-                                    class="btn btn-sm btn-alt-primary btn-category-update"
-                                    data-model="@(JsonConvert.SerializeObject(item))"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modal-category">
-                                        <i class="fa fa-pencil-alt text-primary"></i>
+                                            class="btn btn-sm btn-alt-primary btn-category-update"
+                                            data-model="@(JsonConvert.SerializeObject(item))"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modal-category">
+                                        <i class="fa fa-pencil-alt text-primary"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="top"
+                                           title="Update"></i>
                                     </button>
 
-                                    <button type="button" class="btn btn-sm btn-alt-primary" data-bs-toggle="modal" data-bs-target="#modal-category">
-                                        <i class="fa fa-times text-danger"></i>
+                                    <button type="button"
+                                            class="btn btn-sm btn-alt-primary btn-category-delete"
+                                            data-id="@item.Id"
+                                            data-delete="@item.Deleted"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="@(item.Deleted?"Delete":"Move to trash")">
+                                        @if (item.Deleted)
+                                        {
+                                            <i class="fa fa-times text-danger"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-trash-alt text-danger"></i>
+                                        }
                                     </button>
                                 </div>
                             </td>
@@ -206,7 +240,7 @@
                                         <div class="col-md-3">
                                             <label class="form-label" for="category-code">Code</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="category-code" name="code" placeholder="MAZE" readonly >
+                                                <input type="text" class="form-control" id="category-code" name="code" placeholder="MAZE" readonly>
                                                 <span class="input-group-text">
                                                     <i class="fa fa-qrcode"></i>
                                                 </span>

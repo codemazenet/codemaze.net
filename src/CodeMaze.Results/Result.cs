@@ -10,7 +10,7 @@ namespace CodeMaze.Results
 
         public string Message { get; set; }
 
-        public bool Successed { get; set; }
+        public bool Successed { get; set; } = false;
         public int ResponseCode { get; set; }
 
         public static IResult Fail()
@@ -97,9 +97,11 @@ namespace CodeMaze.Results
     {
         public Result()
         {
+            Data = default(T);
+            Successed = false;
         }
 
-        public T Data { get; set; }
+        public T? Data { get; set; }
 
         public static new Result<T> Fail()
         {

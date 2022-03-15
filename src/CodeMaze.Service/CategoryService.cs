@@ -92,23 +92,53 @@ namespace CodeMaze.Service
             }, "ExecuteUpdateAsync", new { request });
         }
 
-        public Task<IResult<bool>> ExecuteAddAsync(CategoryRequest request)
+        public Task<IResult<bool>> ExecuteTrashAsync(Guid categoryId)
         {
             return TryExecuteAsync<IResult<bool>>(async () =>
+            {
+                var category = _categoryRepository.Get(categoryId);
+                if (null == category) return await Result<bool>.FailAsync();
+
+                category.Deleted = true;
+
+                var result = await _categoryRepository.UpdateAsync(category);
+
+                return await Result<bool>.SuccessAsync(result > 0);
+            }, "ExecuteTrashAsync", new { categoryId });
+        }
+
+        public Task<IResult<bool>> ExecuteDeleteAsync(Guid categoryId)
+        {
+            return TryExecuteAsync<IResult<bool>>(async () =>
+            {
+                var category = _categoryRepository.Get(categoryId);
+                if (null == category) return await Result<bool>.FailAsync();
+
+                var result = await _categoryRepository.DeleteAsync(category);
+
+                return await Result<bool>.SuccessAsync(result > 0);
+            }, "ExecuteUpdateAsync", new { categoryId });
+        }
+
+        public Task<IResult<CategoryViewModel>> ExecuteAddAsync(CategoryRequest request)
+        {
+            return TryExecuteAsync<IResult<CategoryViewModel>>(async () =>
             {
                 var entry = _mapper.Map<CategoryEntity>(request);
 
                 var exists = _categoryRepository.Any(c => c.Url == entry.Url && c.Code == entry.Code);
                 if (exists)
-                    return await Result<bool>.FailAsync($"Category titled: [{request.Title}] already exists.");
+                    return await Result<CategoryViewModel>.FailAsync($"Category titled: [{request.Title}] already exists.");
 
                 Logger.LogInformation("Adding new categoryEntity to database.");
+
+                entry.Deleted = false;
                 var result = await _categoryRepository.AddAsync(entry);
 
                 if (result != null)
-                    return await Result<bool>.SuccessAsync();
+                    return await Result<CategoryViewModel>.SuccessAsync(_mapper.Map<CategoryViewModel>(result));
 
-                return await Result<bool>.FailAsync();
+                return await Result<CategoryViewModel>.FailAsync();
             });
         }
 

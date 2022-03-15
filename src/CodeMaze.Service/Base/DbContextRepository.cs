@@ -234,10 +234,10 @@ namespace CodeMaze.Service
             return DbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(T entity)
+        public Task<int> DeleteAsync(T entity)
         {
             DbContext.Set<T>().Remove(entity);
-            await DbContext.SaveChangesAsync();
+            return DbContext.SaveChangesAsync();
         }
 
         public Task DeleteAsync(IEnumerable<T> entities)

@@ -15,6 +15,10 @@ namespace CodeMaze.IServices
 
         Task<IResult<bool>> ExecuteUpdateAsync(Guid id, CategoryRequest request);
 
-        Task<IResult<bool>> ExecuteAddAsync(CategoryRequest request);
+        Task<IResult<CategoryViewModel>> ExecuteAddAsync(CategoryRequest request);
+
+        Task<IResult<bool>> ExecuteTrashAsync(Guid categoryId);
+
+        Task<IResult<bool>> ExecuteDeleteAsync(Guid categoryId);
     }
 }

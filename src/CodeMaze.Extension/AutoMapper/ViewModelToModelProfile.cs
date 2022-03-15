@@ -14,7 +14,7 @@ namespace CodeMaze.Extension
             CreateMap<UserViewModel, UserEntity>();
 
             CreateMap<CategoryRequest, CategoryEntity>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.Equals(Guid.Empty) ? Guid.NewGuid() : src.Id))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.RemoveMultipleWhiteSpaces()))
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Title.ConvertToUrl()))
                 .ForMember(dest => dest.Code, opt => opt.MapFrom(src => src.Title.ConvertToCode()))
